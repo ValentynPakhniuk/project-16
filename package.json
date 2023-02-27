@@ -2,26 +2,31 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://github.com/ValentynPakhniuk/project-22/",
+  "homepage": "https://github.com/ValentynPakhniuk/project-16/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /project-22/"
+    "build": "parcel build src/*.html --public-url /project-16/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ValentynPakhniuk/project-22.git"
+    "url": "git+https://github.com/ValentynPakhniuk/project-16.git"
   },
   "keywords": [],
   "author": "Valentyn Pakhniuk <valentin.pakhniuk@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ValentynPakhniuk/project-22/issues"
+    "url": "https://github.com/ValentynPakhniuk/project-16/issues"
   },
   "dependencies": {
-    "modern-normalize": "^1.1.0"
+    "axios": "^1.3.4",
+    "flatpickr": "^4.6.13",
+    "lodash.debounce": "^4.0.8",
+    "modern-normalize": "^1.1.0",
+    "notiflix": "^3.2.6"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
+    "buffer": "^6.0.3",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-include": "^1.7.4"
