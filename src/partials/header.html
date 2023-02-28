@@ -1,5 +1,56 @@
 <header class="header">
   <div class="container">
+    <div class="header__wrap-nav">
+      <a class="header__logo" href="./index.html">News</a>
+      <nav class="header__nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="./index.html">Home</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="./favorite.html">Favorite</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="./read.html">Read</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <form class="search">
+      <label class="search__label">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          class="search__line"
+          placeholder="Search"
+        />
+        <svg class="search__ico" width="16" height="15">
+          <use href="./images/header.svg#search"></use>
+        </svg>
+      </label>
+    </form>
 
+    <div class="switch__theme">
+      <span class="switch__left theme-light">Light</span>
+      <svg class="switch__sun theme-light" width="19" height="19">
+        <use href="./images/header.svg#sun" class="theme-light"></use>
+      </svg>
+      <div class="switch__toogle">
+        <svg class="switch__toogle--ground" width="40" height="20">
+          <use href="./images/header.svg#elipse"></use>
+        </svg>
+        <svg class="switch__toogle--border" width="40" height="20">
+          <use href="./images/header.svg#border"></use>
+        </svg>
+        <svg class="switch__toogle--circle" width="16" height="16">
+          <use href="./images/header.svg#circle"></use>
+        </svg>
+      </div>
+      <svg class="switch__moon theme-dark" width="19" height="19">
+        <use href="./images/header.svg#moon" class="theme-dark"></use>
+      </svg>
+      <span class="switch__right theme-dark">Dark</span>
+    </div>
   </div>
 </header>
