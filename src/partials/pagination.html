@@ -1,23 +1,38 @@
 <div class="pagination">
-  <ul class="pagination__list">
-    <li class="pagination__item pagination__prew">
-      <svg class="pagination__ico--prew" width="16" height="16">
-        <use href="./images/pag-ico.svg#icon"></use>
-      </svg>
-      <span>Prew</span>
-    </li>
-    <li class="pagination__item pagination__first">1</li>
-    <li class="pagination__item pagination__prev--more">...</li>
-    <li class="pagination__item pagination__2 pagination__item--active">4</li>
-    <li class="pagination__item pagination__3">5</li>
-    <li class="pagination__item pagination__4">6</li>
-    <li class="pagination__item pagination__next--more">...</li>
-    <li class="pagination__item pagination__last">20</li>
-    <li class="pagination__item pagination__next">
-      <span>Next</span>
-      <svg class="pagination__ico--next" width="16" height="16">
-        <use href="./images/pag-ico.svg#icon"></use>
-      </svg>
-    </li>
-  </ul>
+  <form>
+    <ul class="pagination__list">
+      <li class="pagination__item pagination__prew prew">
+        <svg
+          class="pagination__ico pagination__ico--prew prew"
+          width="16"
+          height="16"
+        >
+          <use href="./images/pag-ico.svg#icon" class="prew"></use>
+        </svg>
+        <span class="prew">Prew</span>
+      </li>
+      <li class="pagination__item pagination__page" data-value="1" ]>1</li>
+      <li class="pagination__item pagination__prew--more">...</li>
+      <li
+        class="pagination__item pagination__page pagination__item--active"
+        data-value="2"
+      >
+        4
+      </li>
+      <li class="pagination__item pagination__page" data-value="3">5</li>
+      <li class="pagination__item pagination__page" data-value="4">6</li>
+      <li class="pagination__item pagination__next--more">...</li>
+      <li class="pagination__item pagination__page" data-value="5">20</li>
+      <li class="pagination__item pagination__next next">
+        <span class="next">Next</span>
+        <svg
+          class="pagination__ico pagination__ico--next next"
+          width="16"
+          height="16"
+        >
+          <use href="./images/pag-ico.svg#icon" class="next"></use>
+        </svg>
+      </li>
+    </ul>
+  </form>
 </div>
