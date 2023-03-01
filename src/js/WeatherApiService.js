@@ -10,7 +10,6 @@ class WeatherApiService {
   }
 
   async getCategories() {
-    console.log('here')
     const response = await axios.get(`${ENDPOINT}?lat=44.34&lon=10.99&${API_KEY}`);
     return response.data;
   }
