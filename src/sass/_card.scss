@@ -1,3 +1,138 @@
+.list-card {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    row-gap: 28px;
+    width: 288px;
+    @include tablet {
+        gap: 30px;
+        width: 736px;
+    }
+    @include desktop {
+        width: 1248px;
+        row-gap: 40px;
+        column-gap: 32px;
+    }
+}
+
 .card {
-  
+    flex-basis: 100%;
+    @include tablet {
+    flex-basis: calc((100% - 30px) / 2);
+    }
+    @include desktop {
+    flex-basis: calc((100% - 64px) / 3);
+    }
+}
+
+.block-photo {
+    position: relative;
+    display: flex;
+    border-radius: 4px;
+    width: 100%;
+    height: 395px;
+}
+
+.card-photo {
+    width: 100%;
+}
+
+.news-category-text {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 112px;
+    height: 24px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    top: 40;
+    background-color: rgba(68, 64, 247, 0.7);
+    border-radius: 0px 4px 4px 0px;
+    color: #FFFFFF;
+}
+
+.checked-news {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 14;
+    right: 14;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.36; 
+    color: #00DD73;
+}
+
+.card-button {
+    position: absolute;
+    display: flex;
+    height: 28px;
+    gap: 4px;
+    border-radius: 20px;
+    background-color: #F4F4F4;
+    justify-content: center;
+    align-items: center;
+    bottom: 12;
+    right: 8;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #111321;
+}
+
+.add-favorite-btn {
+    width: 126px;
+}
+
+.remove-favorite-btn {
+    width: 168px;
+}
+
+.card-title {
+    display: flex;
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.38;
+    letter-spacing: -0.01em;
+    color: #111321;
+}
+
+.card-text {
+    display: flex;
+    margin-top: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.36;
+    color: #111321;
+    height: 57px;
+}
+
+.card-link {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.card-data {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.36;
+    color: #A8A8A8;
+}
+
+.card-more-news {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.36;
+    color: #4440F7;
 }
