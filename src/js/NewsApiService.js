@@ -1,28 +1,36 @@
 import axios from 'axios';
 import { PAGE_SIZE } from './constants';
 
-const ENDPOINT = `https://newsapi.org/v2/everything`;
-const options = {
-  headers: {
-    'X-Api-Key': '48f635e94984412c99886e3d4f3c6f3c',
-  },
-};
+const URL = 'https://api.nytimes.com';
+const API_KEY = 'api-key=SWTGJZG6lt2ntZukcf6TH36zlYgqv0Eb';
 
 class NewsApiService {
   constructor() {
-    this.news = [];
-    this.category = 'admin';
+    this.news = []; // [{ title: 'Title', description: 'Description', isFavorite: false}, ...] `<div>${title}</div>${isFavorite ? '<button id="remove">Remove</button>' : '<button>Add</button>'}`
+    this.category = null;
     this.search = '';
     this.page = 1;
     this.data = '';
   }
+
+  async getCategories() {
+    const categoryApi = `${URL}/svc/news/v3/content/section-list.json?${API_KEY}`;
+    const responseCategories = await axios.get(categoryApi);
+    return responseCategories.data.results;
+  }
+
   async getNews() {
-    // fetch news when go to home, also during search, select a category, data, pagination
-    const URL = `${ENDPOINT}?q=${this.search}&category=${this.category}&from=${this.data}&to=2023-02-25&sortBy=popularity&page=${this.page}&pageSize=${PAGE_SIZE}`;
-    const response = await axios.get(URL, options);
+    const articlesApi = `${URL}/svc/search/v2/articlesearch.json?q=${this.search}&fq=${this.category ? `&category=${this.category}` : ''}&from=${this.data}&to=${Date.now()}&sortBy=popularity&page=${this.page}&pageSize=${PAGE_SIZE}&${API_KEY}`;
+    const response = await axios.get(articlesApi);
     this.nextPage();
-    return response.data.articles;
-    // https://newsapi.org/v2/everything?q=apple&from=2023-02-25&to=2023-02-25&sortBy=popularity&apiKey=48f635e94984412c99886e3d4f3c6f3c
+    this.news = response.data.response;
+    console.log('this.news:', this.news)
+  }
+
+  async getPopular() {
+    const popularApi = `${URL}/svc/mostpopular/v2/viewed/1.json?${API_KEY}`;
+    const responsePopular = await axios.get(popularApi);
+    return responsePopular.data.results;
   }
 
   nextPage() {
@@ -60,4 +68,3 @@ class NewsApiService {
 }
 
 export default new NewsApiService();
-

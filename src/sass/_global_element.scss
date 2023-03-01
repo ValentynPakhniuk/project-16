@@ -2,8 +2,8 @@ body {
   font-family: 'Manrope', sans-serif;
   font-weight: 700;
   font-size: 18px;
-  background-color: #F4F4F4;
-  color: #111321;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 .container {
@@ -23,7 +23,28 @@ body {
   }
 }
 
+.light-mode {
+  --clr-border: #111321;
+  --color-primary: #111321;
+  --color-secondary: #F4F4F4;
+  --clr-switch-light: #4b48db;
+    --clr-switch-dark: #5f6775;
+    --clr-fill-toogle-ground: #ffffff;
+    --clr-stroke-toogle-border: #4b48db;
+    --clr-fill-toogle-circle: #4b48db;
+    --clr-stroke-sun: #4b48db;
+    --clr-stroke-moon: #5f6775;
+}
+
 .dark-mode {
-  background-color: #2E2E2E;
-  color: #F4F4F4;
+  --clr-border: #f4f4f4;
+  --color-primary: #F4F4F4;
+  --color-secondary: #2E2E2E;
+  --clr-switch-light: #5f6775;
+    --clr-switch-dark: #4b48db;
+    --clr-fill-toogle-ground: #4b48db;
+    --clr-stroke-toogle-border: #ffffff;
+    --clr-fill-toogle-circle: #ffffff;
+    --clr-stroke-sun: #5f6775;
+    --clr-stroke-moon: #4b48db;
 }
