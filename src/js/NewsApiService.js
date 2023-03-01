@@ -24,7 +24,12 @@ class NewsApiService {
     const response = await axios.get(articlesApi);
     this.nextPage();
     this.news = response.data.response;
-    console.log('this.news:', this.news)
+    console.log('this.news:', this.news);
+    // const mapData = (data) => {
+    //   return {
+    //     title: data.title || data.header || data.bla,
+    //   }
+    // }
   }
 
   async getPopular() {
