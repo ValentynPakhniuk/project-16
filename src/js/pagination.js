@@ -2,13 +2,21 @@ import debounce from 'lodash.debounce';
 
 // задати debounce по замовчуванню і можливість його вказувати при створені класу
 
+// відслідкувати для 2, 3, 4, 5 сторінок
+// поставити відступи зверху і знизу для пагінатора
+// перевірити якщо задається не кількість елементів, а кількість сторінок
+// зробити адаптивну верстку
+
 export default class Pagination {
+  #basePaginationClass = 'pagination__list';
+
   #refs = {
-    prew: undefined,
-    prewMore: undefined,
-    next: undefined,
-    nextMore: undefined,
-    pages: undefined,
+    pagination: undefined,
+    btnPrew: undefined,
+    btnPointsLeft: undefined,
+    btnNext: undefined,
+    btnPointsRight: undefined,
+    btnsPages: undefined,
   };
 
   #classElements = {
@@ -18,231 +26,78 @@ export default class Pagination {
   };
 
   #typesEvents = {
-    NEXT: 'next',
-    PREW: 'prew',
-    PAGE: 'page',
+    NEXT: 'next-page-number',
+    PREW: 'prew-page-number',
+    PAGE: 'select-page-number',
   };
+
   #events = [];
+
+  #itemsPerPage = 8;
   #currentPage = 1;
   #totalItems = 1;
-  #itemsPerPage = 8;
   #totalPages = 1;
-  #parentClass = '.pagination__list';
-  #isAddEventListener = false;
 
   constructor() {
-    this.#refs.prewMore = document.querySelector('.pagination__prew--more');
-    this.#refs.nextMore = document.querySelector('.pagination__next--more');
-    this.#refs.prew = document.querySelector('.pagination__prew');
-    this.#refs.next = document.querySelector('.pagination__next');
-    this.#refs.pages = document.querySelectorAll('.pagination__page');
-    this.setCurrentPage(1);
+    this.#setBaseReferens();
+
+    this.#isVisiblePagination(false);
+
+    this.#setClickEvents();
   }
 
   setItemsPerPage(value) {
-    this.#currentPage = 1;
     this.#itemsPerPage = this.#checkValueItems(value);
     this.#calculateTotalPages();
-    this.createPaginator();
+
+    this.setCurrentPage();
   }
 
   setTotalItems(value) {
-    this.#currentPage = 1;
     this.#totalItems = this.#checkValueItems(value);
     this.#calculateTotalPages();
-    this.createPaginator();
-    this.#visiblePages();
+
+    this.setCurrentPage();
   }
 
   setTotalPages(value) {
-    this.#currentPage = 1;
     this.#totalPages = this.#checkValueItems(value);
-    this.createPaginator();
-    this.#visiblePages();
-  }
+    this.#calculateTotalItems();
 
-  setCurrentPage(value) {
-    this.#currentPage = this.#checkPageNumber(value);
-
-    console.log('setCurrentPage');
-
-    this.#generateElement();
+    this.setCurrentPage();
   }
 
   addEventListener(eventName, callBackFunction) {
-    console.log('add event ' + eventName);
-
     const obj = {};
-    console.log(obj);
     obj[eventName] = callBackFunction;
-    console.log(obj);
     this.#events.push(obj);
-
-    console.log(this.#events);
   }
 
-  createPaginator() {
-    // створити сам пагінатор
-    this.#setClickEvents();
+  setCurrentPage(value = 1) {
+    this.#currentPage = this.#checkPageNumber(value);
 
-    this.#generateElement();
+    this.#visiblePaginationItems();
   }
 
-  #generateElement() {
-    this.#visiblePrewMore();
-    this.#visibleNextMore();
-    this.#disablePrewAndNext();
-    this.#setPagesNumbers();
-    this.#setActiveItem();
-  }
+  // ------------------------
+  // section private function
+  // ------------------------
 
-  #disablePrewAndNext() {
-    this.#refs.next.classList.remove('pagination__item--disabled');
-    this.#refs.prew.classList.remove('pagination__item--disabled');
-    switch (this.#currentPage) {
-      case 1:
-        this.#refs.prew.classList.add('pagination__item--disabled');
-        break;
-      case this.#totalPages:
-        this.#refs.next.classList.add('pagination__item--disabled');
-        break;
-    }
-
-    if (this.#currentPage < 1) {
-    }
-  }
-
-  #setPagesNumbers() {
-    console.log(this.#currentPage);
-
-    this.#refs.pages.forEach(elem => {
-      if (+elem.dataset.value == 5) {
-        elem.innerText = this.#totalPages;
-      } else {
-        elem.innerText = elem.dataset.value;
-      }
-    });
-
-    if (this.#currentPage > 3 && this.#currentPage <= this.#totalPages - 2) {
-      this.#refs.pages.forEach(elem => {
-        switch (+elem.dataset.value) {
-          case 2:
-            elem.innerText = this.#currentPage - 1;
-            break;
-          case 3:
-            elem.innerText = this.#currentPage;
-            break;
-          case 4:
-            elem.innerText = this.#currentPage + 1;
-            break;
-        }
-      });
-      return;
-    }
-
-    if (
-      this.#currentPage > this.#totalPages - 2 &&
-      this.#currentPage !== this.#totalPages
-    ) {
-      this.#refs.pages.forEach(elem => {
-        switch (+elem.dataset.value) {
-          case 2:
-            elem.innerText = this.#currentPage - 2;
-            break;
-          case 3:
-            elem.innerText = this.#currentPage - 1;
-            break;
-          case 4:
-            elem.innerText = this.#currentPage;
-            break;
-        }
-      });
-      return;
-    }
-
-    if (this.#currentPage == this.#totalPages) {
-      this.#refs.pages.forEach(elem => {
-        switch (+elem.dataset.value) {
-          case 2:
-            elem.innerText = this.#currentPage - 3;
-            break;
-          case 3:
-            elem.innerText = this.#currentPage - 2;
-            break;
-          case 4:
-            elem.innerText = this.#currentPage - 1;
-            break;
-        }
-      });
-      return;
-    }
-  }
-
-  #visiblePrewMore() {
-    if (this.#currentPage < 4) {
-      this.#refs.prewMore.classList.add('pagination--none');
-    } else {
-      this.#refs.prewMore.classList.remove('pagination--none');
-    }
-  }
-
-  #visibleNextMore() {
-    if (this.#currentPage > this.#totalPages - 3 || this.#totalPages <= 5) {
-      this.#refs.nextMore.classList.add('pagination--none');
-    } else {
-      this.#refs.nextMore.classList.remove('pagination--none');
-    }
-  }
-
+  // об'єднати #visiblePages() і #setActiveItem() або і не треба
   #visiblePages() {
-    this.#refs.pages.forEach(elem => {
-      if (elem.dataset.value <= this.#totalPages) {
-        elem.classList.remove('pagination--none');
-      } else {
-        elem.classList.add('pagination--none');
+    this.#refs.btnsPages.forEach(elem => {
+      if (+elem.dataset.value > 1 && +elem.dataset.value < 5) {
+        if (+elem.dataset.value < this.#totalPages) {
+          elem.classList.remove('pagination--none');
+        } else {
+          elem.classList.add('pagination--none');
+        }
       }
     });
-  }
-
-  #setClickEvents() {
-    if (!this.#isAddEventListener) {
-      const ref = document.querySelector(this.#parentClass);
-      ref.addEventListener('click', this.#onClick.bind(this));
-      this.#isAddEventListener = true;
-    }
-  }
-
-  #onClick(e) {
-    let eventName = '';
-    let newPage = 0;
-
-    console.log(e.target.classList + ' ' + e.currentTarget.classList);
-
-    if (e.target.classList.contains(this.#classElements.PREW)) {
-      if (this.#currentPage == 1) {
-        return;
-      }
-      newPage = this.#currentPage - 1;
-      eventName = this.#typesEvents.PREW;
-    } else if (e.target.classList.contains(this.#classElements.PAGE)) {
-      newPage = +e.target.innerText;
-      eventName = this.#typesEvents.PAGE;
-    } else if (e.target.classList.contains(this.#classElements.NEXT)) {
-      if (this.#currentPage == this.#totalPages) {
-        return;
-      }
-      newPage = this.#currentPage + 1;
-      eventName = this.#typesEvents.NEXT;
-    } else {
-      console.log('exit');
-      return;
-    }
-    this.setCurrentPage(newPage);
-    this.#callEvent(eventName);
   }
 
   #setActiveItem() {
-    this.#refs.pages.forEach(elem => {
+    this.#refs.btnsPages.forEach(elem => {
       if (+elem.innerText == this.#currentPage) {
         elem.classList.add('pagination__item--active');
       } else {
@@ -251,9 +106,70 @@ export default class Pagination {
     });
   }
 
-  #callEvent(eventName) {
-    console.log('event ' + eventName);
+  #isVisiblePagination(value) {
+    if (value && this.#totalPages > 1) {
+      this.#refs.pagination.classList.remove('pagination--none');
+    } else {
+      this.#refs.pagination.classList.add('pagination--none');
+    }
+  }
 
+  #setBaseReferens() {
+    this.#refs.pagination = document.querySelector(
+      '.' + this.#basePaginationClass
+    );
+    this.#refs.btnPointsLeft = document.querySelector(
+      '.pagination__prew--more'
+    );
+    this.#refs.btnPointsRight = document.querySelector(
+      '.pagination__next--more'
+    );
+    this.#refs.btnPrew = document.querySelector('.pagination__prew');
+    this.#refs.btnNext = document.querySelector('.pagination__next');
+    this.#refs.btnsPages = document.querySelectorAll('.pagination__page');
+  }
+
+  #calculateTotalPages() {
+    this.#totalPages = Math.ceil(this.#totalItems / this.#itemsPerPage);
+  }
+
+  #calculateTotalItems() {
+    this.#totalItems = this.#itemsPerPage * this.#totalPages;
+  }
+
+  #setClickEvents() {
+    this.#refs.pagination.addEventListener('click', this.#onClick.bind(this));
+  }
+
+  #onClick(e) {
+    if (e.target.classList.contains(this.#classElements.PREW)) {
+      if (this.#currentPage == 1) {
+        return;
+      }
+      this.#callEventByOnClick(this.#currentPage - 1, this.#typesEvents.PREW);
+      return;
+    }
+
+    if (e.target.classList.contains(this.#classElements.PAGE)) {
+      this.#callEventByOnClick(+e.target.innerText, this.#typesEvents.PAGE);
+      return;
+    }
+
+    if (e.target.classList.contains(this.#classElements.NEXT)) {
+      if (this.#currentPage == this.#totalPages) {
+        return;
+      }
+      this.#callEventByOnClick(this.#currentPage + 1, this.#typesEvents.NEXT);
+      return;
+    }
+  }
+
+  #callEventByOnClick(newPage, eventName) {
+    this.setCurrentPage(newPage);
+    this.#callEvent(eventName);
+  }
+
+  #callEvent(eventName) {
     this.#events.forEach(elem => {
       if (elem[eventName]) {
         const callBack = elem[eventName];
@@ -263,6 +179,38 @@ export default class Pagination {
         callBack(e);
       }
     });
+  }
+
+  #visibleBtnPointsLeft() {
+    if (this.#currentPage < 4 || this.#totalPages <= 5) {
+      this.#refs.btnPointsLeft.classList.add('pagination--none');
+    } else {
+      this.#refs.btnPointsLeft.classList.remove('pagination--none');
+    }
+  }
+
+  #visibleBtnPointsRigth() {
+    if (this.#currentPage > this.#totalPages - 3 || this.#totalPages <= 5) {
+      this.#refs.btnPointsRight.classList.add('pagination--none');
+    } else {
+      this.#refs.btnPointsRight.classList.remove('pagination--none');
+    }
+  }
+
+  #disableBtnPrew() {
+    if (this.#currentPage == 1) {
+      this.#refs.btnPrew.classList.add('pagination__item--disabled');
+    } else {
+      this.#refs.btnPrew.classList.remove('pagination__item--disabled');
+    }
+  }
+
+  #disableBtnNext() {
+    if (this.#currentPage == this.#totalPages) {
+      this.#refs.btnNext.classList.add('pagination__item--disabled');
+    } else {
+      this.#refs.btnNext.classList.remove('pagination__item--disabled');
+    }
   }
 
   #checkValueItems(value) {
@@ -282,7 +230,88 @@ export default class Pagination {
     }
   }
 
-  #calculateTotalPages() {
-    this.#totalPages = Math.ceil(this.#totalItems / this.#itemsPerPage);
+  #visiblePaginationItems() {
+    this.#visibleBtnPointsLeft();
+    this.#visibleBtnPointsRigth();
+
+    this.#disableBtnPrew();
+    this.#disableBtnNext();
+
+    this.#setPagesNumbers();
+    this.#visiblePages();
+
+    this.#setActiveItem();
+    this.#isVisiblePagination(true);
+  }
+
+  #setPagesNumbers() {
+    // стартове заповнення номерів сторінок з 1-ї до 4-ї, і встановлення останьої сторінки на 5-й елемент
+    // "1" "2" "3" "4" "..." "10"
+    this.#refs.btnsPages.forEach(elem => {
+      if (+elem.dataset.value == 5) {
+        elem.innerText = this.#totalPages;
+      } else {
+        elem.innerText = elem.dataset.value;
+      }
+    });
+
+    // заповнення номерів сторінок якщо курсор знаходиться всередині списку
+    // "1" "..." "х-1" "х" "х+1" "..." "10"
+    if (this.#currentPage > 3 && this.#currentPage <= this.#totalPages - 2) {
+      this.#refs.btnsPages.forEach(elem => {
+        switch (+elem.dataset.value) {
+          case 2:
+            elem.innerText = this.#currentPage - 1;
+            break;
+          case 3:
+            elem.innerText = this.#currentPage;
+            break;
+          case 4:
+            elem.innerText = this.#currentPage + 1;
+            break;
+        }
+      });
+      return;
+    }
+
+    if (
+      this.#currentPage > this.#totalPages - 2 &&
+      this.#currentPage !== this.#totalPages &&
+      this.#totalPages > 5
+    ) {
+      this.#refs.btnsPages.forEach(elem => {
+        switch (+elem.dataset.value) {
+          case 2:
+            elem.innerText = this.#currentPage - 2;
+            break;
+          case 3:
+            elem.innerText = this.#currentPage - 1;
+            break;
+          case 4:
+            elem.innerText = this.#currentPage;
+            break;
+        }
+      });
+      return;
+    }
+
+    // заповнення номерів сторінок якщо курсор знаходитьсяв на останьому елементы
+    // "1" "..." "7" "8" "9" "10"
+    if (this.#currentPage == this.#totalPages && this.#totalPages > 4) {
+      this.#refs.btnsPages.forEach(elem => {
+        switch (+elem.dataset.value) {
+          case 2:
+            elem.innerText = this.#currentPage - 3;
+            break;
+          case 3:
+            elem.innerText = this.#currentPage - 2;
+            break;
+          case 4:
+            elem.innerText = this.#currentPage - 1;
+            break;
+        }
+      });
+      return;
+    }
   }
 }

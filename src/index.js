@@ -9,13 +9,15 @@ import './js/change-theme';
 import Pagination from './js/pagination';
 
 const pagination = new Pagination();
-pagination.addEventListener('next', callback);
-pagination.addEventListener('prew', callback);
-pagination.addEventListener('page', callback);
+pagination.addEventListener('next-page-number', callback);
+pagination.addEventListener('prew-page-number', callback);
+pagination.addEventListener('select-page-number', callback);
 
 pagination.setItemsPerPage(10);
-pagination.setTotalItems(70);
+pagination.setTotalItems(100);
 
 function callback(e) {
   console.log(e);
 }
+
+console.dir(document.body);

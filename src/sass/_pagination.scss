@@ -20,11 +20,17 @@
   }
 
   .pagination__item {
-    padding: 4px 12px;
+    padding: 4px 11px;
 
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.375;
+
+    @include tablet {
+      padding: 4px 12px;
+
+      font-size: 16px;
+    }
 
     color: var(--clr-pag);
     background-color: var(--clr-pag-bg);
@@ -59,10 +65,22 @@
     &.pagination__next--more,
     &.pagination__prew--more {
       cursor: auto;
+
+      margin: 0 -4px;
+      @include tablet {
+        margin: 0 0;
+      }
     }
   }
 
   .pagination__page {
+    &[data-value='3'],
+    &[data-value='4'] {
+      display: none;
+      @include tablet {
+        display: block;
+      }
+    }
   }
 
   .pagination__prew,
