@@ -5,21 +5,18 @@ const refs = {
     listCards: document.querySelector('.list-card'),
 };
 
-const link =
-'https://static01.nyt.com/images/2023/03/01/multimedia/01xp-whiskey-fugus-03/01xp-whiskey-fugus-03-mediumThreeByTwo440.jpg';
-
 const getPopularNews = async () => {
     const results = await newsPopular.getPopular();
-    const test = results.map(result => console.log(result));
+    // const test = results.map(result => console.log(result));
     const cardNews = results
     .map(
         result => { 
-            const photosArray = result.media[0];
-            const photos = photosArray['media-metadata'];
-            const photosEl = photos[2].url;
-            return `<li class="card">
+            const title = checkTitleLength(result.title);
+            const text = checkTextLength(result.abstract);
+            const url = getUrl(result);
+            const card = `<li class="card">
             <div class="block-photo">
-            <img class="card-photo" src="${photosEl}" alt="Сітка користувачів">
+            <img class="card-photo" src="${url}" alt="Сітка користувачів">
             <p class="news-category-text">${result.section}</p>
             <p class="checked-news visually-hidden">Already read
                 <svg class="checked-news-icon" width="18" height="18">
@@ -35,18 +32,43 @@ const getPopularNews = async () => {
                 </svg>
             </button>
         </div>
-        <h2 class="card-title">${result.title}</h2>
-        <p class="card-text">${result.abstract}</p>
+        <h2 class="card-title">${title}</h2>
+        <p class="card-text">${text}</p>
         <div class="card-link">
             <p class="card-data">${result.published_date}</p>
             <a href="${result.url}" target="_blank" class="card-more-news">Read more</a>
         </div>
     </li>`;
+            console.log(result.title.length);
+            return card;
         })
     .join('');
     refs.listCards.insertAdjacentHTML('beforeend', cardNews);
 }
 
 getPopularNews()
+
+const getUrl = el => {
+    const photosArray = el.media[0];
+    const photos = photosArray['media-metadata'];
+    const photosEl = photos[2].url;
+    return photosEl;
+};
+
+const checkTextLength = text => {
+    if (text.length > 150) {
+        return text.slice(0, 150) + "..."
+    }
+    return text
+}
+
+const checkTitleLength = title => {
+    if (title.length > 35) {
+        return title.slice(0, 35) + '...';
+    }
+    return title;
+};
+
+
 
 
