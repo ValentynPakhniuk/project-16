@@ -1,15 +1,3 @@
-:root {
-  --clr-pag: #111321;
-  --clr-pag-border: #4440f6;
-  --clr-pag-bg: #f4f4f4;
-  --clr-pag-more: #111321;
-  --clr-pag-active: #4440f7;
-}
-
-.dark-mode {
-  --clr-pag-more: #f4f4f4;
-}
-
 .pagination {
   display: flex;
   justify-content: space-around;
