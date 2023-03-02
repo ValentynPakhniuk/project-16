@@ -39,7 +39,6 @@ const getPopularNews = async () => {
             <a href="${result.url}" target="_blank" class="card-more-news">Read more</a>
         </div>
     </li>`;
-            console.log(result.title.length);
             return card;
         })
     .join('');
@@ -63,12 +62,8 @@ const checkTextLength = text => {
 }
 
 const checkTitleLength = title => {
-    if (title.length > 35) {
-        return title.slice(0, 35) + '...';
+    if (title.length > 50) {
+        return title.slice(0, 50) + '...';
     }
     return title;
 };
-
-
-
-

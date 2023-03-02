@@ -20,6 +20,7 @@
     flex-basis: 100%;
     @include tablet {
     flex-basis: calc((100% - 30px) / 2);
+    height: 675px;
     }
     @include desktop {
     flex-basis: calc((100% - 64px) / 3);
@@ -108,12 +109,14 @@
     overflow: hidden;
     @include tablet {
         font-size: 32px;
+        height: 132px;
     }
 }
 
 .card-text {
     display: flex;
     margin-top: 20px;
+    margin-bottom: 20px;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -129,7 +132,6 @@
 .card-link {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 .card-data {
