@@ -23,8 +23,7 @@ class NewsApiService {
     const articlesApi = `${URL}/svc/search/v2/articlesearch.json?q=${this.search}&fq=${this.category ? `&category=${this.category}` : ''}&from=${this.data}&to=${Date.now()}&sortBy=popularity&page=${this.page}&pageSize=${PAGE_SIZE}&${API_KEY}`;
     const response = await axios.get(articlesApi);
     this.nextPage();
-    this.news = response.data.response;
-    console.log('this.news:', this.news);
+    return response.data.response;
     // const mapData = (data) => {
     //   return {
     //     title: data.title || data.header || data.bla,
@@ -72,4 +71,4 @@ class NewsApiService {
   }
 }
 
-export default new NewsApiService();
+export default NewsApiService;

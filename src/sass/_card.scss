@@ -16,9 +16,11 @@
 }
 
 .card {
+    height: 630px;
     flex-basis: 100%;
     @include tablet {
     flex-basis: calc((100% - 30px) / 2);
+    height: 675px;
     }
     @include desktop {
     flex-basis: calc((100% - 64px) / 3);
@@ -35,6 +37,7 @@
 
 .card-photo {
     width: 100%;
+    object-fit: cover;
 }
 
 .news-category-text {
@@ -51,7 +54,7 @@
     top: 40;
     background-color: rgba(68, 64, 247, 0.7);
     border-radius: 0px 4px 4px 0px;
-    color: #FFFFFF;
+    color: var(--clr-fill-toogle-ground);
 }
 
 .checked-news {
@@ -73,7 +76,7 @@
     height: 28px;
     gap: 4px;
     border-radius: 20px;
-    background-color: #F4F4F4;
+    background-color: var(--color-secondary);
     justify-content: center;
     align-items: center;
     bottom: 12;
@@ -82,7 +85,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
-    color: #111321;
+    color: var(--clr-border);
 }
 
 .add-favorite-btn {
@@ -95,30 +98,40 @@
 
 .card-title {
     display: flex;
+    height: 99px;
     margin-top: 20px;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 1.38;
     letter-spacing: -0.01em;
-    color: #111321;
+    color: var(--clr-border);
+    overflow: hidden;
+    @include tablet {
+        font-size: 32px;
+        height: 132px;
+    }
 }
 
 .card-text {
     display: flex;
     margin-top: 20px;
+    margin-bottom: 20px;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.36;
-    color: #111321;
+    color: var(--clr-border);
     height: 57px;
+    overflow: hidden;
+    @include tablet {
+        height: 66px;
+    }
 }
 
 .card-link {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
 }
 
 .card-data {
