@@ -1,0 +1,165 @@
+:root {
+  --clr-pag: #111321;
+  --clr-pag-border: #4440f6;
+  --clr-pag-bg: #f4f4f4;
+  --clr-pag-more: #111321;
+  --clr-pag-active: #4440f7;
+}
+
+.dark-mode {
+  --clr-pag-more: #f4f4f4;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-around;
+
+  .pagination__list {
+    display: flex;
+    gap: 8px;
+  }
+
+  .pagination__item {
+    padding: 4px 6px;
+    min-width: 28px;
+
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.375;
+    text-align: center;
+
+    @include tablet {
+      padding: 4px 8px;
+      min-width: 31px;
+      font-size: 16px;
+    }
+
+    color: var(--clr-pag);
+    background-color: var(--clr-pag-bg);
+
+    border: 1px solid var(--clr-pag-border);
+    border-radius: 2px;
+
+    cursor: pointer;
+
+    transition: scale 250ms linear;
+
+    &:hover {
+      scale: 1.05;
+    }
+
+    &--active {
+      color: var(--clr-pag-bg);
+      background-color: var(--clr-pag-active);
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &--disabled:hover,
+    &.pagination__next--more:hover,
+    &.pagination__prew--more:hover {
+      scale: 1;
+    }
+  }
+
+  .pagination__page {
+    &[data-value='3'],
+    &[data-value='4'] {
+      display: none;
+      @include tablet {
+        display: block;
+      }
+    }
+  }
+
+  .pagination__prew,
+  .pagination__next {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+
+    @include tablet {
+      gap: 10px;
+    }
+  }
+
+  .pagination__prew {
+    padding-left: 14px;
+    padding-right: 9px;
+    @include tablet {
+      padding-left: 16px;
+      padding-right: 10px;
+    }
+  }
+
+  .pagination__prew--more,
+  .pagination__next--more {
+    margin: 0 -4px;
+    padding: 8px 0 4px;
+    min-width: 19px;
+
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.14;
+
+    color: var(--clr-pag-more);
+    background-color: inherit;
+
+    border: none;
+
+    cursor: auto;
+
+    @include tablet {
+      margin: 0 0;
+      min-width: 13px;
+
+      padding: 6px 0;
+      font-size: 16px;
+      line-height: 1.19;
+    }
+  }
+
+  .pagination__next {
+    padding-left: 9px;
+    padding-right: 14px;
+    @include tablet {
+      padding-left: 10px;
+      padding-right: 16px;
+    }
+  }
+
+  .pagination__ico {
+    display: block;
+
+    width: 6px;
+    height: 9px;
+
+    @include tablet {
+      width: 8px;
+      height: 13px;
+    }
+
+    fill: var(--clr-pag);
+
+    // &--prew {
+    //   // transform: rotate(90deg);
+    // }
+
+    &--next {
+      transform: rotate(180deg);
+    }
+  }
+
+  .pagination--none {
+    display: none;
+  }
+
+  .pagination__page.pagination--none {
+    display: none;
+  }
+}
