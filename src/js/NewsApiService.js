@@ -35,6 +35,8 @@ class NewsApiService {
   async getPopular() {
     const popularApi = `${URL}/svc/mostpopular/v2/viewed/1.json?${API_KEY}`;
     const responsePopular = await axios.get(popularApi);
+    // const popularNews = responsePopular.data.results;
+    // console.log(popularNews);
     return responsePopular.data.results;
   }
 
@@ -72,4 +74,4 @@ class NewsApiService {
   }
 }
 
-export default new NewsApiService();
+export default NewsApiService;

@@ -1,13 +1,13 @@
-import flatpickr from 'flatpickr';
+// import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 // import { includes } from 'lodash';
-import newsApiService from './NewsApiService';
-import weatherApiService from './WeatherApiService';
-
+// import newsApiService from './NewsApiService';
+// import weatherApiService from './WeatherApiService';
+import './cards'
 import './change-theme';
 
-weatherApiService.getCategories();
-newsApiService.getCategories();
-newsApiService.getNews();
-newsApiService.getPopular();
+// weatherApiService.getCategories();
+// newsApiService.getCategories();
+// newsApiService.getNews();
+// newsApiService.getPopular();

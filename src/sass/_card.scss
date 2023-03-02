@@ -16,6 +16,7 @@
 }
 
 .card {
+    height: 630px;
     flex-basis: 100%;
     @include tablet {
     flex-basis: calc((100% - 30px) / 2);
@@ -35,6 +36,7 @@
 
 .card-photo {
     width: 100%;
+    object-fit: cover;
 }
 
 .news-category-text {
@@ -95,6 +97,7 @@
 
 .card-title {
     display: flex;
+    height: 99px;
     margin-top: 20px;
     font-style: normal;
     font-weight: 700;
@@ -102,6 +105,10 @@
     line-height: 1.38;
     letter-spacing: -0.01em;
     color: #111321;
+    overflow: hidden;
+    @include tablet {
+        font-size: 32px;
+    }
 }
 
 .card-text {
@@ -113,6 +120,10 @@
     line-height: 1.36;
     color: #111321;
     height: 57px;
+    overflow: hidden;
+    @include tablet {
+        height: 66px;
+    }
 }
 
 .card-link {
