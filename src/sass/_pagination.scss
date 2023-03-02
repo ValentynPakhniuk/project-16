@@ -20,15 +20,17 @@
   }
 
   .pagination__item {
-    padding: 4px 11px;
+    padding: 4px 6px;
+    min-width: 28px;
 
     font-weight: 500;
     font-size: 14px;
     line-height: 1.375;
+    text-align: center;
 
     @include tablet {
-      padding: 4px 12px;
-
+      padding: 4px 8px;
+      min-width: 31px;
       font-size: 16px;
     }
 
@@ -61,16 +63,6 @@
     &.pagination__prew--more:hover {
       scale: 1;
     }
-
-    &.pagination__next--more,
-    &.pagination__prew--more {
-      cursor: auto;
-
-      margin: 0 -4px;
-      @include tablet {
-        margin: 0 0;
-      }
-    }
   }
 
   .pagination__page {
@@ -86,50 +78,88 @@
   .pagination__prew,
   .pagination__next {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     align-items: center;
+
+    @include tablet {
+      gap: 10px;
+    }
   }
 
   .pagination__prew {
-    padding-left: 16px;
-    padding-right: 10px;
+    padding-left: 14px;
+    padding-right: 9px;
+    @include tablet {
+      padding-left: 16px;
+      padding-right: 10px;
+    }
   }
 
   .pagination__prew--more,
   .pagination__next--more {
-    border: none;
-    padding: 6px 0;
+    margin: 0 -4px;
+    padding: 8px 0 4px;
+    min-width: 19px;
 
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 1.19;
+    font-size: 14px;
+    line-height: 1.14;
 
     color: var(--clr-pag-more);
     background-color: inherit;
+
+    border: none;
+
+    cursor: auto;
+
+    @include tablet {
+      margin: 0 0;
+      min-width: 13px;
+
+      padding: 6px 0;
+      font-size: 16px;
+      line-height: 1.19;
+    }
   }
 
   .pagination__next {
-    padding-left: 10px;
-    padding-right: 16px;
+    padding-left: 9px;
+    padding-right: 14px;
+    @include tablet {
+      padding-left: 10px;
+      padding-right: 16px;
+    }
   }
 
   .pagination__ico {
     display: block;
 
-    fill: var(--clr-pag);
+    width: 6px;
+    height: 9px;
 
-    &--prew {
-      transform: rotate(90deg);
+    @include tablet {
+      width: 8px;
+      height: 13px;
     }
 
+    fill: var(--clr-pag);
+
+    // &--prew {
+    //   // transform: rotate(90deg);
+    // }
+
     &--next {
-      transform: rotate(-90deg);
+      transform: rotate(180deg);
     }
   }
 
   .pagination--none {
+    display: none;
+  }
+
+  .pagination__page.pagination--none {
     display: none;
   }
 }

@@ -6,18 +6,17 @@ import NewsApiService from './js/NewsApiService';
 
 import './js/change-theme';
 
-import Pagination from './js/pagination';
+// import Pagination from './js/pagination';
 
-const pagination = new Pagination();
-pagination.addEventListener('next-page-number', callback);
-pagination.addEventListener('prew-page-number', callback);
-pagination.addEventListener('select-page-number', callback);
+// const pagination = new Pagination();
+// pagination.addEventListener('next-page-number', callback);
+// pagination.addEventListener('prew-page-number', callback);
+// pagination.addEventListener('select-page-number', callback);
 
-pagination.setItemsPerPage(10);
-pagination.setTotalItems(100);
+// pagination.setItemsPerPage(10);
+// // pagination.setTotalItems(100);
+// pagination.setTotalPages(10);
 
-function callback(e) {
-  console.log(e);
-}
-
-console.dir(document.body);
+// function callback(e) {
+//   console.log(e);
+// }
