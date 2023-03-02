@@ -56,6 +56,3 @@ function marckupError() {
     //     `
 }
 
-
-
-console.log(refs.pagination)
