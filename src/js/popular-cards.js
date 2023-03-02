@@ -6,25 +6,7 @@ const refs = {
   listCards: document.querySelector('.list-card'),
 };
 
-const getPopularNews = async () => {
-  const results = await newsPopular.getPopular();
-  const cardNews = results
-    .map(result => {
-      const card = getCard(
-        getUrl(result),
-        result.section,
-        checkTitleLength(result.title),
-        checkTextLength(result.abstract),
-        result.published_date,
-        result.url
-      );
-      return card;
-    })
-    .join('');
-  refs.listCards.insertAdjacentHTML('beforeend', cardNews);
-};
-
-export default getCard = (urlPhoto, category, title, text, date, url) => {
+const getCard = (urlPhoto, category, title, text, date, url) => {
   return `<li class="card">
             <div class="block-photo">
             <img class="card-photo" src="${urlPhoto}" alt="Сітка користувачів">
@@ -50,6 +32,24 @@ export default getCard = (urlPhoto, category, title, text, date, url) => {
             <a href="${url}" target="_blank" class="card-more-news">Read more</a>
         </div>
     </li>`;
+};
+
+const getPopularNews = async () => {
+  const results = await newsPopular.getPopular();
+  const cardNews = results
+    .map(result => {
+      const card = getCard(
+        getUrl(result),
+        result.section,
+        checkTitleLength(result.title),
+        checkTextLength(result.abstract),
+        result.published_date,
+        result.url
+      );
+      return card;
+    })
+    .join('');
+  refs.listCards.insertAdjacentHTML('beforeend', cardNews);
 };
 
 const getUrl = el => {
