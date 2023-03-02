@@ -7,6 +7,7 @@
 import './popular-cards'
 import './cards'
 import './change-theme';
+import './not-found';
 
 // weatherApiService.getCategories();
 // newsApiService.getCategories();
