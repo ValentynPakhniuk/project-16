@@ -7,7 +7,7 @@
     justify-content: space-between;
 
     margin: 0 auto;
-    padding: 28px 0;
+    padding: 28px 16px;
   }
 
   .header__wrap-nav {
@@ -80,6 +80,31 @@
   }
 
   .switch__theme {
+    
+    display: none;
+    
+      @include tablet {
+        z-index: 999;
+        display: block;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 100%;
+        text-align: right;
+        border: none;
+        padding: 16px 20px;
+        color: #000;
+        background: #86e543;
+        border-radius: 16px;
+        transition: box-shadow 250ms linear;
+        cursor: pointer;
+    
+        &:hover,
+        &:focus {
+          box-shadow: 0px 8px 20px rgba(134, 229, 67, 0.5),
+            0px 4px 10px rgba(255, 255, 255, 0.1);
+          outline: none;
+        }
     display: flex;
     gap: 12px;
 
@@ -143,4 +168,5 @@
 
     fill: var(--clr-fill-toogle-circle);
   }
+}
 }
