@@ -1,6 +1,5 @@
 import NewsApiService from './NewsApiService';
 
-
 const getNewsl = new NewsApiService();
 
 const link = 'https://image-placeholder.com/images/actual-size/200x200.png';
@@ -14,15 +13,15 @@ const refs = {
 refs.form.addEventListener('submit', onSubmitForm);
 
 function onSubmitForm(e) {
-    e.preventDefault();
-    const inputValue = refs.formInput.value.trim();
-    getNewsl.search = inputValue;
-    getNewNews();
-    // return
+  e.preventDefault();
+  const inputValue = refs.formInput.value.trim();
+  getNewsl.search = inputValue;
+  getNewNews();
+  return;
 }
 
 const getCard = (urlPhoto, category, title, text, date, url) => {
-    return `<li class="card">
+  return `<li class="card">
             <div class="block-photo">
             <img class="card-photo" src="${urlPhoto}" alt="Сітка користувачів">
             <p class="news-category-text">${category}</p>
@@ -52,38 +51,36 @@ const getCard = (urlPhoto, category, title, text, date, url) => {
 };
 
 const getNewNews = async () => {
-    const response = await getNewsl.getNews();
-    const cardNews = response.docs
-        .map(news => {
-            console.log(news.multimedia[0].url);
-        console.log(news);
-        const newsNew = getCard(
-            link,
-            // getUrlPhoto(news),
-            news.section_name,
-            checkTitleLength(news.headline.main),
-            checkTextLength(news.abstract),
-            getDate(news.pub_date),
-            news.web_url
-        );
-        return newsNew;
-        })
-        .join('');
-    refs.listCards.innerHTML = cardNews;
+  const response = await getNewsl.getNews();
+  const cardNews = response.docs
+    .map(news => {
+      const newsNew = getCard(
+        link,
+        // getUrlPhoto(news),
+        news.section_name,
+        checkTitleLength(news.headline.main),
+        checkTextLength(news.abstract),
+        getDate(news.pub_date),
+        news.web_url
+      );
+      return newsNew;
+    })
+    .join('');
+  refs.listCards.innerHTML = cardNews;
 };
 
 const checkTextLength = text => {
-    if (text.length > 150) {
+  if (text.length > 150) {
     return text.slice(0, 150) + '...';
-    }
-    return text;
+  }
+  return text;
 };
 
 const checkTitleLength = title => {
-    if (title.length > 50) {
+  if (title.length > 50) {
     return title.slice(0, 50) + '...';
-    }
-    return title;
+  }
+  return title;
 };
 
 const getDate = date => date.slice(0, 10);
