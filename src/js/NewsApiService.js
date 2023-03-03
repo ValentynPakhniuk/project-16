@@ -4,7 +4,7 @@ import { PAGE_SIZE } from './constants';
 const URL = 'https://api.nytimes.com';
 const API_KEY = 'api-key=SWTGJZG6lt2ntZukcf6TH36zlYgqv0Eb';
 
-class NewsApiService {
+export default  class NewsApiService {
   constructor() {
     this.news = []; // [{ title: 'Title', description: 'Description', isFavorite: false}, ...] `<div>${title}</div>${isFavorite ? '<button id="remove">Remove</button>' : '<button>Add</button>'}`
     this.category = null;
@@ -72,4 +72,4 @@ class NewsApiService {
   }
 }
 
-export default new NewsApiService();
+// export default new NewsApiService();

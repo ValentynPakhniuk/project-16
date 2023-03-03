@@ -6,8 +6,9 @@ import newsApiService from './NewsApiService';
 import weatherApiService from './WeatherApiService';
 
 import './change-theme';
+import './filters';
 
-weatherApiService.getCategories();
-newsApiService.getCategories();
-newsApiService.getNews();
-newsApiService.getPopular();
+// weatherApiService.getCategories();
+// newsApiService.getCategories();
+// newsApiService.getNews();
+// newsApiService.getPopular();
