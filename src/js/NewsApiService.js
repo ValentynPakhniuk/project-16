@@ -16,7 +16,9 @@ class NewsApiService {
   async getCategories() {
     const categoryApi = `${URL}/svc/news/v3/content/section-list.json?${API_KEY}`;
     const responseCategories = await axios.get(categoryApi);
+    console.log(responseCategories);
     return responseCategories.data.results;
+    
   }
 
   async getNews() {
@@ -71,4 +73,6 @@ class NewsApiService {
   }
 }
 
+
 export default NewsApiService;
+
