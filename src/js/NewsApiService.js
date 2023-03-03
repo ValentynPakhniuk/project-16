@@ -4,7 +4,7 @@ import { PAGE_SIZE } from './constants';
 const URL = 'https://api.nytimes.com';
 const API_KEY = 'api-key=SWTGJZG6lt2ntZukcf6TH36zlYgqv0Eb';
 
-export default  class NewsApiService {
+export default class NewsApiService {
   constructor() {
     this.news = []; // [{ title: 'Title', description: 'Description', isFavorite: false}, ...] `<div>${title}</div>${isFavorite ? '<button id="remove">Remove</button>' : '<button>Add</button>'}`
     this.category = null;
@@ -16,7 +16,9 @@ export default  class NewsApiService {
   async getCategories() {
     const categoryApi = `${URL}/svc/news/v3/content/section-list.json?${API_KEY}`;
     const responseCategories = await axios.get(categoryApi);
+    console.log(responseCategories);
     return responseCategories.data.results;
+    
   }
 
   async getNews() {
@@ -72,4 +74,3 @@ export default  class NewsApiService {
   }
 }
 
-// export default new NewsApiService();

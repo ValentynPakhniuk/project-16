@@ -23,8 +23,8 @@ export default async function getResponseCategory() {
     try {
         const response  = await categoryApiService.getCategories(); 
         console.log(response);
-        renderCategoriesDesktop(response);
-        renderCategoriesOtherDesktop(response);
+        renderCategories(response);
+        renderCategoriesOther(response);
     } catch (error) {
         Notiflix.Notify.warning('No response category list from server. Please, try again later.');
         console.log(error);
@@ -32,7 +32,7 @@ export default async function getResponseCategory() {
 }
 getResponseCategory()
 
-function renderCategoriesDesktop (response) {
+function renderCategories (response) {
     let markup = '';
     for (let i = 0; i <= 6; i++) {
         markup += `
@@ -45,7 +45,7 @@ function renderCategoriesDesktop (response) {
     return 
 }
 
-function renderCategoriesOtherDesktop(response) {
+function renderCategoriesOther(response) {
     refs.othersTextInBtn.textContent = 'Others';
     console.log(refs.othersTextInBtn.textContent);
     let markup = '';
@@ -81,4 +81,3 @@ function onBtnClick(e) {
         refs.openOthersBtn.classList.remove('others__btn-active');
     }
 }
-
