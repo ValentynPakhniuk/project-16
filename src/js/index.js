@@ -1,3 +1,4 @@
+
 // import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 // import 'flatpickr/dist/flatpickr.min.css';
@@ -8,8 +9,5 @@ import './popular-cards';
 import './cards';
 import './change-theme';
 import './not-found';
+import './filters';
 
-// weatherApiService.getCategories();
-// newsApiService.getCategories();
-// newsApiService.getNews();
-// newsApiService.getPopular();

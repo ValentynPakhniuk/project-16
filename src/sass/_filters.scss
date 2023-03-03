@@ -41,6 +41,11 @@
     }
 }
 
+.category-active {
+    color: #ffffff;
+    background-color: #4440f6;
+}
+
 .others__container {
     position: relative;
 }
@@ -63,19 +68,24 @@
     }
 }
 
+.others__btn-active {
+    color: #ffffff;
+    background-color: #4440f6;
+}
+
 .others__text-btn {
     font-size: 12px;
     line-height: calc(16 / 12);
 }
 
 .others__icon-open {
-    color: #4440F6;
-    // background-color:#4440F6;
+    display: block;
+    fill: #4440F6;
 }
 
 .others__icon-close {
     display: none;
-    fill: #4440F6;
+    fill: white;
 }
 
 .others__list {
@@ -105,6 +115,7 @@
     font-size: 12px;
     line-height: calc(16 / 12);
     letter-spacing: 0.01em;
+    text-align: left;
 
     &:hover,
     &:focus {
@@ -118,5 +129,25 @@
     left: 0;
     z-index: 2;
     pointer-events: none;
-    // visibility: hidden;
+    visibility: hidden;
+}
+
+.others__wrapper.is-open {
+    pointer-events: auto;
+    visibility: visible;
+}
+
+// .others__wrapper.is-open .others__list {}
+
+.others__wrapper.is-open~.others__button {
+    background-color: #4440f6;
+    color: #f8f8f8;
+
+    .others__icon-open {
+        display: none;
+    }
+
+    .others__icon-close {
+        display: block;
+    }
 }
