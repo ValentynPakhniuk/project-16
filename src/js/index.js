@@ -4,9 +4,10 @@
 // import { includes } from 'lodash';
 // import newsApiService from './NewsApiService';
 // import weatherApiService from './WeatherApiService';
-import './popular-cards'
-import './cards'
+import './popular-cards';
+import './cards';
 import './change-theme';
+import './not-found';
 
 // weatherApiService.getCategories();
 // newsApiService.getCategories();
