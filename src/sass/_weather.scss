@@ -1,0 +1,121 @@
+.weather {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 395px;
+	height: 675px;
+	padding: 40px 53px 60px 53px;
+
+	background-color: #4440F6;	
+}
+
+.weather-daily {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 93%;
+}
+
+.weather__header {
+	display: flex;
+}
+
+.temperature {
+	font-family: Roboto;
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 64px;
+
+	color: #FFFFFF;
+}
+
+.weather-conditions {
+	padding-left: 23px;
+
+	font-family: Roboto;
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 36px;
+
+	color: #FFFFFF;
+	
+}
+
+.weather__button-city {
+	display: block;
+	width: 177px;
+	height: 42px;
+	margin-left: 16px;
+	margin-bottom: 20px;
+
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: 400;
+
+	border: 0;
+	border-radius: 10px;
+	background-color: rgba(254, 254, 255, 0.3);
+	color: #FFFFFF;	
+}
+
+.weather__button-city::before {
+	content: url('../images/point.svg');
+	vertical-align: middle;
+	margin-right: 12px;
+}
+
+.weather__day,
+.weather__date {
+	display: block;
+	margin-bottom: 16px;
+
+	text-align: center;
+	font-family: Roboto;
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 36px;
+
+	color: #FFFFFF;
+}
+
+.wether-week__date {
+	margin-bottom: 5px;
+
+	text-align: center;
+	font-family: Roboto;
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 26px;
+
+	color: #FFFFFF;
+}
+
+.weather__button-choice-display {
+	display: block;
+	width: 177px;
+	height: 42px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 12px;
+
+	font-family: Roboto;
+	font-size: 20px;
+	font-weight: 400;
+	
+	border: 0;
+	border-radius: 10px;
+	background-color: rgba(254, 254, 255, 0.3);
+	color: #FFFFFF;	
+}
+
+.weather__footer {
+	display: block;
+}
+
+.current-year {
+	margin-left: 10px;
+}
+
+.invisible {
+	display: none;
+}

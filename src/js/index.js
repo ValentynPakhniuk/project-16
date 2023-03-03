@@ -11,4 +11,5 @@ import './change-theme';
 import './calendar';
 import './not-found';
 import './filters';
+import './weather';
 
