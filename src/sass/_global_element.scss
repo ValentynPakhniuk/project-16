@@ -26,25 +26,37 @@ body {
 .light-mode {
   --clr-border: #111321;
   --color-primary: #111321;
-  --color-secondary: #F4F4F4;
+  --color-secondary: #f4f4f4;
   --clr-switch-light: #4b48db;
-    --clr-switch-dark: #5f6775;
-    --clr-fill-toogle-ground: #ffffff;
-    --clr-stroke-toogle-border: #4b48db;
-    --clr-fill-toogle-circle: #4b48db;
-    --clr-stroke-sun: #4b48db;
-    --clr-stroke-moon: #5f6775;
+  --clr-switch-dark: #5f6775;
+  --clr-fill-toogle-ground: #ffffff;
+  --clr-stroke-toogle-border: #4b48db;
+  --clr-fill-toogle-circle: #4b48db;
+  --clr-stroke-sun: #4b48db;
+  --clr-stroke-moon: #5f6775;
+  // pagination
+  --clr-pag: #111321;
+  --clr-pag-border: #4440f6;
+  --clr-pag-bg: #f4f4f4;
+  --clr-pag-active: #4440f7;
+  --clr-pag-more: #111321;
 }
 
 .dark-mode {
   --clr-border: #f4f4f4;
-  --color-primary: #F4F4F4;
-  --color-secondary: #2E2E2E;
+  --color-primary: #f4f4f4;
+  --color-secondary: #2e2e2e;
   --clr-switch-light: #5f6775;
-    --clr-switch-dark: #4b48db;
-    --clr-fill-toogle-ground: #4b48db;
-    --clr-stroke-toogle-border: #ffffff;
-    --clr-fill-toogle-circle: #ffffff;
-    --clr-stroke-sun: #5f6775;
-    --clr-stroke-moon: #4b48db;
+  --clr-switch-dark: #4b48db;
+  --clr-fill-toogle-ground: #4b48db;
+  --clr-stroke-toogle-border: #ffffff;
+  --clr-fill-toogle-circle: #ffffff;
+  --clr-stroke-sun: #5f6775;
+  --clr-stroke-moon: #4b48db;
+  // pagination
+  --clr-pag: #111321;
+  --clr-pag-border: #4440f6;
+  --clr-pag-bg: #f4f4f4;
+  --clr-pag-active: #4440f7;
+  --clr-pag-more: #f4f4f4;
 }
