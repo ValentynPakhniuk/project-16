@@ -4,7 +4,6 @@ const refs = {
   errorEl: document.querySelector('.error'),
 };
 
-
 console.log('I here');
 
 function checkContent(lengthList) {
