@@ -8,6 +8,7 @@
 import './popular-cards';
 import './cards';
 import './change-theme';
+import './calendar';
 import './not-found';
 import './filters';
 

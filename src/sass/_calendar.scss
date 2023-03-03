@@ -1,0 +1,34 @@
+.calendar-container {
+    padding: 20;
+    display: flex;
+}
+
+.calendar-input {
+    text-align: center;
+    font-size: 14px;
+
+    width: 168px;
+    height: 31px;
+    margin-left: 37px;
+    padding: 5 12;
+    border-radius: 20px;
+
+    color: var(--clr-fill-toogle-ground);
+    background: var(--clr-pag-border);
+}
+
+.calendar-input::placeholder {
+    color: #A8A8A8;
+}
+
+.calendar-text {
+    padding: 5;
+}
+
+// .calendar-label {
+//     position: relative;
+// }
+
+// .calendar-icon {
+   
+// }
