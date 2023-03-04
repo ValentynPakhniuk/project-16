@@ -23,8 +23,10 @@ pagination.setItemsPerPage(10);
 import RequestDataBaseControler from './request-database-controler';
 const requestDataBaseControler = new RequestDataBaseControler();
 
-requestDataBaseControler.searchLine = 'fds';
-const data = async () => await requestDataBaseControler.requestData(1);
+// requestDataBaseControler.date = '20230101';
+requestDataBaseControler.searchLine = '';
+requestDataBaseControler.category = 'books';
+const data = async () => await requestDataBaseControler.requestData(0);
 data().then(data => {
   console.dir(data);
   console.log(data.response.meta.hits);

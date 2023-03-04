@@ -9,7 +9,7 @@ export default class RequestDataBaseControler {
     searchLine: '',
     category: '',
     date: '',
-    page: 1,
+    page: 0,
   };
 
   #requestURL = new RequestURL();
@@ -41,14 +41,14 @@ export default class RequestDataBaseControler {
   }
 
   set page(value) {
-    this.#searchParams.page = value <= 0 ? 1 : value;
+    this.#searchParams.page = value <= 0 ? 0 : value;
   }
 
   get page() {
     return this.#searchParams.page;
   }
 
-  async requestData(pageNumber = 1) {
+  async requestData(pageNumber = 0) {
     this.page = pageNumber;
     console.log(this.#requestURL.getNewsRequestURL(this.#searchParams));
     return await this.#loadData.getData(
@@ -97,16 +97,18 @@ class RequestURL {
 
     paramsLine += `&page=${searchParams.page}`;
 
+    // paramsLine += `&offset=0`;
     // paramsLine += `&pageSize=${searchParams.pageSize}`;
 
-    if (searchParams.searchLine.length > 0) {
-      paramsLine += `&q=${searchParams.searchLine}`;
-    }
     if (searchParams.category.length > 0) {
       paramsLine += `&fq=${searchParams.category}`;
     }
+    console.log(searchParams.date + ' date ' + searchParams.date.length);
     if (searchParams.date.length > 0) {
-      paramsLine += `&from=${searchParams.date}&to=${searchParams.date}`;
+      paramsLine += `&begin_date=${searchParams.date}&end_date=${searchParams.date}`;
+    }
+    if (searchParams.searchLine.length > 0) {
+      paramsLine += `&q=${searchParams.searchLine}`;
     }
 
     return paramsLine;
