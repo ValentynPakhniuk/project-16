@@ -14,10 +14,17 @@ const refs = {
 const APIURL = 'https://api.openweathermap.org/data/2.5/';
 const APIKEY = 'ea8d3210fb1031e19e4ed7c502a65955';
 const date = new Date();
-let lat = '49.9808100';
-let lon = '36.2527200';
 
-fetch(`${APIURL}weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`)
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  const crd = pos.coords;
+
+  fetch(`${APIURL}weather?lat=${crd.latitude}&lon=${crd.longitude}&appid=${APIKEY}&units=metric`)
   .then(response => response.json())
   .then(weather => {
     refs.temperature.textContent = Math.round(weather.main.temp);
@@ -25,17 +32,24 @@ fetch(`${APIURL}weather?lat=${lat}&lon=${lon}&appid=${APIKEY}&units=metric`)
     refs.cityName.textContent = weather.name;
   });
 
-fetch(`${APIURL}forecast?lat=${lat}&lon=${lon}&cnt=60&appid=${APIKEY}`)
-.then(response => response.json())
-.then(weatherWeek => {
+  fetch(`${APIURL}forecast?lat=${crd.latitude}&lon=${crd.longitude}&cnt=60&appid=${APIKEY}`)
+  .then(response => response.json())
+  .then(weatherWeek => {
   refs.cityNameWeek.textContent = weatherWeek.city.name;
 
-  if (weatherWeek.list) {
+//   if (weatherWeek.list) {
     
-  }
+//   }
 
-  console.log(weatherWeek);
+//   console.log(weatherWeek);
 });
+};
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+};
+
+navigator.geolocation.getCurrentPosition(success, error, options); 
 
 function showCurrentDate() {
   const options = { day: 'numeric', month: 'long' };
