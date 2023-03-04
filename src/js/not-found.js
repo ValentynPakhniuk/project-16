@@ -4,8 +4,7 @@ const refs = {
   errorEl: document.querySelector('.error'),
 };
 
-
-console.log('I here');
+// console.log('I here');
 
 function checkContent(lengthList) {
   const { pagination, cardList, errorEl } = refs;

@@ -2,8 +2,6 @@ import NewsApiService from './NewsApiService';
 
 const getNewsl = new NewsApiService();
 
-const link = 'https://image-placeholder.com/images/actual-size/200x200.png';
-
 const refs = {
   formInput: document.querySelector('.search__line'),
   form: document.querySelector('#search-form'),
@@ -20,10 +18,17 @@ function onSubmitForm(e) {
   return;
 }
 
-const getCard = (urlPhoto, category, title, text, date, url) => {
+export const getCard = (urlPhoto, category, title, text, date, url) => {
+  const defaultUrl =
+    'https://image-placeholder.com/images/actual-size/200x200.png';
+  const domain = 'https://static01.nyt.com/';
+  const protocol = 'https://';
+  const photo =
+    urlPhoto.search(protocol) !== -1 ? urlPhoto : `${domain}${urlPhoto}`;
+  const imageUrl = urlPhoto ? photo : defaultUrl;
   return `<li class="card">
             <div class="block-photo">
-            <img class="card-photo" src="${urlPhoto}" alt="Сітка користувачів">
+            <img class="card-photo" src="${imageUrl}" alt="Сітка користувачів">
             <p class="news-category-text">${category}</p>
             <p class="checked-news visually-hidden">Already read
                 <svg class="checked-news-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,13 +55,15 @@ const getCard = (urlPhoto, category, title, text, date, url) => {
     </li>`;
 };
 
+const getUrlPhoto = el => el.multimedia[0].url;
+
 const getNewNews = async () => {
   const response = await getNewsl.getNews();
   const cardNews = response.docs
     .map(news => {
+      console.log('getUrlPhoto(news):', getUrlPhoto(news));
       const newsNew = getCard(
-        link,
-        // getUrlPhoto(news),
+        getUrlPhoto(news),
         news.section_name,
         checkTitleLength(news.headline.main),
         checkTextLength(news.abstract),
@@ -84,5 +91,3 @@ const checkTitleLength = title => {
 };
 
 const getDate = date => date.slice(0, 10);
-
-// const getUrlPhoto = el => el.multimedia[0].url;
