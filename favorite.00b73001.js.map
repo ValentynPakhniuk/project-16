@@ -1,1 +1,1 @@
-{"mappings":"AAAAA,QAAQC,IAAI","sources":["src/js/favorite.js"],"sourcesContent":["console.log('favorite loaded');"],"names":["console","log"],"version":3,"file":"favorite.00b73001.js.map"}
+{"mappings":"AAAAA,QAAQC,IAAI","sources":["src/js/favorite.js"],"sourcesContent":["console.log('favorite loaded');\n"],"names":["console","log"],"version":3,"file":"favorite.00b73001.js.map"}
