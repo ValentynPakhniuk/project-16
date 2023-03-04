@@ -25,26 +25,26 @@
 .category__btn {
     padding: 8px 21px;
 
-    border: 1px solid #4440f7;
+    border: 1px solid var(--clr-categoty-btn);
     border-radius: 20px;
-    background-color: white;
+    background-color: var(--clr-categoty-btn-background);
 
-    color: #4b48db;
+    color: var(--clr-categoty-btn-text);
     font-size: 12px;
     line-height: calc(16 / 12);
     cursor: pointer;
 
     &:hover,
     &:focus {
-        color: #ffffff;
-        background-color: #4440f6;
+        color: var(--clr-categoty-btn-background);
+        background-color: var(--clr-categoty-btn);
     }
 }
 
-.category-active {
-    color: #ffffff;
-    background-color: #4440f6;
-}
+// .category-active {
+//     color: #ffffff;
+//     background-color: var(--clr-categoty-btn);
+// }
 
 .others__container {
     position: relative;
@@ -58,9 +58,9 @@
 
     cursor: pointer;
 
-    color: #4440F6;
-    background-color: white;
-    border: 1px solid #4440f7;
+    color: var(--clr-categoty-btn);
+    background-color: var(--clr-categoty-btn-background);
+    border: 1px solid var(--clr-categoty-btn);
     border-radius: 20px;
 
     @media screen and (min-width: $tablet) {
@@ -69,8 +69,8 @@
 }
 
 .others__btn-active {
-    color: #ffffff;
-    background-color: #4440f6;
+    color: var(--clr-categoty-btn-background);
+    background-color: var(--clr-categoty-btn);
 }
 
 .others__text-btn {
@@ -80,12 +80,12 @@
 
 .others__icon-open {
     display: block;
-    fill: #4440F6;
+    fill: var(--clr-categoty-btn);
 }
 
 .others__icon-close {
     display: none;
-    fill: white;
+    fill: var(--clr-categoty-btn-background);
 }
 
 .others__list {
@@ -94,7 +94,7 @@
     padding: 14px 24px;
     overflow: overlay;
 
-    background: #f8f8f8;
+    background: var(--clr-categoty-btn-background);
     border-radius: 20px;
 
     filter: drop-shadow(0px 10px 60px rgba(0, 0, 0, 0.1));
@@ -110,7 +110,7 @@
     display: inline-block;
     cursor: pointer;
 
-    color: #4440F7;
+    color: var(--clr-categoty-btn);
     background-color: transparent;
     font-size: 12px;
     line-height: calc(16 / 12);
@@ -139,9 +139,9 @@
 
 // .others__wrapper.is-open .others__list {}
 
-.others__wrapper.is-open~.others__button {
-    background-color: #4440f6;
-    color: #f8f8f8;
+.others__wrapper.is-open~.others__btn {
+    background-color: var(--clr-categoty-btn);
+    color: var(--clr-categoty-btn-background);
 
     .others__icon-open {
         display: none;
