@@ -43,14 +43,15 @@
 
 .weather__button-city {
 	display: block;
-	width: 177px;
-	height: 42px;
 	margin-left: 16px;
 	margin-bottom: 20px;
+	padding: 7px 10px 7px 10px;
+	min-width: 177px;
 
 	font-family: Roboto;
 	font-size: 20px;
 	font-weight: 400;
+	text-align: center;
 
 	border: 0;
 	border-radius: 10px;
