@@ -22,7 +22,7 @@ const refs = {
 export default async function getResponseCategory() {
   try {
     const response = await categoryApiService.getCategories();
-    console.log(response);
+    // console.log(response);
     renderCategories(response);
     renderCategoriesOther(response);
   } catch (error) {
@@ -49,7 +49,7 @@ function renderCategories(response) {
 
 function renderCategoriesOther(response) {
   refs.othersTextInBtn.textContent = 'Others';
-  console.log(refs.othersTextInBtn.textContent);
+  // console.log(refs.othersTextInBtn.textContent);
   let markup = '';
   for (let i = 7; i < 50; i++) {
     markup += `

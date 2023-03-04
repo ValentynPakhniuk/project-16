@@ -1,4 +1,3 @@
-
 // import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 // import 'flatpickr/dist/flatpickr.min.css';
@@ -12,4 +11,3 @@ import './calendar';
 import './not-found';
 import './filters';
 import './weather';
-
