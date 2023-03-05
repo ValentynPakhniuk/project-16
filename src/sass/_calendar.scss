@@ -1,5 +1,4 @@
 .calendar-container {
-    padding: 20;
     display: flex;
 }
 
@@ -7,20 +6,17 @@
     text-align: center;
     font-size: 14px;
 
-    width: 168px;
+    width: 151px;
     height: 31px;
     border-radius: 20px;
 
-    border: 1px solid var(--color-primary);
-    color: var(--color-primary);
-    background: none;
-
-    &:hover,
-    &:focus {
-        color: var(--clr-fill-toogle-ground);
-        background-color: var(--clr-pag-border);
-        border: none;
+    @include tablet {
+        width: 168px;
     }
+
+    border: 1px solid var(--color-primary);
+    color: #5f6775;
+    background: none;
 }
 
 .calendar-input::placeholder {
@@ -30,21 +26,36 @@
 }
 
 .calendar-text {
-    padding: 5;
-    margin-right: 37px;
+    display: none;
+    
+    @include desktop {
+        display: flex;
+        padding: 5;
+        margin-right: 37px;
+    }
 }
 
 .calendar-label {
     position: relative;
 
+    &:hover .calendar-input,
+    &:focus .calendar-input {
+        color: var(--clr-fill-toogle-ground);
+        color: var(--clr-pag-bg);
+        background-color: var(--clr-pag-border);
+        border: none;
+    }
+
     &:hover .calendar-icon-before,
     &:focus .calendar-icon-before {
         fill: var(--clr-fill-toogle-ground);
+        fill: var(--clr-pag-bg);
     }
 
     &:hover .calendar-icon-after,
     &:focus .calendar-icon-after {
         fill: var(--clr-fill-toogle-ground);
+        fill: var(--clr-pag-bg);
         transform: matrix(-1, 0, 0, -1, 0, 0);
         top: 20%;
     }
@@ -56,16 +67,24 @@
     cursor: pointer;
     position: absolute;
     top: 50%;
-    left: 14px;
+    left: 10px;
     transform: translateY(-50%);
+
+    @include tablet {
+        left: 14px;
+    }
 }
 
 .calendar-icon-after {
-    fill: var(--color-primary);
+    fill: #5f6775;
     
     cursor: pointer;
     position: absolute;
     top: 50%;
-    right: 14px;
+    right: 10px;
     transform: translateY(-50%);
+
+    @include tablet {
+        right: 14px;
+    }
 }

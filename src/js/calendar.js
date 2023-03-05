@@ -6,6 +6,7 @@ import NewsApiService from './NewsApiService';
 const options = {
   // defaultDate: new Date(),
   dateFormat: 'd/m/Y',
+  disableMobile: "true",
   onClose(selectedDates) {
     // console.log(selectedDates[0]);
   },
