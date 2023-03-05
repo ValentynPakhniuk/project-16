@@ -11,3 +11,4 @@ import './calendar';
 import './not-found';
 import './filters';
 import './weather';
+import './mobile-menu';

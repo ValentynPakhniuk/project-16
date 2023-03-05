@@ -31,25 +31,25 @@ export default async function getResponseCategory() {
 }
 
 function onResize(e) {
-    getResponseCategory();
-} 
+  getResponseCategory();
+}
 
 function renderByViewportWidth(response) {
-  if (window.matchMedia("(min-width: 1280px)").matches) {
+  if (window.matchMedia('(min-width: 1280px)').matches) {
     clearCategoriesMarkup();
     renderCategoriesDesktop(response);
     renderCategoriesOtherDesktop(response);
-  } else if (window.matchMedia("(min-width: 768px)").matches) {
+  } else if (window.matchMedia('(min-width: 768px)').matches) {
     clearCategoriesMarkup();
     renderCategoriesTablet(response);
     renderCategoriesOtherTablet(response);
   } else {
     clearCategoriesMarkup();
     renderCategoriesOtherMobile(response);
-    }
+  }
 }
 
-function renderCategoriesDesktop (response) {
+function renderCategoriesDesktop(response) {
   let markup = '';
   for (let i = 0; i < 6; i++) {
     markup += `
@@ -62,7 +62,7 @@ function renderCategoriesDesktop (response) {
   return;
 }
 
-function renderCategoriesOtherDesktop (response) {
+function renderCategoriesOtherDesktop(response) {
   refs.othersTextInBtn.textContent = 'Others';
   let markup = '';
   for (let i = 6; i < response.length; i++) {
@@ -77,42 +77,42 @@ function renderCategoriesOtherDesktop (response) {
 }
 
 function renderCategoriesTablet(response) {
-    let markup = '';
-    for (let i = 0; i < 4; i++) {
-        markup += `
+  let markup = '';
+  for (let i = 0; i < 4; i++) {
+    markup += `
             <li class="category__item"><button class="category__btn" type="button">${response[i].display_name}</button></li>
             `;
-    };
-    refs.categoriesList.insertAdjacentHTML('beforeend', markup);
-    return 
+  }
+  refs.categoriesList.insertAdjacentHTML('beforeend', markup);
+  return;
 }
 
 function renderCategoriesOtherTablet(response) {
   refs.othersTextInBtn.textContent = 'Others';
-    let markup = '';
-    for (let i = 4; i < response.length; i++) {
-        markup += `
+  let markup = '';
+  for (let i = 4; i < response.length; i++) {
+    markup += `
           <li class="others__item">
             <button class="others__item-btn">${response[i].display_name}</button>
           </li>
             `;
-    };
+  }
   refs.categoriesOthersList.insertAdjacentHTML('beforeend', markup);
-    return 
+  return;
 }
 
 function renderCategoriesOtherMobile(response) {
   refs.othersTextInBtn.textContent = 'Categories';
-    let markup = '';
-    for (let i = 0; i < response.length; i++) {
-        markup += `
+  let markup = '';
+  for (let i = 0; i < response.length; i++) {
+    markup += `
           <li class="others__item">
             <button class="others__item-btn">${response[i].display_name}</button>
           </li>
             `;
-    };
-    refs.categoriesOthersList.insertAdjacentHTML('beforeend', markup);
-    return 
+  }
+  refs.categoriesOthersList.insertAdjacentHTML('beforeend', markup);
+  return;
 }
 
 refs.categoriesOthersList.addEventListener('click', onClickOtherCategories);
