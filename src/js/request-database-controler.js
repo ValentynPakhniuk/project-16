@@ -14,6 +14,9 @@ const REQUEST_TYPE = {
   POPULAR: 'popular',
 };
 
+/**
+ * Контролер запитів до бекенду
+ */
 export default class RequestDataBaseControler {
   #searchParams = {
     searchLine: '',
@@ -43,7 +46,7 @@ export default class RequestDataBaseControler {
   }
 
   set date(value) {
-    this.#searchParams.date = value;
+    this.#searchParams.date = this.#formatDate(value);
   }
 
   get date() {
@@ -51,10 +54,12 @@ export default class RequestDataBaseControler {
   }
 
   set page(value) {
+    // приведення номера сторінки у відповідність до нумерації бекенда
     this.#searchParams.page = value <= 1 ? 0 : value - 1;
   }
 
   get page() {
+    // приведення номера сторінки у відповідність до нумерації на фронті
     return this.#searchParams.page + 1;
   }
 
@@ -75,6 +80,7 @@ export default class RequestDataBaseControler {
     });
   }
 
+  // перетворення отриманих даних у результуючі в залежності від різних форматів у відповідях
   #createResultData(data, dataType) {
     const result = {
       hits: 0,
@@ -86,7 +92,7 @@ export default class RequestDataBaseControler {
         result.hits = data.response.meta.hits;
         result.data = data.response.docs.map(elem => {
           const obj = {};
-          obj.urlPhoto = this.#getUrlPhoto(elem);
+          obj.urlPhoto = this.#getUrlPhotoForNews(elem);
           obj.category = elem.section_name;
           obj.title = this.#checkTitleLength(elem.headline.main);
           obj.text = this.#checkTextLength(elem.abstract);
@@ -98,6 +104,43 @@ export default class RequestDataBaseControler {
         });
         break;
       case REQUEST_TYPE.CATEGORY:
+        // if (data.results === null) {
+        //   break;
+        // }
+        // result.hits = data.results.length;
+        // result.data = data.results
+        //   .filter(
+        //     (elem, idx) =>
+        //       idx >= this.#searchParams.page * PAGE_SIZE &&
+        //       idx < (this.#searchParams.page + 1) * PAGE_SIZE
+        //   )
+        //   .map(elem => {
+        //     const obj = {};
+        //     obj.urlPhoto = this.#getUrlPhotoForNews(elem);
+        //     obj.category = elem.section;
+        //     obj.title = this.#checkTitleLength(elem.title);
+        //     obj.text = this.#checkTextLength(elem.abstract);
+        //     obj.date = this.#getDate(elem.published_date);
+        //     obj.url = elem.url;
+        //     obj.alt = this.#getAltCategory(elem);
+        //     obj.id = elem.uri;
+        //     return obj;
+        //   });
+        result.hits = data.response.meta.hits;
+        result.data = data.response.docs.map(elem => {
+          const obj = {};
+          obj.urlPhoto = this.#getUrlPhotoForNews(elem);
+          obj.category = elem.section_name;
+          obj.title = this.#checkTitleLength(elem.headline.main);
+          obj.text = this.#checkTextLength(elem.abstract);
+          obj.date = this.#getDate(elem.pub_date);
+          obj.url = elem.web_url;
+          obj.alt = 'no picture description';
+          obj.id = elem.uri;
+          return obj;
+        });
+
+        break;
       case REQUEST_TYPE.POPULAR:
         result.hits = data.num_results;
         result.data = data.results
@@ -108,13 +151,13 @@ export default class RequestDataBaseControler {
           )
           .map(elem => {
             const obj = {};
-            obj.urlPhoto = this.#getUrl(elem);
+            obj.urlPhoto = this.#getUrlPhotoPopular(elem);
             obj.category = elem.section;
             obj.title = this.#checkTitleLength(elem.title);
             obj.text = this.#checkTextLength(elem.abstract);
             obj.date = this.#getDate(elem.published_date);
             obj.url = elem.url;
-            obj.alt = this.#getAlt(elem);
+            obj.alt = this.#getAltPopular(elem);
             obj.id = elem.uri;
             return obj;
           });
@@ -123,7 +166,8 @@ export default class RequestDataBaseControler {
     return result;
   }
 
-  #getUrlPhoto(el) {
+  // формування шляху по фото для REQUEST_TYPE.NEWS
+  #getUrlPhotoForNews(el) {
     if (el.multimedia.length <= 0) {
       return TMP_LINK;
     }
@@ -134,6 +178,14 @@ export default class RequestDataBaseControler {
     }
 
     return url.search(httpProtocol) !== -1 ? url : `${domain}${url}`;
+  }
+
+  // формування шляху по фото для REQUEST_TYPE.POPULAR
+  #getUrlPhotoPopular(el) {
+    if (el.media.length == 0) {
+      return TMP_LINK;
+    }
+    return el.media[0]['media-metadata'][2].url;
   }
 
   #checkTitleLength(title) {
@@ -154,14 +206,8 @@ export default class RequestDataBaseControler {
     return date.slice(0, 10);
   }
 
-  #getUrl(el) {
-    if (el.media.length == 0) {
-      return TMP_LINK;
-    }
-    return el.media[0]['media-metadata'][2].url;
-  }
-
-  #getAlt(el) {
+  // формування властивості alt для REQUEST_TYPE.POPULAR
+  #getAltPopular(el) {
     if (el.media.length == 0) {
       return 'There is no photo for the article';
     }
@@ -170,8 +216,31 @@ export default class RequestDataBaseControler {
     }
     return el.media[0].copyright;
   }
+
+  // формування властивості alt для REQUEST_TYPE.CATEGORY
+  #getAltCategory(el) {
+    if (el.multimedia.length == 0) {
+      return 'There is no photo for the article';
+    }
+    if (el.multimedia[0].copyright.length == 0) {
+      return 'There is no photo for the article';
+    }
+    return el.multimedia[0].copyright;
+  }
+
+  // перетворення дати
+  #formatDate(date) {
+    const arrDate = date.split('/');
+    if (arrDate.length == 3) {
+      return `${arrDate[2]}${arrDate[1]}${arrDate[0]}`;
+    }
+    return '';
+  }
 }
 
+/**
+ * формування рядку запиту до бекенду
+ */
 class RequestURL {
   #requestType;
 
@@ -181,6 +250,7 @@ class RequestURL {
     return this.#requestType;
   }
 
+  // формування рядка get запиту до бекенда
   getNewsRequestURL(searchParams) {
     this.#setRequestType(searchParams);
 
@@ -191,6 +261,7 @@ class RequestURL {
     );
   }
 
+  // визначення типу запиту
   #setRequestType(searchParams) {
     if (searchParams.searchLine.length !== 0) {
       this.#requestType = REQUEST_TYPE.NEWS;
@@ -205,75 +276,57 @@ class RequestURL {
     this.#requestType = REQUEST_TYPE.POPULAR;
   }
 
+  // визначення API шляху в залежності від типу запиту
   #getNewsRequestURLDirection(searchParams) {
     switch (this.#requestType) {
       case REQUEST_TYPE.NEWS:
         return '/svc/search/v2/articlesearch.json';
       case REQUEST_TYPE.CATEGORY:
-        return `/svc/news/v3/content/nyt/${searchParams.category}.json`;
+        return '/svc/search/v2/articlesearch.json';
+      // return `/svc/news/v3/content/inyt/${searchParams.category}.json`;
       case REQUEST_TYPE.POPULAR:
         return `/svc/mostpopular/v2/viewed/1.json`;
     }
   }
 
+  // формування параметрів для запиту в залежності від типу запиту
   #getNewsRequestURLParams(searchParams) {
     let paramsLine = `?${API_KEY}`;
 
     switch (this.#requestType) {
       case REQUEST_TYPE.NEWS:
-        // if (searchParams.category.length > 0) {
-        //   paramsLine += `&fq=${'{Article}'}`; //searchParams.category
-        // }
-        // console.log(searchParams.date + ' date ' + searchParams.date.length);
         if (searchParams.searchLine.length > 0) {
           paramsLine += `&q=${searchParams.searchLine}`;
         }
-        paramsLine += `&pageSize=${PAGE_SIZE}`;
 
       case REQUEST_TYPE.CATEGORY:
         // paramsLine += `&sortBy=popularity`;
+        if (searchParams.category.length > 0) {
+          paramsLine += `&fq=section_name: ("${this.#changeSpecSymbol(
+            searchParams.category
+          )}")`;
+        }
 
         paramsLine += `&page=${searchParams.page}`;
 
         if (searchParams.date.length > 0) {
           paramsLine += `&begin_date=${searchParams.date}&end_date=${searchParams.date}`;
         }
+
+        paramsLine += `&pageSize=${PAGE_SIZE}`;
     }
     return paramsLine;
+  }
 
-    // let paramsLine = `?${API_KEY}`;
-
-    // if (this.#requestType == REQUEST_TYPE.POPULAR) {
-    //   return paramsLine;
-    // }
-
-    // paramsLine += `&sortBy=popularity`;
-
-    // paramsLine += `&page=${searchParams.page}`;
-
-    // if (searchParams.date.length > 0) {
-    //   paramsLine += `&begin_date=${searchParams.date}&end_date=${searchParams.date}`;
-    // }
-
-    // if (this.#requestType == REQUEST_TYPE.CATEGORY) {
-    //   return paramsLine;
-    // }
-
-    // // paramsLine += `&offset=0`;
-    // // paramsLine += `&pageSize=${searchParams.pageSize}`;
-
-    // if (searchParams.category.length > 0) {
-    //   paramsLine += `&fq=${searchParams.category}`;
-    // }
-    // // console.log(searchParams.date + ' date ' + searchParams.date.length);
-    // if (searchParams.searchLine.length > 0) {
-    //   paramsLine += `&q=${searchParams.searchLine}`;
-    // }
-
-    // return paramsLine;
+  // заміна & на %26amp;
+  #changeSpecSymbol(value) {
+    return value.split('&').join('%26');
   }
 }
 
+/**
+ * запит до бекенду
+ */
 class LoadData {
   constructor() {}
 

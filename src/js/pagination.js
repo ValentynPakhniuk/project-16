@@ -1,4 +1,5 @@
 import throttle from 'lodash.throttle';
+import { PAGE_SIZE } from './constants';
 
 // Функціонал:
 // - може перебирати сторінки як за допомогою кнопок "Next", "Prew", так і прямим натисканням
@@ -101,7 +102,7 @@ export default class Pagination {
   #screenSizeRefreshRate = 300;
   #clickPageRefreshRate = 1000;
 
-  #itemsPerPage = 8;
+  #itemsPerPage = PAGE_SIZE;
   #currentPage = 1;
   #totalItems = 1;
   #totalPages = 1;
@@ -109,6 +110,7 @@ export default class Pagination {
   constructor(screenSizeRefreshRate = 300, clickPageRefreshRate = 1000) {
     this.#screenSizeRefreshRate = screenSizeRefreshRate;
     this.#clickPageRefreshRate = clickPageRefreshRate;
+    this.#itemsPerPage = PAGE_SIZE;
 
     this.#setBaseReferens();
 

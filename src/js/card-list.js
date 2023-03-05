@@ -1,3 +1,6 @@
+/**
+ * Формування переліку карток по шаблону
+ */
 export default class CardsList {
   #refPathInnerHTML;
 
@@ -6,12 +9,13 @@ export default class CardsList {
   }
 
   getCardsList(dataCardList) {
+    // очищуємо старі карточки, так щоб залишилася карточка погоди
     [...this.#refPathInnerHTML.children].forEach(element => {
       if (!element.classList.contains('card__weather')) {
         this.#refPathInnerHTML.removeChild(element);
       }
     });
-
+    // додаємо нові картки на сторінку
     this.#refPathInnerHTML.insertAdjacentHTML(
       'beforeend',
       this.#createCardsList(dataCardList)
@@ -20,7 +24,20 @@ export default class CardsList {
 
   #createCardsList(dataCardList) {
     return dataCardList
-      .map((elem, idx) => this.#createCard(elem, idx < 2 ? idx : idx + 1))
+      .map((elem, idx) => {
+        // формуємо порядок карток, щоб можна було вставляти картку погоди
+        switch (idx) {
+          case 0:
+            idx = 0;
+            break;
+          case 1:
+            idx = 2;
+            break;
+          default:
+            idx += 2;
+        }
+        return this.#createCard(elem, idx);
+      })
       .join('');
   }
 
