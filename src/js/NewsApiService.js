@@ -16,21 +16,21 @@ class NewsApiService {
   async getCategories() {
     const categoryApi = `${URL}/svc/news/v3/content/section-list.json?${API_KEY}`;
     const responseCategories = await axios.get(categoryApi);
-    console.log(responseCategories);
     return responseCategories.data.results;
   }
 
   async getNews() {
-    const articlesApi = `${URL}/svc/search/v2/articlesearch.json?q=${
-      this.search
-    }&fq=${this.category ? `&category='${this.category}'` : ''}&from=${
-      this.date
-    }&to=${Date.now()}&sortBy=popularity&page=${
-      this.page
-    }&pageSize=${PAGE_SIZE}&${API_KEY}`;
+    const articlesApi = `${URL}/svc/search/v2/articlesearch.json?q=${this.search}&page=${this.page}&pageSize=${PAGE_SIZE}&${API_KEY}`;
     const response = await axios.get(articlesApi);
     this.nextPage();
     return response.data.response;
+  }
+
+  async getNewsCategories() {
+    const newsCategoriesApi = `${URL}/svc/news/v3/content/nyt/${this.page}.json?page=${this.page}&pageSize=${PAGE_SIZE}&${API_KEY}`;
+    const responseNewsCategories = await axios.get(newsCategoriesApi);
+    this.nextPage();
+    return responseNewsCategories.data;
   }
 
   async getPopular() {
