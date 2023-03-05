@@ -9,8 +9,21 @@
   </head>
   <body class="light-mode">
     <include src="./partials/header.html"></include>
-    <include src="./partials/filters.html"></include>
-    <include src="./partials/calendar.html"></include>
-    <include src="./partials/weather.html"></include>
+    <section>
+      <div class="container filters__line">
+        <include src="./partials/filters.html"></include>
+        <include src="./partials/calendar.html"></include>
+      </div>
+    </section>
+    <section>
+      <div class="container list__cards">
+        <ul class="list-card">
+          <li class="card card__weather" style="order: 3">
+            <include src="./partials/weather.html"></include>
+          </li>
+        </ul>
+        <include src="./partials/pagination.html"></include>
+      </div>
+    </section>
   </body>
 </html>
