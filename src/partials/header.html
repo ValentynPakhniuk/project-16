@@ -1,22 +1,70 @@
 <header class="header ">
-  <div class="container header__wrap-nav">
-    
-    <a class="header__logo" href="./index.html">News</a>
-    <nav class="header__nav">
-      <ul class="nav__list">
-        <li class="nav__item">
-          <a class="nav__link" href="./index.html">Home</a>
+  <div class="container header__wrap-nav header__container">
+    <a class="header__logo text-link text-link__navigation link" href="./index.html">News</a>
+    <form class="search search__mobile" id="search-form">
+      <label class="search__label">
+        <input type="text" name="search" id="search" class="search__line" placeholder="Search" />
+        <svg class="search__ico" width="16" height="15">
+          <use href="./images/header.svg#search"></use>
+        </svg>
+      </label>
+    </form>
+    <button type="button" class="menu-button is-open" aria-expanded="false" aria-controls="menu-container"
+      data-menu-button>
+      <svg width="54" height="36" aria-label="Преключатель мобільного меню">
+        <use class="icon-cross" href="./images/header.svg#open-menu"></use>
+        <use class="icon-menu" href="./images/header.svg#close-menu"></use>
+      </svg>
+    </button>
+    <div class="menu-container" id="menu-container" data-menu>
+      <ul class="site-nav site-nav__container list">
+        <li class="site-nav__item">
+          <a href="./index.html" class="site-nav__link link">Home</a>
         </li>
-        <li class="nav__item">
-          <a class="nav__link" href="./favorite.html">Favorite</a>
+        <li class="site-nav__item">
+          <a href="./favorite.html" class="site-nav__link link">Favorite</a>
         </li>
-        <li class="nav__item">
-          <a class="nav__link" href="./read.html">Read</a>
+        <li class="site-nav__item">
+          <a href="./read.html" class="site-nav__link link">Read</a>
+        </li>
+      </ul>
+      <div class="switch__theme">
+        <span class="switch__left theme-light">Light</span>
+        <svg class="switch__sun theme-light" width="19" height="19">
+          <use href="./images/header.svg#sun" class="theme-light"></use>
+        </svg>
+        <div class="switch__toogle">
+          <svg class="switch__toogle--ground" width="40" height="20">
+            <use href="./images/header.svg#elipse"></use>
+          </svg>
+          <svg class="switch__toogle--border" width="40" height="20">
+            <use href="./images/header.svg#border"></use>
+          </svg>
+          <svg class="switch__toogle--circle" width="16" height="16">
+            <use href="./images/header.svg#circle"></use>
+          </svg>
+        </div>
+        <svg class="switch__moon theme-dark" width="19" height="19">
+          <use href="./images/header.svg#moon" class="theme-dark"></use>
+        </svg>
+        <span class="switch__right theme-dark">Dark</span>
+      </div>
+    </div>
+    <nav class="header__nav navigation navigation__container">
+      <ul class="nav__list site-nav site-nav__container list">
+        <li class="nav__item site-nav__item">
+          <a class="nav__link site-nav__link link" href="./index.html">Home</a>
+        </li>
+        <li class="nav__item site-nav__item">
+          <a class="nav__link site-nav__link link" href="./favorite.html">Favorite</a>
+        </li>
+        <li class="nav__item site-nav__item">
+          <a class="nav__link site-nav__link link" href="./read.html">Read</a>
         </li>
       </ul>
     </nav>
     
-    <form class="search" id="search-form">
+    <form class="search search__big" id="search-form">
       <label class="search__label">
         <input
           type="text"
@@ -53,5 +101,5 @@
       <span class="switch__right theme-dark">Dark</span>
     </div>
   </div>
+  <div class="box-shadow-header"></div>
 </header>
-
