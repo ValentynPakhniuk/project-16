@@ -6,18 +6,30 @@ export default class CardsList {
   }
 
   getCardsList(dataCardList) {
-    this.refPathInnerHTML.innerHTML = createCardsList(dataCardList);
+    console.dir(this.#refPathInnerHTML);
+    [...this.#refPathInnerHTML.children].forEach(element => {
+      if (!element.classList.contains('card__weather')) {
+        this.#refPathInnerHTML.removeChild(element);
+      }
+    });
+
+    this.#refPathInnerHTML.insertAdjacentHTML(
+      'beforeend',
+      this.#createCardsList(dataCardList)
+    );
   }
 
   #createCardsList(dataCardList) {
-    return dataCardList.map(elem => createCard(elem)).join('');
+    return dataCardList
+      .map((elem, idx) => this.#createCard(elem, idx < 2 ? idx : idx + 1))
+      .join('');
   }
 
-  #createCard({ urlPhoto, category, title, text, date, url }) {
+  #createCard({ urlPhoto, category, title, text, date, url, alt, id }, order) {
     return `
-        <li class="card">
+        <li class="card" style="order: ${order}" id="${id}">
             <div class="block-photo">
-            <img class="card-photo" src="${urlPhoto}" alt="Сітка користувачів">
+            <img class="card-photo" src="${urlPhoto}" alt="${alt}">
             <p class="news-category-text">${category}</p>
             <p class="checked-news visually-hidden">Already read
                 <svg class="checked-news-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
