@@ -60,7 +60,6 @@ export default class RequestDataBaseControler {
 
   async requestData(pageNumber = 1) {
     this.page = pageNumber;
-    console.log(this.#requestURL.getNewsRequestURL(this.#searchParams));
 
     const resultFetchData = async () =>
       await this.#loadData.getData(
@@ -86,7 +85,6 @@ export default class RequestDataBaseControler {
       case REQUEST_TYPE.NEWS:
         result.hits = data.response.meta.hits;
         result.data = data.response.docs.map(elem => {
-          console.log(elem);
           const obj = {};
           obj.urlPhoto = this.#getUrlPhoto(elem);
           obj.category = elem.section_name;
@@ -109,7 +107,6 @@ export default class RequestDataBaseControler {
               idx < (this.#searchParams.page + 1) * PAGE_SIZE
           )
           .map(elem => {
-            console.log(elem);
             const obj = {};
             obj.urlPhoto = this.#getUrl(elem);
             obj.category = elem.section;
@@ -123,7 +120,6 @@ export default class RequestDataBaseControler {
           });
         break;
     }
-    console.log(result);
     return result;
   }
 

@@ -6,7 +6,6 @@ export default class CardsList {
   }
 
   getCardsList(dataCardList) {
-    console.dir(this.#refPathInnerHTML);
     [...this.#refPathInnerHTML.children].forEach(element => {
       if (!element.classList.contains('card__weather')) {
         this.#refPathInnerHTML.removeChild(element);

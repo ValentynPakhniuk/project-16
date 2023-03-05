@@ -1,4 +1,3 @@
-
 import throttle from 'lodash.throttle';
 
 // import flatpickr from 'flatpickr';
@@ -29,7 +28,6 @@ pagination.addEventListener('select-page-number', callbackMainRequest);
 pagination.setItemsPerPage(10);
 
 function callbackMainRequest(e) {
-  console.log(e.page);
   mainRequestData(e.page);
 }
 
@@ -47,7 +45,7 @@ document.querySelector('#search-form').addEventListener('submit', e => {
 });
 
 // requestDataBaseControler.date = '20230101';
-requestDataBaseControler.searchLine = 'magic cat';
+//requestDataBaseControler.searchLine = 'magic cat';
 // requestDataBaseControler.category = 'books';
 
 window.addEventListener('resize', throttle(windowsResize, 300));
@@ -77,7 +75,6 @@ function mainRequestData(pageNumber = 1) {
     }
     windowsResize();
     htmlCardList.style.display = 'block';
-    console.log(data);
   });
 }
 
