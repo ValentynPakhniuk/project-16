@@ -27,7 +27,7 @@ class NewsApiService {
   }
 
   async getNewsCategories() {
-    const newsCategoriesApi = `${URL}/svc/news/v3/content/nyt/${this.page}.json?page=${this.page}&pageSize=${PAGE_SIZE}&${API_KEY}`;
+    const newsCategoriesApi = `${URL}/svc/news/v3/content/nyt/${this.category}.json?page=${this.page}&pageSize=${PAGE_SIZE}&${API_KEY}`;
     const responseNewsCategories = await axios.get(newsCategoriesApi);
     this.nextPage();
     return responseNewsCategories.data;

@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const categoryApiService = new NewsApiService();
 
+onResize();
+
 window.addEventListener('resize', debounce(onResize, 300));
 
 const refs = {
