@@ -134,6 +134,9 @@ export default class Pagination {
 
   setTotalPages(value) {
     this.#totalPages = this.#checkValueItems(value);
+    if (this.#totalPages > 200) {
+      this.#totalPages = 200;
+    }
     this.#calculateTotalItems();
 
     this.setCurrentPage();
@@ -203,6 +206,9 @@ export default class Pagination {
 
   #calculateTotalPages() {
     this.#totalPages = Math.ceil(this.#totalItems / this.#itemsPerPage);
+    if (this.#totalPages > 200) {
+      this.#totalPages = 200;
+    }
   }
 
   #calculateTotalItems() {
@@ -231,13 +237,13 @@ export default class Pagination {
   }
 
   #setInitValeyScreenWidthType() {
-    this.#setWindowsScreenType(window.innerWidth);
+    this.#setWindowsScreenType(window.screen.availWidth);
   }
 
   #callbackResizeWindow(e) {
     const oldScreenWidthType = this.#screenWidthType.mobile;
 
-    this.#setWindowsScreenType(e.target.innerWidth);
+    this.#setWindowsScreenType(window.screen.availWidth);
 
     if (oldScreenWidthType !== this.#screenWidthType.mobile) {
       this.#visiblePaginationItems();
