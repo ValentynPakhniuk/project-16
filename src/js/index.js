@@ -1,11 +1,9 @@
 import throttle from 'lodash.throttle';
-import getResponseCategory from './filters';
 
 import './change-theme';
 import './weather';
 import './mobile-menu';
 import './filters';
-getResponseCategory();
 import './calendar';
 
 /**
