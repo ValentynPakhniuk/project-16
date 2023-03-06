@@ -22,9 +22,9 @@ import './mobile-menu';
 
 // updateFavoriteButtons();
 
-function saveFavotiteNews() {
-    console.log(HI);
-}
+// function saveFavotiteNews() {
+//     console.log(HI);
+// }
 
 const newsList = document.querySelector('.list-card');
 const removeFavoriteBtn = document.querySelectorAll('.remove-favorite-btn');
@@ -188,10 +188,12 @@ createMarkup(parsedNews);
 favoritePage.addEventListener('click', removeFavorite);
 
 function removeFavorite(e) {
-    e.preventDefault();
     console.log(e.target);
 
     if (e.target.classList.contains('remove-favorite-btn')) {
+
+        currentLi = e.target.parentElement.parentElement;
+        console.log(currentLi);
         currentId = e.target.parentElement.parentElement.id;
         const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
@@ -203,7 +205,7 @@ function removeFavorite(e) {
         console.log(newSavedData);
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedData));
-        createMarkup(newSavedData);
+        currentLi.remove();
     }
 }
 
