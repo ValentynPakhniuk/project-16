@@ -7,6 +7,7 @@ import './weather';
 import './mobile-menu';
 import './filters';
 import './calendar';
+import './favorite';
 
 /**
  * Блок пагінації,
