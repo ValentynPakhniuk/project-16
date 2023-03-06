@@ -4,7 +4,7 @@ body.modal-open {
 
 .header {
   position: relative;
-  z-index: 999;
+  z-index: 99;
 
   .container {
     display: flex;
@@ -45,7 +45,11 @@ body.modal-open {
 
   .header__nav {
     // margin-right: 147px;
+    display: none;
     z-index: 999;
+    @include tablet {
+        display: flex;
+      }
   }
 
   .nav__list {
@@ -63,28 +67,17 @@ body.modal-open {
   }
 
   .search {
+    display: flex;
+    z-index: 999;
     position: relative;
     padding-top: 6px;
     width: 288px;
     height: 31px;
   }
 
-  .search__mobile {
+  .container-logo-search {
     display: flex;
     z-index: 999;
-
-    @include tablet {
-      display: none;
-    }
-  }
-
-  .search__big {
-    display: none;
-
-    @include tablet {
-      display: flex;
-      z-index: 999;
-    }
   }
 
   .search__label {
