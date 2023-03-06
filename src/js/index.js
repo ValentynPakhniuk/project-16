@@ -1,21 +1,12 @@
 import throttle from 'lodash.throttle';
+import debounce from 'lodash.debounce';
+import getResponseCategory from './filters';
 
 import './change-theme';
 import './weather';
 import './mobile-menu';
 import './filters';
 import './calendar';
-
-/**
- * ToDo List
- * Додати запит по категорії
- * Підкючити календар на заповнення в параметр контролеру
- * підправити класс формування карток
- * підключити вибір категорії
- * підключити дату
- * зробити 3 варіанти запитів до серверу
- * адаптація для пагінатора
- */
 
 /**
  * Блок пагінації,
@@ -40,14 +31,18 @@ const cardsList = new CardsList('.list-card');
 /**
  * Блок запуску пошуку по "пошуковому рядку"
  */
-document.querySelector('#search-form').addEventListener('submit', e => {
+const refDate = document.querySelector('.calendar-input');
+document
+  .querySelector('#search-form')
+  .addEventListener('submit', onSubmitSearchLine);
+function onSubmitSearchLine(e) {
   e.preventDefault();
   requestDataBaseControler.searchLine =
     e.currentTarget.elements.search.value.trim();
   requestDataBaseControler.category = '';
-  requestDataBaseControler.date = '';
+  requestDataBaseControler.date = refDate.value;
   mainRequestData();
-});
+}
 
 /**
  * Блок зміни позиції карточки з погодою в залежності від розміру екрану (мобайл, таблетка, десктоп)
@@ -70,8 +65,7 @@ function windowsResize(e) {
  */
 const refCategories = document
   .querySelector('.category')
-  .addEventListener('click', onClickCategories);
-const refDate = document.querySelector('.calendar-input');
+  .addEventListener('click', debounce(onClickCategories, 300));
 function onClickCategories(e) {
   e.preventDefault();
   let category = '';

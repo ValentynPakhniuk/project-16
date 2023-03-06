@@ -1,68 +1,70 @@
 import throttle from 'lodash.throttle';
 import { PAGE_SIZE } from './constants';
 
-// Функціонал:
-// - може перебирати сторінки як за допомогою кнопок "Next", "Prew", так і прямим натисканням
-//   на номер сторінки
-// - слідкує на шириною робочої області і автоматично перебудовується під ширину екрану
-// - надає події, по яким можна відсідковувати натискання на пагінаторі і повертає тип події і
-//   сформований номер сторінки
-// - кількість сторінок можна задавати як за допомогою вказання кількості сторінок або загальну
-//   кількість елементів, що повертає сервер
-// - можна задати активний номер сторінки (якщо необхідно використати попепедньо збережений номер з
-//   локального сховища)
-//
-// Порядк дій по роботу з класом
-// 1. Ініцілізація
-// const pagination = new Pagination([screenSizeRefreshRate = 300], [clickPageRefreshRate = 1000]);
-// screenSizeRefreshRate - швидкість реагування на змінення розміру стірнки
-// clickPageRefreshRate - інтервал через який можна буде повторно натиснути на кнопку пагінації
-//
-// 2. Події
-// клас ініціює 3 події:
-// 'next-page-number' - натискання на кнопку Next
-// 'prew-page-number' - натискання на кнопку Prew
-// 'select-page-number' - натискання на номер сторінки
-//    Використання:
-//      pagination.addEventListener('next-page-number', callBackFunction);
-//      pagination.addEventListener('prew-page-number', callBackFunction);
-//      pagination.addEventListener('select-page-number', callBackFunction);
-//    на всі події можна повішати одну і туж саму функцію
-//    callBackFunction (e) => {}
-//    e - це об'єкт, який містить назву події і номер поточної сторінки, яку обрали на пагінаторі
-//    приклади:
-//      {name: 'select-page-number', page: 2}
-//      {name: 'next-page-number', page: 3}
-//      {name: 'prew-page-number', page: 4}
-//
-// 3. Методи класу:
-//
-// setItemsPerPage(value = 8) - встановити кількість елементів на сторінці
-// setTotalItems(value)       - встановити загальну кількість елементів, які повертає сервер
-// setTotalPages(value)       - встановити загальну кількість сторінок, які повертає сервер
-// setCurrentPage(value = 1)  - встановити поточнку сторінку (можна вставновити початкову
-//                              сторінку якщо вона буде вичитуватися з локального сховища)
-// Для того, щоб пагінатор включився достатньо використати setTotalItems або setTotalPages
-// Якщо задати кількість елементів або сторінок так що вийде всього одна сторінка, або менше,
-// то пагінатор буде приховано.
-//
-// 4. Приклад роботи:
-//
-// import Pagination from './js/pagination';
-// const pagination = new Pagination();
-// pagination.addEventListener('next-page-number', callback);
-// pagination.addEventListener('prew-page-number', callback);
-// pagination.addEventListener('select-page-number', callback);
-// pagination.setItemsPerPage(10);
-//
-// function callback(e) {
-//   console.log(e);
-// }
-//
-// pagination.setTotalItems(100);
-//
-//  Буде відображено пагінатор на 10 сторінок, так як задано кількість елментів на сторінці = 10.
-//
+/* 
+Функціонал:
+- може перебирати сторінки як за допомогою кнопок "Next", "Prew", так і прямим натисканням
+  на номер сторінки
+- слідкує на шириною робочої області і автоматично перебудовується під ширину екрану
+- надає події, по яким можна відсідковувати натискання на пагінаторі і повертає тип події і
+  сформований номер сторінки
+- кількість сторінок можна задавати як за допомогою вказання кількості сторінок або загальну
+  кількість елементів, що повертає сервер
+- можна задати активний номер сторінки (якщо необхідно використати попепедньо збережений номер з
+  локального сховища)
+
+Порядк дій по роботу з класом
+1. Ініцілізація
+const pagination = new Pagination([screenSizeRefreshRate = 300], [clickPageRefreshRate = 1000]);
+screenSizeRefreshRate - швидкість реагування на змінення розміру стірнки
+clickPageRefreshRate - інтервал через який можна буде повторно натиснути на кнопку пагінації
+
+2. Події
+клас ініціює 3 події:
+'next-page-number' - натискання на кнопку Next
+'prew-page-number' - натискання на кнопку Prew
+'select-page-number' - натискання на номер сторінки
+   Використання:
+     pagination.addEventListener('next-page-number', callBackFunction);
+     pagination.addEventListener('prew-page-number', callBackFunction);
+     pagination.addEventListener('select-page-number', callBackFunction);
+   на всі події можна повішати одну і туж саму функцію
+   callBackFunction (e) => {}
+   e - це об'єкт, який містить назву події і номер поточної сторінки, яку обрали на пагінаторі
+   приклади:
+     {name: 'select-page-number', page: 2}
+     {name: 'next-page-number', page: 3}
+     {name: 'prew-page-number', page: 4}
+
+3. Методи класу:
+
+setItemsPerPage(value = 8) - встановити кількість елементів на сторінці
+setTotalItems(value)       - встановити загальну кількість елементів, які повертає сервер
+setTotalPages(value)       - встановити загальну кількість сторінок, які повертає сервер
+setCurrentPage(value = 1)  - встановити поточнку сторінку (можна вставновити початкову
+                             сторінку якщо вона буде вичитуватися з локального сховища)
+Для того, щоб пагінатор включився достатньо використати setTotalItems або setTotalPages
+Якщо задати кількість елементів або сторінок так що вийде всього одна сторінка, або менше,
+то пагінатор буде приховано.
+
+4. Приклад роботи:
+
+import Pagination from './js/pagination';
+const pagination = new Pagination();
+pagination.addEventListener('next-page-number', callback);
+pagination.addEventListener('prew-page-number', callback);
+pagination.addEventListener('select-page-number', callback);
+pagination.setItemsPerPage(10);
+
+function callback(e) {
+  console.log(e);
+}
+
+pagination.setTotalItems(100);
+
+ Буде відображено пагінатор на 10 сторінок, так як задано кількість елментів на сторінці = 10.
+
+ */
 
 export default class Pagination {
   #basePaginationClass = 'pagination__list';
@@ -156,9 +158,9 @@ export default class Pagination {
     this.#visiblePaginationItems();
   }
 
-  // ------------------------
-  // section private function
-  // ------------------------
+  /**
+   * section private function
+   */
 
   // об'єднати #visiblePages() і #setActiveItem() або і не треба
   #visiblePages() {
