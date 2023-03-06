@@ -26,7 +26,7 @@ export const getCard = (urlPhoto, category, title, text, date, url) => {
   const photo =
     urlPhoto.search(protocol) !== -1 ? urlPhoto : `${domain}${urlPhoto}`;
   const imageUrl = urlPhoto ? photo : defaultUrl;
-  return `<li class="card">
+  return `<li class="card" id="${id}">
             <div class="block-photo">
             <img class="card-photo" src="${imageUrl}" alt="Сітка користувачів">
             <p class="news-category-text">${category}</p>
