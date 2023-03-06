@@ -13,7 +13,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 93%;
+	height: 91%;
 }
 
 .weather__header {
@@ -41,7 +41,7 @@
 	
 }
 
-.weather__button-city {
+.weather-city {
 	display: block;
 	margin-left: 16px;
 	margin-bottom: 20px;
@@ -59,7 +59,7 @@
 	color: #FFFFFF;	
 }
 
-.weather__button-city::before {
+.weather-city::before {
 	content: url('../images/point.svg');
 	vertical-align: middle;
 	margin-right: 12px;
@@ -82,7 +82,17 @@
 .wether-week__date {
 	margin-bottom: 5px;
 
-	text-align: center;
+	font-family: Roboto;
+	font-weight: 400;
+	font-style: Regular;
+	font-size: 36px;
+
+	color: #FFFFFF;
+}
+
+.wether-week {
+	margin-bottom: 20px;
+
 	font-family: Roboto;
 	font-weight: 400;
 	font-style: Regular;
