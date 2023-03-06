@@ -1,3 +1,4 @@
+import Notiflix from 'notiflix';
 import axios from 'axios';
 import { PAGE_SIZE } from './constants';
 
@@ -86,6 +87,10 @@ export default class RequestDataBaseControler {
       hits: 0,
       data: [],
     };
+
+    if (data === null) {
+      return result;
+    }
 
     switch (dataType) {
       case REQUEST_TYPE.NEWS:
@@ -290,6 +295,7 @@ class RequestURL {
   }
 
   // формування параметрів для запиту в залежності від типу запиту
+  // break тут відсутній, тому що створення параметрів проходить "наскрізно".
   #getNewsRequestURLParams(searchParams) {
     let paramsLine = `?${API_KEY}`;
 
@@ -300,7 +306,8 @@ class RequestURL {
         }
 
       case REQUEST_TYPE.CATEGORY:
-        // paramsLine += `&sortBy=popularity`;
+        paramsLine += `&sort=newest`;
+
         if (searchParams.category.length > 0) {
           paramsLine += `&fq=section_name: ("${this.#changeSpecSymbol(
             searchParams.category
@@ -331,7 +338,12 @@ class LoadData {
   constructor() {}
 
   async getData(httpRequest) {
-    const reuestData = await axios.get(httpRequest);
-    return reuestData.data;
+    try {
+      const reuestData = await axios.get(httpRequest);
+      return reuestData.data;
+    } catch (error) {
+      Notiflix.Notify.warning(error.response.statusText);
+      return null;
+    }
   }
 }
