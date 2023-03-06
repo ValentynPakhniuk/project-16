@@ -4,9 +4,8 @@ import debounce from 'lodash.debounce';
 import axios from 'axios';
 
 const categoryApiService = new NewsApiService();
-
+const categories = getResponseCategory();
 onResize();
-
 window.addEventListener('resize', debounce(onResize, 300));
 
 const refs = {
@@ -20,20 +19,24 @@ const refs = {
   othersIconClose: document.querySelector('.others__icon-close'),
 };
 
-export default async function getResponseCategory() {
+async function getResponseCategory() {
   try {
-    const response = await categoryApiService.getCategories();
-    renderByViewportWidth(response);
+    let categories = await categoryApiService.getCategories();
+    let filteredCategories = categories.filter(function (category) {
+      return category.section.indexOf(' ') === -1;
+    });
+    return filteredCategories;
   } catch (error) {
     Notiflix.Notify.warning(
       'No response category list from server. Please, try again later.'
     );
     console.log(error);
+    return [];
   }
 }
 
-function onResize(e) {
-  getResponseCategory();
+function onResize() {
+  categories.then(renderByViewportWidth);
 }
 
 function renderByViewportWidth(response) {
