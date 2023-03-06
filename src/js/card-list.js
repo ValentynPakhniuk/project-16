@@ -1,34 +1,51 @@
-import NewsApiService from './NewsApiService';
+/**
+ * Формування переліку карток по шаблону
+ */
+export default class CardsList {
+  #refPathInnerHTML;
 
-const getNewsl = new NewsApiService();
+  constructor(cardsListSelector) {
+    this.#refPathInnerHTML = document.querySelector(cardsListSelector);
+  }
 
-const refs = {
-  formInput: document.querySelector('.search__line'),
-  form: document.querySelector('#search-form'),
-  listCards: document.querySelector('.list-card'),
-};
+  getCardsList(dataCardList) {
+    // очищуємо старі карточки, так щоб залишилася карточка погоди
+    [...this.#refPathInnerHTML.children].forEach(element => {
+      if (!element.classList.contains('card__weather')) {
+        this.#refPathInnerHTML.removeChild(element);
+      }
+    });
+    // додаємо нові картки на сторінку
+    this.#refPathInnerHTML.insertAdjacentHTML(
+      'beforeend',
+      this.#createCardsList(dataCardList)
+    );
+  }
 
-refs.form.addEventListener('submit', onSubmitForm);
+  #createCardsList(dataCardList) {
+    return dataCardList
+      .map((elem, idx) => {
+        // формуємо порядок карток, щоб можна було вставляти картку погоди
+        switch (idx) {
+          case 0:
+            idx = 0;
+            break;
+          case 1:
+            idx = 2;
+            break;
+          default:
+            idx += 2;
+        }
+        return this.#createCard(elem, idx);
+      })
+      .join('');
+  }
 
-function onSubmitForm(e) {
-  e.preventDefault();
-  const inputValue = refs.formInput.value.trim();
-  getNewsl.search = inputValue;
-  getNewNews();
-  return;
-}
-
-export const getCard = (urlPhoto, category, title, text, date, url) => {
-  const defaultUrl =
-    'https://image-placeholder.com/images/actual-size/200x200.png';
-  const domain = 'https://static01.nyt.com/';
-  const protocol = 'https://';
-  const photo =
-    urlPhoto.search(protocol) !== -1 ? urlPhoto : `${domain}${urlPhoto}`;
-  const imageUrl = urlPhoto ? photo : defaultUrl;
-  return `<li class="card">
+  #createCard({ urlPhoto, category, title, text, date, url, alt, id }, order) {
+    return `
+        <li class="card" style="order: ${order}" id="${id}">
             <div class="block-photo">
-            <img class="card-photo" src="${imageUrl}" alt="Сітка користувачів">
+            <img class="card-photo" src="${urlPhoto}" alt="${alt}">
             <p class="news-category-text">${category}</p>
             <p class="checked-news visually-hidden">Already read
                 <svg class="checked-news-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,49 +62,13 @@ export const getCard = (urlPhoto, category, title, text, date, url) => {
                 <path d="M4.66683 2C2.82616 2 1.3335 3.47733 1.3335 5.3C1.3335 6.77133 1.91683 10.2633 7.65883 13.7933C7.76168 13.8559 7.87976 13.889 8.00016 13.889C8.12056 13.889 8.23864 13.8559 8.3415 13.7933C14.0835 10.2633 14.6668 6.77133 14.6668 5.3C14.6668 3.47733 13.1742 2 11.3335 2C9.49283 2 8.00016 4 8.00016 4C8.00016 4 6.5075 2 4.66683 2Z" fill="#4B48DA"/>
                 </svg>
             </button>
-        </div>
-        <h2 class="card-title">${title}</h2>
-        <p class="card-text">${text}</p>
-        <div class="card-link">
-            <p class="card-data">${date}</p>
-            <a href="${url}" target="_blank" class="card-more-news">Read more</a>
-        </div>
-    </li>`;
-};
-
-const getUrlPhoto = el => el.multimedia[0].url;
-
-const getNewNews = async () => {
-  const response = await getNewsl.getNews();
-  const cardNews = response.docs
-    .map(news => {
-      console.log('getUrlPhoto(news):', getUrlPhoto(news));
-      const newsNew = getCard(
-        getUrlPhoto(news),
-        news.section_name,
-        checkTitleLength(news.headline.main),
-        checkTextLength(news.abstract),
-        getDate(news.pub_date),
-        news.web_url
-      );
-      return newsNew;
-    })
-    .join('');
-  refs.listCards.innerHTML = cardNews;
-};
-
-const checkTextLength = text => {
-  if (text.length > 150) {
-    return text.slice(0, 150) + '...';
+            </div>
+            <h2 class="card-title">${title}</h2>
+            <p class="card-text">${text}</p>
+            <div class="card-link">
+                <p class="card-data">${date}</p>
+                <a href="${url}" target="_blank" class="card-more-news">Read more</a>
+            </div>
+        </li>`;
   }
-  return text;
-};
-
-const checkTitleLength = title => {
-  if (title.length > 50) {
-    return title.slice(0, 50) + '...';
-  }
-  return title;
-};
-
-const getDate = date => date.slice(0, 10);
+}

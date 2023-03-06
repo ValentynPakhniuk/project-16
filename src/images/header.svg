@@ -18,5 +18,15 @@
 <symbol id="sun" viewBox="0 0 32 32">
 <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.2857" d="M16 1.778v2.586M16 27.636v2.586M5.941 5.941l1.836 1.836M24.223 24.223l1.836 1.836M1.778 16h2.586M27.636 16h2.586M5.941 26.059l1.836-1.836M24.223 7.777l1.836-1.836M22.465 16c0 3.57-2.894 6.465-6.465 6.465s-6.465-2.894-6.465-6.465c0-3.57 2.894-6.465 6.465-6.465s6.465 2.894 6.465 6.465z"></path>
 </symbol>
+<svg id="close-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 6L6 18" stroke="#111321" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 6L18 18" stroke="#111321" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<svg id="open-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 12H21" stroke="#111321" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 6H21" stroke="#111321" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3 18H21" stroke="#111321" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
 </defs>
 </svg>

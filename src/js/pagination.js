@@ -1,4 +1,5 @@
 import throttle from 'lodash.throttle';
+import { PAGE_SIZE } from './constants';
 
 // Функціонал:
 // - може перебирати сторінки як за допомогою кнопок "Next", "Prew", так і прямим натисканням
@@ -101,7 +102,7 @@ export default class Pagination {
   #screenSizeRefreshRate = 300;
   #clickPageRefreshRate = 1000;
 
-  #itemsPerPage = 8;
+  #itemsPerPage = PAGE_SIZE;
   #currentPage = 1;
   #totalItems = 1;
   #totalPages = 1;
@@ -109,6 +110,7 @@ export default class Pagination {
   constructor(screenSizeRefreshRate = 300, clickPageRefreshRate = 1000) {
     this.#screenSizeRefreshRate = screenSizeRefreshRate;
     this.#clickPageRefreshRate = clickPageRefreshRate;
+    this.#itemsPerPage = PAGE_SIZE;
 
     this.#setBaseReferens();
 
@@ -134,6 +136,9 @@ export default class Pagination {
 
   setTotalPages(value) {
     this.#totalPages = this.#checkValueItems(value);
+    if (this.#totalPages > 200) {
+      this.#totalPages = 200;
+    }
     this.#calculateTotalItems();
 
     this.setCurrentPage();
@@ -203,6 +208,9 @@ export default class Pagination {
 
   #calculateTotalPages() {
     this.#totalPages = Math.ceil(this.#totalItems / this.#itemsPerPage);
+    if (this.#totalPages > 200) {
+      this.#totalPages = 200;
+    }
   }
 
   #calculateTotalItems() {
@@ -231,13 +239,13 @@ export default class Pagination {
   }
 
   #setInitValeyScreenWidthType() {
-    this.#setWindowsScreenType(window.innerWidth);
+    this.#setWindowsScreenType(window.screen.availWidth);
   }
 
   #callbackResizeWindow(e) {
     const oldScreenWidthType = this.#screenWidthType.mobile;
 
-    this.#setWindowsScreenType(e.target.innerWidth);
+    this.#setWindowsScreenType(window.screen.availWidth);
 
     if (oldScreenWidthType !== this.#screenWidthType.mobile) {
       this.#visiblePaginationItems();

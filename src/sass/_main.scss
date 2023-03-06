@@ -1,0 +1,14 @@
+.list__cards {
+  padding-bottom: 150px;
+
+  & .list-card {
+    margin-bottom: 60px;
+  }
+}
+
+.filters__line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
