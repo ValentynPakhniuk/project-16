@@ -181,8 +181,6 @@ body.modal-open {
     overflow: hidden;
     padding: 0 10px;
 
-
-
     @include mobile {
       width: 40px;
       transition: width 0.5s ease-in-out, border-color 0.5s ease-in-out;
