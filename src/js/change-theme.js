@@ -32,3 +32,27 @@ function addClassToBody() {
     document.body.classList.remove('dark-mode');
   }
 }
+
+const mobileMenu = document.querySelector('#menu-container');
+const containerLogoSearch = document.querySelector('.container-logo-search');
+const searchForm = document.querySelector('#search-form');
+
+const moveToggleBtn = function () {
+  if (window.innerWidth < 768) {
+    mobileMenu.appendChild(tgl);
+    containerLogoSearch.appendChild(searchForm);
+  } else {
+    document.querySelector('.container').appendChild(tgl);
+    document.querySelector('.container__search').appendChild(searchForm);
+  }
+};
+
+moveToggleBtn(); // виклик переміщення при завантаженні сторінки
+
+window.addEventListener('resize', function () {
+  moveToggleBtn();
+});
+
+mobileMenu.addEventListener('click', function () {
+  moveToggleBtn();
+});
