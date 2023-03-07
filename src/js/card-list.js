@@ -1,3 +1,5 @@
+import { VISUALLY_HIDDEN_CLASS } from './constants';
+
 /**
  * Формування переліку карток по шаблону
  */
@@ -80,10 +82,10 @@ export default class CardsList {
   }
 
   #visibleAddToFavorite(isFavorite) {
-    return isFavorite ? 'visually-hidden' : '';
+    return isFavorite ? VISUALLY_HIDDEN_CLASS : '';
   }
 
   #visibleRemoveFromFavorite(isFavorite) {
-    return isFavorite ? '' : 'visually-hidden';
+    return isFavorite ? '' : VISUALLY_HIDDEN_CLASS;
   }
 }

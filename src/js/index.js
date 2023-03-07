@@ -1,6 +1,10 @@
 import throttle from 'lodash.throttle';
 import debounce from 'lodash.debounce';
-// import getResponseCategory from './filters';
+import { LIST_CARD_SELECTOR, VISUALLY_HIDDEN_CLASS } from './constants';
+
+import Pagination from './pagination';
+import CardsList from './card-list';
+import RequestDataBaseControler from './request-database-controler';
 
 import './change-theme';
 import './weather';
@@ -12,7 +16,6 @@ import './favorite-add';
 /**
  * Блок пагінації,
  */
-import Pagination from './pagination';
 const pagination = new Pagination();
 // перехоплення події натискання кнопок на пагінаторі
 pagination.addEventListener('next-page-number', callbackMainRequest);
@@ -26,8 +29,7 @@ function callbackMainRequest(e) {
 /**
  * Блок формування списку карточок на сторінці
  */
-import CardsList from './card-list';
-const cardsList = new CardsList('.list-card');
+const cardsList = new CardsList(LIST_CARD_SELECTOR);
 
 /**
  * Блок запуску пошуку по "пошуковому рядку"
@@ -87,7 +89,6 @@ function onClickCategories(e) {
 /**
  * Блок контрлера сторінки
  */
-import RequestDataBaseControler from './request-database-controler';
 const requestDataBaseControler = new RequestDataBaseControler();
 // функція формування наповнення карток на сторінці
 const htmlCardList = document.querySelector('.list__cards');
@@ -101,9 +102,9 @@ function mainRequestData(pageNumber = 1) {
 
   data.then(data => {
     // перевірка на відсутність даних у запиті
-    refNoData.classList.add('visually-hidden');
+    refNoData.classList.add(VISUALLY_HIDDEN_CLASS);
     if (data.hits <= 0) {
-      refNoData.classList.remove('visually-hidden');
+      refNoData.classList.remove(VISUALLY_HIDDEN_CLASS);
       return;
     }
 
@@ -115,5 +116,6 @@ function mainRequestData(pageNumber = 1) {
     htmlCardList.style.display = 'block';
   });
 }
+
 // стартове заповнення сторінки картками
 mainRequestData();
