@@ -2,11 +2,23 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 395px;
-	height: 675px;
-	padding: 40px 53px 60px 53px;
+	width: 288px;
+	height: 469px;
+	padding: 37px 37px 32px 37px;
 
-	background-color: #4440F6;	
+	background-color: #4440F6;
+
+	@include tablet {
+		width: 353px;
+		height: 675px;
+		padding: 40px 32px 60px 32px;
+	}
+
+	@include desktop {
+		width: 395px;
+		height: 675px;
+		padding: 40px 53px 60px 53px;
+	}
 }
 
 .weather-daily {
@@ -24,9 +36,17 @@
 	font-family: Roboto;
 	font-weight: 400;
 	font-style: Regular;
-	font-size: 64px;
+	font-size: 55px;
 
 	color: #FFFFFF;
+
+	@include tablet {
+		font-size: 64px;
+	}
+	
+	@include desktop {
+		font-size: 64px;
+	}
 }
 
 .weather-conditions {
@@ -35,10 +55,17 @@
 	font-family: Roboto;
 	font-weight: 400;
 	font-style: Regular;
-	font-size: 36px;
+	font-size: 24px;
 
 	color: #FFFFFF;
+
+	@include tablet {
+		font-size: 36px;
+	}
 	
+	@include desktop {
+		font-size: 36px;
+	}
 }
 
 .weather-city {
@@ -46,17 +73,27 @@
 	margin-left: 16px;
 	margin-bottom: 20px;
 	padding: 7px 10px 7px 10px;
-	min-width: 177px;
+	min-width: 121px;
 
 	font-family: Roboto;
-	font-size: 20px;
+	font-size: 14px;
 	font-weight: 400;
 	text-align: center;
 
 	border: 0;
 	border-radius: 10px;
 	background-color: rgba(254, 254, 255, 0.3);
-	color: #FFFFFF;	
+	color: #FFFFFF;
+	
+	@include tablet {
+		font-size: 20px;
+		min-width: 177px;
+	}
+	
+	@include desktop {
+		font-size: 20px;
+		min-width: 177px;
+	}
 }
 
 .weather-city::before {
@@ -74,9 +111,17 @@
 	font-family: Roboto;
 	font-weight: 400;
 	font-style: Regular;
-	font-size: 36px;
+	font-size: 28px;
 
 	color: #FFFFFF;
+
+	@include tablet {
+		font-size: 36px;
+	}
+	
+	@include desktop {
+		font-size: 36px;
+	}
 }
 
 .wether-week__date {
@@ -85,38 +130,68 @@
 	font-family: Roboto;
 	font-weight: 400;
 	font-style: Regular;
-	font-size: 36px;
+	font-size: 24px;
 
 	color: #FFFFFF;
+
+	@include tablet {
+		font-size: 36px;
+	}
+	
+	@include desktop {
+		font-size: 36px;
+	}
 }
 
 .wether-week {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 
 	font-family: Roboto;
 	font-weight: 400;
 	font-style: Regular;
-	font-size: 26px;
+	font-size: 18px;
 
 	color: #FFFFFF;
+
+	@include tablet {
+		font-size: 26px;
+	}
+	
+	@include desktop {
+		font-size: 26px;
+	}
 }
 
 .weather__button-choice-display {
 	display: block;
-	width: 177px;
-	height: 42px;
+	width: 151px;
+	height: 34px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 12px;
 
 	font-family: Roboto;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: 400;
 	
 	border: 0;
 	border-radius: 10px;
 	background-color: rgba(254, 254, 255, 0.3);
-	color: #FFFFFF;	
+	color: #FFFFFF;
+	
+	@include tablet {
+		width: 177px;
+		height: 42px;
+
+		font-size: 20px;
+	}
+	
+	@include desktop {
+		width: 177px;
+		height: 42px;
+
+		font-size: 20px;
+	}
 }
 
 .weather__footer {
