@@ -7,8 +7,7 @@ import './weather';
 import './mobile-menu';
 import './filters';
 import './calendar';
-console.log('my');
-import './favorite';
+import './favorite-add';
 
 /**
  * Блок пагінації,
