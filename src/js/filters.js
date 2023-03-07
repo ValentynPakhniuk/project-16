@@ -4,9 +4,10 @@ import debounce from 'lodash.debounce';
 import axios from 'axios';
 
 const categoryApiService = new NewsApiService();
-const categories = getResponseCategory();
+
 onResize();
-window.addEventListener('resize', debounce(onResize, 300));
+
+window.addEventListener('resize', debounce(onResize, 500));
 
 const refs = {
   categoriesContainer: document.querySelector('.js-category-container'),
@@ -17,26 +18,28 @@ const refs = {
   othersWrapper: document.querySelector('.js-others-wrapper'),
   othersIconOpen: document.querySelector('.others__icon-open'),
   othersIconClose: document.querySelector('.others__icon-close'),
+  othersItemBtn:document.querySelector('.others__item-btn'),
 };
 
-async function getResponseCategory() {
+console.log(refs.othersTextInBtn);
+
+export default async function getResponseCategory() {
   try {
     let categories = await categoryApiService.getCategories();
     let filteredCategories = categories.filter(function (category) {
       return category.section.indexOf(' ') === -1;
     });
-    return filteredCategories;
+    renderByViewportWidth(filteredCategories);
   } catch (error) {
     Notiflix.Notify.warning(
       'No response category list from server. Please, try again later.'
     );
     console.log(error);
-    return [];
   }
 }
 
-function onResize() {
-  categories.then(renderByViewportWidth);
+function onResize(e) {
+  getResponseCategory();
 }
 
 function renderByViewportWidth(response) {
@@ -121,22 +124,28 @@ function renderCategoriesOtherMobile(response) {
 }
 
 refs.categoriesOthersList.addEventListener('click', onClickOtherCategories);
+refs.openOthersBtn.addEventListener('click', onOthersBtnClick);
+refs.categoriesList.addEventListener('click', onClickCategories);
 
 function onClickOtherCategories(e) {
+  let target = e.target;
+  if (target.tagName != 'BUTTON') {
+    return
+  } else {
+    console.log(e);
+  refs.othersTextInBtn.textContent = e.srcElement.textContent;
   refs.othersWrapper.classList.remove('is-open');
-  refs.openOthersBtn.classList.remove('others__btn-active');
   refs.othersIconOpen.style.display = 'block';
-  refs.othersIconClose.style.display = 'none';
-}
+  refs.othersIconOpen.style.fill = 'var(--clr-fill-toogle-ground)';
+  refs.othersIconClose.style.display = 'none';}
+  }
 
 function clearCategoriesMarkup() {
   refs.categoriesList.innerHTML = '';
   refs.categoriesOthersList.innerHTML = '';
 }
 
-refs.openOthersBtn.addEventListener('click', onBtnClick);
-
-function onBtnClick(e) {
+function onOthersBtnClick(e) {
   refs.othersWrapper.classList.toggle('is-open');
   refs.othersIconOpen.style.display = refs.othersWrapper.classList.contains(
     'is-open'
@@ -150,7 +159,15 @@ function onBtnClick(e) {
     : 'none';
   if (refs.othersWrapper.classList.contains('is-open')) {
     refs.openOthersBtn.classList.add('others__btn-active');
+    refs.othersIconOpen.style.fill = 'var(--clr-categoty-btn)';
   } else {
     refs.openOthersBtn.classList.remove('others__btn-active');
   }
+}
+
+function onClickCategories(e) {
+  refs.othersTextInBtn.textContent = 'Others';
+  refs.othersWrapper.classList.remove('is-open');
+  refs.openOthersBtn.classList.remove('others__btn-active');
+  refs.othersIconOpen.style.fill = 'var(--clr-categoty-btn)';
 }
