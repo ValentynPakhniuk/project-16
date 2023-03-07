@@ -92,7 +92,7 @@ function removeFavorite(e) {
         const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
         // console.log(savedData);
 
-        const newSavedData = savedData.filter(item =>  item.id != currentId )
+        const newSavedData = savedData.filter(item =>  item.id !== currentId )
         // console.log(newSavedData);
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedData));
