@@ -27,10 +27,30 @@ function createMarkup(news) {
       </li>`;
     })
     .join('');
-  favoritePage.insertAdjacentHTML('beforeend', markup);
+  // favoritePage.insertAdjacentHTML('beforeend', markup);
+   favoritePage.innerHTML = markup;
 }
 
 const favoritePage = document.querySelector('.favorite-page-wrap');
 const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE)) || [];
 
 createMarkup(parsedNews, favoritePage);
+
+//пошук на сторінці favorite по ключовому слову в title
+
+const searchFavoriteInput = document.getElementById('search');
+
+searchFavoriteInput.addEventListener('input', onSearchFavorite);
+
+function onSearchFavorite(e) {
+  e.preventDefault();
+  const searchInput = e.currentTarget;
+
+  const searchInputValue = searchInput.value.trim();
+
+  const normalizedToUpperCaseInput = searchInputValue.toUpperCase();
+
+  const foundFavoriteNews = parsedNews.filter(news => news.title.toUpperCase().includes(normalizedToUpperCaseInput))
+
+  createMarkup(foundFavoriteNews, favoritePage);
+}
