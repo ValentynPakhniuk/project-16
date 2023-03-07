@@ -1,4 +1,4 @@
-console.log('favorite loaded');
+﻿console.log('favorite loaded');
 import './mobile-menu';
 
 
@@ -47,7 +47,6 @@ let favoriteObj = {};
 
 let savedApiData = localStorage.getItem(STORAGE_KEY);
 savedApiData = JSON.parse(savedApiData) || [];
-
 newsList.addEventListener('click', saveFavotiteNews);
 
 function saveFavotiteNews(e) {
@@ -92,9 +91,8 @@ function saveFavotiteNews(e) {
 }
 
 const savedNews = localStorage.getItem(STORAGE_KEY);
-const parsedNews = JSON.parse(savedNews); 
+const parsedNews = JSON.parse(savedNews);
 console.dir(parsedNews);
-
 
 // function createMarkup() {
 //     const savedNews = localStorage.getItem(STORAGE_KEY);
@@ -151,12 +149,13 @@ console.dir(parsedNews);
 // //         </div>
 // //     </li>`;
 // }
-    
+
 // addFavoriteMarkup();
 
 function createMarkup(news) {
-    const markup = news.map(({ imgUrl, category, title, text, date, readMoreLink, id }) => {
-        return `<li class="card fav-card" id="${id}">
+  const markup = news
+    .map(({ imgUrl, category, title, text, date, readMoreLink, id }) => {
+      return `<li class="card fav-card" id="${id}">
              <div class="block-photo">
              <img class="card-photo" src="${imgUrl}" alt="Сітка користувачів">
             <p class="news-category-text">${category}</p>
@@ -179,48 +178,31 @@ function createMarkup(news) {
         </div>
     </li>`;
     })
-            .join('')
-    favoritePage.insertAdjacentHTML("beforeend", markup);
-    // console.log(markup);
+    .join('');
+  favoritePage.insertAdjacentHTML('beforeend', markup);
+  // console.log(markup);
 }
 createMarkup(parsedNews);
 
 favoritePage.addEventListener('click', removeFavorite);
 
 function removeFavorite(e) {
-    console.log(e.target);
+  console.log(e.target);
 
-    if (e.target.classList.contains('remove-favorite-btn')) {
+  if (e.target.classList.contains('remove-favorite-btn')) {
+    currentLi = e.target.parentElement.parentElement;
+    console.log(currentLi);
+    currentId = e.target.parentElement.parentElement.id;
+    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
-        currentLi = e.target.parentElement.parentElement;
-        console.log(currentLi);
-        currentId = e.target.parentElement.parentElement.id;
-        const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    console.log(savedData);
 
-        console.log(savedData);
+    console.log(currentId);
+    console.log();
+    const newSavedData = savedData.filter(item => item.id != currentId);
+    console.log(newSavedData);
 
-        console.log(currentId);
-        console.log();
-        const newSavedData = savedData.filter(item =>  item.id != currentId )
-        console.log(newSavedData);
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedData));
-        currentLi.remove();
-    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedData));
+    currentLi.remove();
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
