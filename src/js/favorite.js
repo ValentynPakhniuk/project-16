@@ -1,31 +1,6 @@
 console.log('favorite loaded');
 import './mobile-menu';
 
-
-// function updateFavoriteButtons() {
-// const savedApiData = JSON.parse(localStorage.getItem('savedApiData'));
-// // const cardId = document.querySelector('.card').id;
-//     const cardId = document.querySelector('.fav-card');
-//     console.log(cardId);
-//   const savedCard = savedApiData.find((card) => card.id === cardId);
-//   const removeFavoriteButton = document.querySelector('.remove-favorite-btn');
-
-//   if (savedCard) {
-//     // якщо об'єкт з id поточної картки є в масиві savedApiData, то прибираємо клас visually-hidden з кнопки remove-favorite-btn
-//     removeFavoriteButton.classList.remove('visually-hidden');
-//   }
-// if (savedApiData.some(item => item.id === id)) {
-//              e.target.classList.add('visually-hidden');
-//              removeBtn.classList.remove('visually-hidden');
-//   }
-// }
-
-// updateFavoriteButtons();
-
-// function saveFavotiteNews() {
-//     console.log(HI);
-// }
-
 const newsList = document.querySelector('.list-card');
 const removeFavoriteBtn = document.querySelectorAll('.remove-favorite-btn');
 const favoritePage = document.querySelector('.favorite-page-wrap');
@@ -33,7 +8,7 @@ const favoritePage = document.querySelector('.favorite-page-wrap');
 console.log(favoritePage);
 const STORAGE_KEY = "favoriteNews";
 
-let favoriteObj = {};
+// let favoriteObj = {};
 // let savedApiData = [];
 
 let savedApiData = localStorage.getItem(STORAGE_KEY);
@@ -62,15 +37,6 @@ function saveFavotiteNews(e) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(savedApiData));
 
         const removeBtn = e.target.parentElement.children[4];
-
-//      if (savedApiData.some(item => item.id === id)) {
-//              e.target.classList.add('visually-hidden');
-//              removeBtn.classList.remove('visually-hidden');
-//   } else {
-//     savedApiData.push(favoriteObj);
-//     localStorage.setItem(STORAGE_KEY, JSON.stringify(savedApiData));
-//   }
-
         e.target.classList.add('visually-hidden');
         removeBtn.classList.remove('visually-hidden');
     };
@@ -129,19 +95,3 @@ function removeFavorite(e) {
         currentLi.remove();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
