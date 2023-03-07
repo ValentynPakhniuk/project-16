@@ -1,12 +1,13 @@
 import throttle from 'lodash.throttle';
 import debounce from 'lodash.debounce';
-import getResponseCategory from './filters';
+// import getResponseCategory from './filters';
 
 import './change-theme';
 import './weather';
 import './mobile-menu';
 import './filters';
 import './calendar';
+console.log('my');
 import './favorite';
 
 /**

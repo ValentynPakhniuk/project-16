@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 import axios from 'axios';
-import { PAGE_SIZE } from './constants';
+import { PAGE_SIZE, STORAGE_KEY_FAVORITE } from './constants';
 
 const URL = 'https://api.nytimes.com';
 const API_KEY = 'api-key=SWTGJZG6lt2ntZukcf6TH36zlYgqv0Eb';
@@ -92,6 +92,11 @@ export default class RequestDataBaseControler {
       return result;
     }
 
+    const faviriteStoradge = JSON.parse(
+      localStorage.getItem(STORAGE_KEY_FAVORITE)
+    );
+    console.log(faviriteStoradge);
+
     switch (dataType) {
       case REQUEST_TYPE.NEWS:
         result.hits = data.response.meta.hits;
@@ -105,6 +110,10 @@ export default class RequestDataBaseControler {
           obj.url = elem.web_url;
           obj.alt = 'no picture description';
           obj.id = elem.uri;
+          obj.isFavorite = this.#getFavariteStatusForCardByURI(
+            faviriteStoradge,
+            elem.uri
+          );
           return obj;
         });
         break;
@@ -142,6 +151,10 @@ export default class RequestDataBaseControler {
           obj.url = elem.web_url;
           obj.alt = 'no picture description';
           obj.id = elem.uri;
+          obj.isFavorite = this.#getFavariteStatusForCardByURI(
+            faviriteStoradge,
+            elem.uri
+          );
           return obj;
         });
 
@@ -164,11 +177,29 @@ export default class RequestDataBaseControler {
             obj.url = elem.url;
             obj.alt = this.#getAltPopular(elem);
             obj.id = elem.uri;
+            obj.isFavorite = this.#getFavariteStatusForCardByURI(
+              faviriteStoradge,
+              elem.uri
+            );
             return obj;
           });
         break;
     }
     return result;
+  }
+
+  // повертає true якщо вказаний uri знаходиться в збереженому фаворітному спискові карточок
+  #getFavariteStatusForCardByURI(favoriteList, uri) {
+    if (favoriteList === null) {
+      return false;
+    }
+
+    for (let i = 0; i < favoriteList.length; i++) {
+      if (favoriteList[i].id === uri) {
+        return true;
+      }
+    }
+    return false;
   }
 
   // формування шляху по фото для REQUEST_TYPE.NEWS

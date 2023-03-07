@@ -13,7 +13,6 @@ const STORAGE_KEY = "favoriteNews";
 
 let savedApiData = localStorage.getItem(STORAGE_KEY);
 savedApiData = JSON.parse(savedApiData) || [];
-
 newsList.addEventListener('click', saveFavotiteNews);
 
 function saveFavotiteNews(e) {
@@ -43,12 +42,13 @@ function saveFavotiteNews(e) {
 }
 
 const savedNews = localStorage.getItem(STORAGE_KEY);
-const parsedNews = JSON.parse(savedNews); 
+const parsedNews = JSON.parse(savedNews);
 console.dir(parsedNews);
 
 function createMarkup(news) {
-    const markup = news.map(({ imgUrl, category, title, text, date, readMoreLink, id }) => {
-        return `<li class="card fav-card" id="${id}">
+  const markup = news
+    .map(({ imgUrl, category, title, text, date, readMoreLink, id }) => {
+      return `<li class="card fav-card" id="${id}">
              <div class="block-photo">
              <img class="card-photo" src="${imgUrl}" alt="Сітка користувачів">
             <p class="news-category-text">${category}</p>
@@ -79,9 +79,13 @@ createMarkup(parsedNews);
 favoritePage.addEventListener('click', removeFavorite);
 
 function removeFavorite(e) {
-    console.log(e.target);
+  console.log(e.target);
 
-    if (e.target.classList.contains('remove-favorite-btn')) {
+  if (e.target.classList.contains('remove-favorite-btn')) {
+    currentLi = e.target.parentElement.parentElement;
+    console.log(currentLi);
+    currentId = e.target.parentElement.parentElement.id;
+    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
         const currentLi = e.target.parentElement.parentElement;
         const currentId = e.target.parentElement.parentElement.id;
