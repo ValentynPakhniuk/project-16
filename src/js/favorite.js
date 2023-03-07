@@ -85,7 +85,6 @@ function removeFavorite(e) {
     currentLi = e.target.parentElement.parentElement;
     console.log(currentLi);
     currentId = e.target.parentElement.parentElement.id;
-    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
         const currentLi = e.target.parentElement.parentElement;
         const currentId = e.target.parentElement.parentElement.id;
