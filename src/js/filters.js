@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce';
 import axios from 'axios';
 
 const categoryApiService = new NewsApiService();
-
+const categories = getResponseCategory();
 onResize();
 
 window.addEventListener('resize', debounce(onResize, 500));
@@ -18,28 +18,29 @@ const refs = {
   othersWrapper: document.querySelector('.js-others-wrapper'),
   othersIconOpen: document.querySelector('.others__icon-open'),
   othersIconClose: document.querySelector('.others__icon-close'),
-  othersItemBtn:document.querySelector('.others__item-btn'),
+  othersItemBtn: document.querySelector('.others__item-btn'),
 };
 
 console.log(refs.othersTextInBtn);
 
-export default async function getResponseCategory() {
+async function getResponseCategory() {
   try {
     let categories = await categoryApiService.getCategories();
     let filteredCategories = categories.filter(function (category) {
       return category.section.indexOf(' ') === -1;
     });
-    renderByViewportWidth(filteredCategories);
+    return filteredCategories;
   } catch (error) {
     Notiflix.Notify.warning(
       'No response category list from server. Please, try again later.'
     );
     console.log(error);
+    return [];
   }
 }
 
-function onResize(e) {
-  getResponseCategory();
+function onResize() {
+  categories.then(renderByViewportWidth);
 }
 
 function renderByViewportWidth(response) {
@@ -130,15 +131,16 @@ refs.categoriesList.addEventListener('click', onClickCategories);
 function onClickOtherCategories(e) {
   let target = e.target;
   if (target.tagName != 'BUTTON') {
-    return
+    return;
   } else {
     console.log(e);
-  refs.othersTextInBtn.textContent = e.srcElement.textContent;
-  refs.othersWrapper.classList.remove('is-open');
-  refs.othersIconOpen.style.display = 'block';
-  refs.othersIconOpen.style.fill = 'var(--clr-fill-toogle-ground)';
-  refs.othersIconClose.style.display = 'none';}
+    refs.othersTextInBtn.textContent = e.srcElement.textContent;
+    refs.othersWrapper.classList.remove('is-open');
+    refs.othersIconOpen.style.display = 'block';
+    refs.othersIconOpen.style.fill = 'var(--clr-fill-toogle-ground)';
+    refs.othersIconClose.style.display = 'none';
   }
+}
 
 function clearCategoriesMarkup() {
   refs.categoriesList.innerHTML = '';

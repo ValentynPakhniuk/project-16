@@ -1,12 +1,12 @@
 console.log('favorite loaded');
-import './mobile-menu';
+// import './mobile-menu';
 
 const newsList = document.querySelector('.list-card');
 const removeFavoriteBtn = document.querySelectorAll('.remove-favorite-btn');
 const favoritePage = document.querySelector('.favorite-page-wrap');
 
 console.log(favoritePage);
-const STORAGE_KEY = "favoriteNews";
+const STORAGE_KEY = 'favoriteNews';
 
 // let favoriteObj = {};
 // let savedApiData = [];
@@ -16,29 +16,31 @@ savedApiData = JSON.parse(savedApiData) || [];
 newsList.addEventListener('click', saveFavotiteNews);
 
 function saveFavotiteNews(e) {
-    e.preventDefault();
-    if (e.target.classList.contains('add-favorite-btn')) {
-        let favoriteObj = {};
+  e.preventDefault();
+  if (e.target.classList.contains('add-favorite-btn')) {
+    let favoriteObj = {};
 
-        const imgUrl = e.target.parentElement.children[0].src;
-        const category = e.target.parentElement.children[1].innerText;
-        const title = e.target.parentElement.parentElement.children[1].innerText;
-        const text = e.target.parentElement.parentElement.children[2].innerText;
-        const date = e.target.parentElement.parentElement.children[3].children[0].innerText;
-        const readMoreLink = e.target.parentElement.parentElement.children[3].children[1].href;
-        const id = e.target.parentElement.parentElement.id;
+    const imgUrl = e.target.parentElement.children[0].src;
+    const category = e.target.parentElement.children[1].innerText;
+    const title = e.target.parentElement.parentElement.children[1].innerText;
+    const text = e.target.parentElement.parentElement.children[2].innerText;
+    const date =
+      e.target.parentElement.parentElement.children[3].children[0].innerText;
+    const readMoreLink =
+      e.target.parentElement.parentElement.children[3].children[1].href;
+    const id = e.target.parentElement.parentElement.id;
 
-        favoriteObj = { imgUrl, category, title, text, date, readMoreLink, id };        
-        savedApiData.push(favoriteObj);
+    favoriteObj = { imgUrl, category, title, text, date, readMoreLink, id };
+    savedApiData.push(favoriteObj);
 
-        console.log(savedApiData);
+    console.log(savedApiData);
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(savedApiData));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedApiData));
 
-        const removeBtn = e.target.parentElement.children[4];
-        e.target.classList.add('visually-hidden');
-        removeBtn.classList.remove('visually-hidden');
-    };
+    const removeBtn = e.target.parentElement.children[4];
+    e.target.classList.add('visually-hidden');
+    removeBtn.classList.remove('visually-hidden');
+  }
 }
 
 const savedNews = localStorage.getItem(STORAGE_KEY);
@@ -71,8 +73,8 @@ function createMarkup(news) {
         </div>
     </li>`;
     })
-            .join('')
-    favoritePage.insertAdjacentHTML("beforeend", markup);
+    .join('');
+  favoritePage.insertAdjacentHTML('beforeend', markup);
 }
 createMarkup(parsedNews);
 
@@ -86,15 +88,15 @@ function removeFavorite(e) {
     console.log(currentLi);
     currentId = e.target.parentElement.parentElement.id;
 
-        const currentLi = e.target.parentElement.parentElement;
-        const currentId = e.target.parentElement.parentElement.id;
-        const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-        // console.log(savedData);
+    const currentLi = e.target.parentElement.parentElement;
+    const currentId = e.target.parentElement.parentElement.id;
+    const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    // console.log(savedData);
 
-        const newSavedData = savedData.filter(item =>  item.id !== currentId )
-        // console.log(newSavedData);
+    const newSavedData = savedData.filter(item => item.id !== currentId);
+    // console.log(newSavedData);
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedData));
-        currentLi.remove();
-    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newSavedData));
+    currentLi.remove();
+  }
 }
