@@ -1,0 +1,88 @@
+.switch__theme {
+    z-index: 999;
+    gap: 12px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33;
+    display: none;
+
+    @include tablet {
+    display: flex;
+    gap: 12px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.33;
+    }
+
+
+  }
+
+  .switch__left {
+    color: var(--clr-switch-light);
+  }
+
+  .switch__right {
+    color: var(--clr-switch-dark);
+  }
+
+  .switch__img {
+  }
+
+  .switch__sun {
+    stroke: var(--clr-stroke-sun);
+  }
+
+  .switch__moon {
+    stroke: var(--clr-stroke-moon);
+  }
+
+  .switch__toogle {
+    z-index: 1000;
+    position: relative;
+    width: 40px;
+    height: 20px;
+  }
+
+  .switch__toogle--ground {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    fill: var(--clr-fill-toogle-ground);
+  }
+
+  .switch__toogle--border {
+    position: absolute;
+    left: 0;
+    top: 0;
+    stroke: var(--clr-stroke-toogle-border);
+  }
+
+  .switch__toogle--circle {
+    position: absolute;
+    left: 2px;
+
+    .dark-mode & {
+      left: auto;
+      right: 2px;
+    }
+
+    top: 50%;
+    transform: translateY(-50%);
+    fill: var(--clr-fill-toogle-circle);
+  }
+
+  .switch__left.theme-light, .switch__right.theme-dark {
+    display: none;
+  }
+  .switch__sun,  .switch__moon {
+    display: inline;
+  }
+
+  @include desktop {
+    .switch__left.theme-light, .switch__right.theme-dark {
+      display: inline;
+    }
+    .switch__sun,  .switch__moon {
+      display: none;
+    }
+  }

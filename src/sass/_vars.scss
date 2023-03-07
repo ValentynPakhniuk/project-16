@@ -21,7 +21,7 @@ $mobile: 480px;
 }
 
 @mixin mobile {
-  @media screen and (min-width: $mobile) {
+  @media screen and (max-width: 767px) {
     @content;
   }
 }

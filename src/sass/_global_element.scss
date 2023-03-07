@@ -9,6 +9,8 @@ body {
 .container {
   padding: 0 16px;
   margin: 0 auto;
+  margin: 0 16px;
+
 
   @include mobile {
     width: $mobile;

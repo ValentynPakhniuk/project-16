@@ -1,0 +1,17 @@
+<svg  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="icon-menu-book" viewBox="0 0 32 32" >
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color1, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.7778" d="M2.667 4h8c1.415 0 2.771 0.562 3.771 1.562s1.562 2.357 1.562 3.771v18.667c0-1.061-0.421-2.078-1.172-2.828s-1.768-1.172-2.828-1.172h-9.333v-20z"></path>
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color1, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.7778" d="M29.333 4h-8c-1.414 0-2.771 0.562-3.771 1.562s-1.562 2.357-1.562 3.771v18.667c0-1.061 0.421-2.078 1.172-2.828s1.768-1.172 2.828-1.172h9.333v-20z"></path>
+</symbol>
+<symbol id="icon-menu-heart" viewBox="0 0 36 32">
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color1, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M31.261 4.915c-0.766-0.766-1.676-1.375-2.677-1.789s-2.074-0.628-3.158-0.628c-1.084 0-2.157 0.214-3.158 0.628s-1.911 1.023-2.677 1.789l-1.59 1.59-1.59-1.59c-1.548-1.548-3.646-2.417-5.835-2.417s-4.287 0.869-5.835 2.417c-1.548 1.548-2.417 3.646-2.417 5.835s0.869 4.287 2.417 5.835l13.26 13.26 13.26-13.26c0.766-0.766 1.374-1.676 1.789-2.677s0.628-2.074 0.628-3.158-0.213-2.157-0.628-3.158c-0.415-1.001-1.023-1.911-1.789-2.677v0z"></path>
+</symbol>
+<symbol id="icon-menu-home" viewBox="0 0 32 32">
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color1, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.7778" d="M4 12l12-9.333 12 9.333v14.667c0 0.707-0.281 1.386-0.781 1.886s-1.178 0.781-1.886 0.781h-18.667c-0.707 0-1.386-0.281-1.886-0.781s-0.781-1.178-0.781-1.886v-14.667z"></path>
+<path fill="none" stroke="#f4f4f4" style="stroke: var(--color1, #f4f4f4)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.7778" d="M12 29.333v-13.333h8v13.333"></path>
+</symbol>
+</defs>
+</svg>
+
+<!-- aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" -->

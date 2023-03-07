@@ -13,5 +13,6 @@
     menuBtnRef.getAttribute('aria-expanded', !expanded);
     mobileMenuRef.classList.toggle('is-open');
     body.classList.toggle('modal-open');
+    formSearch.classList.toggle('visually-hidden');
   });
 })();
