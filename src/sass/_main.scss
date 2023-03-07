@@ -1,13 +1,34 @@
 .list__cards {
-  padding-bottom: 150px;
+  padding-bottom: 60px;
+
+  @include tablet {
+    padding-bottom: 100px;
+  }
+
+  @include desktop {
+    padding-bottom: 150px;
+  }
 
   & .list-card {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+
+    @include tablet {
+      margin-bottom: 48px;
+    }
+    @include desktop {
+      margin-bottom: 60px;
+    }
   }
 }
 
 .filters__line {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.no-data {
+  padding-top: 120px;
+  padding-bottom: 226px;
 }
