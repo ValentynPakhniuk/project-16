@@ -40,8 +40,6 @@ function saveFavotiteNews(e) {
 }
 
 function removeFavorite(e) {
-  console.log(e.target);
-
   if (e.target.classList.contains(REMOTE_FAVORITE_BTN)) {
     const currentLi = e.target.parentElement.parentElement;
     const currentId = currentLi.id;
@@ -60,8 +58,7 @@ function removeFavorite(e) {
 }
 
 function turnOffFavorite(elem) {
-  console.log(window.location.pathname);
-  if (window.location.pathname === FAVORITE_PAGE_PATH) {
+  if (window.location.pathname.includes(FAVORITE_PAGE_PATH)) {
     elem.remove();
   } else {
     elem
@@ -74,7 +71,7 @@ function turnOffFavorite(elem) {
 }
 
 function visibleNoData() {
-  if (window.location.pathname === FAVORITE_PAGE_PATH) {
+  if (window.location.pathname.includes(FAVORITE_PAGE_PATH)) {
     const savedData =
       JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE)) || [];
     const noDataBlock = document.querySelector('.no-data .error');

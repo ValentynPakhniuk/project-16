@@ -32,6 +32,5 @@ function createMarkup(news) {
 
 const favoritePage = document.querySelector('.favorite-page-wrap');
 const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE)) || [];
-console.dir(parsedNews);
 
 createMarkup(parsedNews, favoritePage);
