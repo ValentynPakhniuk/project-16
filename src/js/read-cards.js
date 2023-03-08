@@ -1,12 +1,8 @@
-
-
-
 //import { values } from 'lodash';
 import { STORAGE_KEY_READ } from './constants';
 
-function createMarkup2(dateDiv){
-
-const markup2 = dateDiv
+function createMarkup2(dateDiv) {
+  const markup2 = dateDiv
     .map(() => {
       return `
       <div>
@@ -18,27 +14,19 @@ const markup2 = dateDiv
     })
     .join('');
   readPage2.insertAdjacentHTML('beforeend', markup2);
-  
-  }
-
-
-
+}
 
 //_______
 function createMarkup(news) {
- // const idFromStorage = localStorage.getItem(STORAGE_KEY_READ, 'id');
+  // const idFromStorage = localStorage.getItem(STORAGE_KEY_READ, 'id');
   //console.log(idFromStorage);
-  
-  
- 
+
   const markup = news
     .map(({ imgUrl, category, title, text, date, readMoreLink, id }) => {
       //console.log(id)
-      
-      
+
       //<div>
-      
-      
+
       return `
       
       <li class="card fav-card" id="${id}">
@@ -71,7 +59,6 @@ function createMarkup(news) {
     })
     .join('');
   readPage.insertAdjacentHTML('beforeend', markup);
-  
 }
 
 const readPage = document.querySelector('.read-page-wrap');
@@ -79,11 +66,6 @@ const readPage2 = document.querySelector('.dateDiv');
 const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
 
 //console.log(parsedNews[0].id)
-
-
-
-
-
 
 // const noDataBlock = document.querySelector('.no-data .error');
 //     const containerCardList = document.querySelector('.container.list__cards');
@@ -96,9 +78,6 @@ const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
 // noDataBlock.classList.add(VISUALLY_HIDDEN_CLASS);
 // containerCardList.classList.remove(VISUALLY_HIDDEN_CLASS);
 // }
- 
-
-
 
 createMarkup(parsedNews, readPage);
 createMarkup2(parsedNews, readPage);
