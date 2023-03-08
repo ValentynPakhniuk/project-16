@@ -2,13 +2,15 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 require('flatpickr/dist/themes/material_blue.css');
 import NewsApiService from './NewsApiService';
+import { onSelectDataByCalendar } from './index.js';
 
 const options = {
   // defaultDate: new Date(),
   dateFormat: 'd/m/Y',
-  disableMobile: "true",
+  disableMobile: 'true',
   onClose(selectedDates) {
     // console.log(selectedDates[0]);
+    onSelectDataByCalendar();
   },
 };
 
