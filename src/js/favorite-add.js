@@ -16,8 +16,10 @@ function saveFavotiteNews(e) {
   //   e.preventDefault();
   if (e.target.classList.contains(ADD_FAVORITE_BTN)) {
     const elementBlockPhoto = e.target.parentElement;
+    
     const elementCard = elementBlockPhoto.parentElement;
-
+    // console.log(elementCard, "fav")
+    console.log(elementBlockPhoto, "fav")
     const favoriteObj = {};
     favoriteObj.imgUrl = elementBlockPhoto.children[0].src;
     favoriteObj.category = elementBlockPhoto.children[1].innerText;
