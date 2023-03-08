@@ -12,8 +12,9 @@ import {
   
   const newsList = document.querySelector(LIST_CARD_SELECTOR);
   newsList.addEventListener('click', saveReadNews);
-  //newsList.addEventListener('click', removeFavorite);
+  //newsList.addEventListener('click', saveData);
   let idFrom=[]; 
+  let readfromobj;
   function saveReadNews(e) {
     //e.preventDefault();
     if (e.target.classList.contains(ADD_READ_BTN)) {
@@ -38,11 +39,18 @@ import {
       readObj.date = elementCard.children[3].children[0].innerText;
       readObj.readMoreLink = elementCard.children[3].children[1].href;
       readObj.id = elementCard.id;
-                   
-                            
+                readfromobj = readObj.id;   
+                    // for (let i = 0; i<10; i++;)    {
 
-                                   
-                        
+                    // }     
+if (idFrom.includes(readObj.id)){
+
+ return
+                                  
+}     
+
+ console.log(idFrom, "idfrom-------");
+ console.log(readObj.id, 'readobj');
 
       const savedApiData2 =
         JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
@@ -50,7 +58,7 @@ import {
   
       localStorage.setItem(STORAGE_KEY_READ, JSON.stringify(savedApiData2));
                         
-            // }  }         
+                
   
     
     }
@@ -59,62 +67,11 @@ import {
   const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
 
   parsedNews.forEach(element => {
-    console.log(element.id,"ele")
+    //console.log(element.id,"ele")
     idFrom.push(element.id);
   });
-  console.log(idFrom, "ele2")
+  //console.log(idFrom, "ele2")
+//console.log(readfromobj)
 
 
-//console.log(idFrom)
-
-//   function removeFavorite(e) {
-//     if (e.target.classList.contains(REMOTE_FAVORITE_BTN)) {
-//       const currentLi = e.target.parentElement.parentElement;
-//       const currentId = currentLi.id;
-  
-//       const savedData =
-//         JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE)) || [];
-  
-//       const newSavedData = savedData.filter(item => item.id !== currentId);
-  
-//       localStorage.setItem(STORAGE_KEY_FAVORITE, JSON.stringify(newSavedData));
-  
-//       turnOffFavorite(currentLi);
-  
-//       visibleNoData();
-//     }
-//   }
-  
-//   function turnOffFavorite(elem) {
-//     if (window.location.pathname.includes(FAVORITE_PAGE_PATH)) {
-//       elem.remove();
-//     } else {
-//       elem
-//         .querySelector(`.${REMOTE_FAVORITE_BTN}`)
-//         .classList.add(VISUALLY_HIDDEN_CLASS);
-//       elem
-//         .querySelector(`.${ADD_FAVORITE_BTN}`)
-//         .classList.remove(VISUALLY_HIDDEN_CLASS);
-//     }
-//   }
-  
-//   function visibleNoData() {
-//     if (window.location.pathname.includes(READ_PAGE_PATH)) {
-//       const savedData =
-//         JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE)) || [];
-//       const noDataBlock = document.querySelector('.no-data .error');
-//       const containerCardList = document.querySelector('.container.list__cards');
-//       if (savedData.length == 0) {
-//         noDataBlock.querySelector('.title-error').innerHTML =
-//           'We haven’t found <br> favorite news';
-//         noDataBlock.classList.remove(VISUALLY_HIDDEN_CLASS);
-//         containerCardList.classList.add(VISUALLY_HIDDEN_CLASS);
-//       } else {
-//         noDataBlock.classList.add(VISUALLY_HIDDEN_CLASS);
-//         containerCardList.classList.remove(VISUALLY_HIDDEN_CLASS);
-//       }
-//     }
-//   }
-  
-//    visibleNoData();
   
