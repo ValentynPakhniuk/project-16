@@ -48,6 +48,14 @@ function onSubmitSearchLine(e) {
 }
 
 /**
+ * пошук по даті
+ */
+export function onSelectDataByCalendar() {
+  requestDataBaseControler.date = refDate.value;
+  mainRequestData();
+}
+
+/**
  * Блок зміни позиції карточки з погодою в залежності від розміру екрану (мобайл, таблетка, десктоп)
  */
 window.addEventListener('resize', throttle(windowsResize, 300));
@@ -79,6 +87,8 @@ function onClickCategories(e) {
   }
 
   if (category.length > 0) {
+    document.querySelector('#search').value = '';
+
     requestDataBaseControler.searchLine = '';
     requestDataBaseControler.category = category;
     requestDataBaseControler.date = refDate.value;
@@ -100,10 +110,14 @@ function mainRequestData(pageNumber = 1) {
 
   const data = requestDataBaseControler.requestData(pageNumber);
 
+  refNoData.parentElement.classList.remove(VISUALLY_HIDDEN_CLASS);
+
   data.then(data => {
     // перевірка на відсутність даних у запиті
-    refNoData.classList.add(VISUALLY_HIDDEN_CLASS);
-    if (data.hits <= 0) {
+    if (data.hits > 0) {
+      refNoData.classList.add(VISUALLY_HIDDEN_CLASS);
+      refNoData.parentElement.classList.add(VISUALLY_HIDDEN_CLASS);
+    } else {
       refNoData.classList.remove(VISUALLY_HIDDEN_CLASS);
       return;
     }
