@@ -13,7 +13,7 @@ import {
   const newsList = document.querySelector(LIST_CARD_SELECTOR);
   newsList.addEventListener('click', saveReadNews);
   //newsList.addEventListener('click', removeFavorite);
-  let idFrom; 
+  let idFrom=[]; 
   function saveReadNews(e) {
     //e.preventDefault();
     if (e.target.classList.contains(ADD_READ_BTN)) {
@@ -38,14 +38,19 @@ import {
       readObj.date = elementCard.children[3].children[0].innerText;
       readObj.readMoreLink = elementCard.children[3].children[1].href;
       readObj.id = elementCard.id;
-                                    
+    //    for (let i=0; i++; i<10) {
+                        // if(parsedNews[0].id != readObj.id){    
+                
+                        
+                        
+
       const savedApiData2 =
         JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
       savedApiData2.push(readObj);
   
       localStorage.setItem(STORAGE_KEY_READ, JSON.stringify(savedApiData2));
-
-      
+                        
+                       
   
     //   // приховуємо "add to favorite", включаємо 'Remove from favorite'
     //   e.target.classList.add(VISUALLY_HIDDEN_CLASS);
@@ -54,8 +59,15 @@ import {
 
   }
   const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
-console.log(parsedNews[0].id)
-console.log(idFrom)
+
+  parsedNews.forEach(element => {
+    console.log(element.id)
+    
+  });
+    console.log(parsedNews)
+
+
+//console.log(idFrom)
 
 //   function removeFavorite(e) {
 //     if (e.target.classList.contains(REMOTE_FAVORITE_BTN)) {
