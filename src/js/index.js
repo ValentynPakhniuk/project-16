@@ -12,6 +12,7 @@ import './mobile-menu';
 import './filters';
 import './calendar';
 import './favorite-add';
+import './read-more-add';
 
 /**
  * Блок пагінації,

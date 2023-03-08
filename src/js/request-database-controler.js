@@ -95,6 +95,7 @@ export default class RequestDataBaseControler {
     const faviriteStoradge = JSON.parse(
       localStorage.getItem(STORAGE_KEY_FAVORITE)
     );
+    
     console.log(faviriteStoradge);
 
     switch (dataType) {
