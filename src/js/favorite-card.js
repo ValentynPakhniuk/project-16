@@ -1,4 +1,8 @@
-import { STORAGE_KEY_FAVORITE } from './constants';
+import {
+  STORAGE_KEY_FAVORITE,
+  VISUALLY_HIDDEN_CLASS,
+} from './constants';
+
 
 function createMarkup(news) {
   const markup = news
@@ -48,9 +52,26 @@ function onSearchFavorite(e) {
 
   const searchInputValue = searchInput.value.trim();
 
-  const normalizedToUpperCaseInput = searchInputValue.toUpperCase();
+  let normalizedToUpperCaseInput = searchInputValue.toUpperCase();
 
   const foundFavoriteNews = parsedNews.filter(news => news.title.toUpperCase().includes(normalizedToUpperCaseInput))
 
-  createMarkup(foundFavoriteNews, favoritePage);
+  const noDataBlock = document.querySelector('.no-data .error');
+  const containerCardList = document.querySelector('.container.list__cards');
+  console.log(noDataBlock);
+
+  if (foundFavoriteNews.length === 0) {
+    noDataBlock.querySelector('.title-error').innerHTML =
+      'We haven’t found <br> favorite news';
+
+      noDataBlock.classList.remove(VISUALLY_HIDDEN_CLASS);
+      containerCardList.classList.add(VISUALLY_HIDDEN_CLASS);
+  }
+
+  else {
+    createMarkup(foundFavoriteNews, favoritePage);
+    noDataBlock.classList.add(VISUALLY_HIDDEN_CLASS);
+    containerCardList.classList.remove(VISUALLY_HIDDEN_CLASS);
+  }
 }
+
