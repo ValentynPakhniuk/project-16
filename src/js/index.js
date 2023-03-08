@@ -110,10 +110,14 @@ function mainRequestData(pageNumber = 1) {
 
   const data = requestDataBaseControler.requestData(pageNumber);
 
+  refNoData.parentElement.classList.remove(VISUALLY_HIDDEN_CLASS);
+
   data.then(data => {
     // перевірка на відсутність даних у запиті
-    refNoData.classList.add(VISUALLY_HIDDEN_CLASS);
-    if (data.hits <= 0) {
+    if (data.hits > 0) {
+      refNoData.classList.add(VISUALLY_HIDDEN_CLASS);
+      refNoData.parentElement.classList.add(VISUALLY_HIDDEN_CLASS);
+    } else {
       refNoData.classList.remove(VISUALLY_HIDDEN_CLASS);
       return;
     }
