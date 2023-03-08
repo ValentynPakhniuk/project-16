@@ -48,6 +48,14 @@ function onSubmitSearchLine(e) {
 }
 
 /**
+ * пошук по даті
+ */
+export function onSelectDataByCalendar() {
+  requestDataBaseControler.date = refDate.value;
+  mainRequestData();
+}
+
+/**
  * Блок зміни позиції карточки з погодою в залежності від розміру екрану (мобайл, таблетка, десктоп)
  */
 window.addEventListener('resize', throttle(windowsResize, 300));
@@ -79,6 +87,8 @@ function onClickCategories(e) {
   }
 
   if (category.length > 0) {
+    document.querySelector('#search').value = '';
+
     requestDataBaseControler.searchLine = '';
     requestDataBaseControler.category = category;
     requestDataBaseControler.date = refDate.value;

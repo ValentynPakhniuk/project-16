@@ -13,7 +13,7 @@ newsList.addEventListener('click', saveFavotiteNews);
 newsList.addEventListener('click', removeFavorite);
 
 function saveFavotiteNews(e) {
-  e.preventDefault();
+  //   e.preventDefault();
   if (e.target.classList.contains(ADD_FAVORITE_BTN)) {
     const elementBlockPhoto = e.target.parentElement;
     const elementCard = elementBlockPhoto.parentElement;
