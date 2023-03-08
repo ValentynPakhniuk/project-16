@@ -22,6 +22,10 @@
       margin-bottom: 60px;
     }
   }
+
+  & .card__weather {
+    height: 100%;
+  }
 }
 
 .filters__line {
@@ -34,4 +38,14 @@
 .no-data {
   padding-top: 120px;
   padding-bottom: 226px;
+}
+
+.footer {
+  background-color: #7a7a7a;
+
+  height: 120px;
+
+  @include tablet {
+    height: 146px;
+  }
 }
