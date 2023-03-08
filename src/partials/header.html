@@ -1,26 +1,52 @@
 <header class="header ">
   <div class="container header__wrap-nav header__container">
-    <div class="container-logo-search">
-      <a class="header__logo text-link text-link__navigation link" href="./index.html">News</a>
-
+    <div class="mobile-header-container">
+      <div class="container-logo-search">
+        <a class="header__logo text-link text-link__navigation link" href="./index.html">News</a>
+      
+      </div>
+      <button type="button" class="menu-button is-open" aria-expanded="false" aria-controls="menu-container" data-menu-button>
+        <svg width="24" height="24" aria-label="Преключатель мобільного меню">
+          <use class="icon-cross" href="./images/header.svg#open-menu"></use>
+          <use class="icon-menu" href="./images/header.svg#close-menu"></use>
+        </svg>
+      </button>
     </div>
-    <button type="button" class="menu-button is-open" aria-expanded="false" aria-controls="menu-container"
-      data-menu-button>
-      <svg width="24" height="24" aria-label="Преключатель мобільного меню">
-        <use class="icon-cross" href="./images/header.svg#open-menu"></use>
-        <use class="icon-menu" href="./images/header.svg#close-menu"></use>
-      </svg>
-    </button>
     <div class="menu-container" id="menu-container" data-menu>
-      <ul class="site-nav site-nav__container list">
-        <li class="site-nav__item">
-          <a href="./index.html" class="site-nav__link link">Home</a>
+      <ul class="site-nav site-nav__container site-nav__mobile list">
+        <li class="site-nav__item container__item">
+          <div class="icon__link">
+            <svg width="32" height="32">
+              <use class="icon-menu" href="./images/header.svg#home"></use>
+            </svg>
+            <a href="./index.html" class="site-nav__link link">Home</a>
+          </div>
+          
+          <svg width="20" height="20"><use class="icon-menu" href="./images/header.svg#chevron-right"></use></svg>
         </li>
-        <li class="site-nav__item">
-          <a href="./favorite.html" class="site-nav__link link">Favorite</a>
+        
+        <li class="site-nav__item container__item">
+          <div class="icon__link">
+            <svg width="32" height="32">
+              <use class="icon-menu" href="./images/header.svg#favorite"></use>
+            </svg>
+            <a href="./favorite.html" class="site-nav__link link">Favorite</a>
+          </div>
+          <svg width="20" height="20">
+            <use class="icon-menu" href="./images/header.svg#chevron-right"></use>
+          </svg>
         </li>
-        <li class="site-nav__item">
-          <a href="./read.html" class="site-nav__link link">Read</a>
+        <li class="site-nav__item container__item">
+          <div class="icon__link">
+            <svg width="32" height="32">
+              <use class="icon-menu" href="./images/header.svg#read"></use>
+            </svg>
+            <a href="./read.html" class="site-nav__link link">Read</a>
+          </div>
+          
+          <svg width="20" height="20">
+            <use class="icon-menu" href="./images/header.svg#chevron-right"></use>
+          </svg>
         </li>
       </ul>
       
@@ -41,10 +67,10 @@
     <div class="container__search">
       <form class="search" id="search-form">
         <label class="search__label">
-          <input type="text" name="search" id="search" class="search__line" placeholder="Search" />
           <svg class="search__ico" width="16" height="15">
             <use href="./images/header.svg#search"></use>
           </svg>
+          <input type="text" name="search" id="search" class="search__line" placeholder="Search" />
         </label>
       </form>
     </div>
