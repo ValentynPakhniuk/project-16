@@ -38,10 +38,10 @@ import {
       readObj.date = elementCard.children[3].children[0].innerText;
       readObj.readMoreLink = elementCard.children[3].children[1].href;
       readObj.id = elementCard.id;
-    //    for (let i=0; i++; i<10) {
-                        // if(parsedNews[0].id != readObj.id){    
-                
-                        
+                   
+                            
+
+                                   
                         
 
       const savedApiData2 =
@@ -50,21 +50,19 @@ import {
   
       localStorage.setItem(STORAGE_KEY_READ, JSON.stringify(savedApiData2));
                         
-                       
+            // }  }         
   
-    //   // приховуємо "add to favorite", включаємо 'Remove from favorite'
-    //   e.target.classList.add(VISUALLY_HIDDEN_CLASS);
-     //  elementBlockPhoto.children[4].classList.remove(VISUALLY_HIDDEN_CLASS);
+    
     }
 
   }
   const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
 
   parsedNews.forEach(element => {
-    console.log(element.id)
-    
+    console.log(element.id,"ele")
+    idFrom.push(element.id);
   });
-    console.log(parsedNews)
+  console.log(idFrom, "ele2")
 
 
 //console.log(idFrom)
