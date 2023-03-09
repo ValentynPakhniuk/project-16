@@ -99,8 +99,6 @@
   menuItem.classList.add('site-nav__link--current');
 
   let mobMenu = document.querySelector('.site-nav__mobile');
-  console.log('mobMenu: ', mobMenu);
   let mobItem = mobMenu.querySelector(`[href='${page}']`);
-  console.log('mobItem: ', mobItem.parentElement);
   mobItem.parentElement.classList.add('container__item--current');
 </script>
