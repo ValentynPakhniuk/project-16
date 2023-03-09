@@ -24,7 +24,7 @@
         </li>
         
         <li class="site-nav__item container__item">
-          <a href="./index.html" class="nav__link site-nav__link mobile__nav-link link"><span class="span__link"><svg width="32"
+          <a href="./favorite.html" class="nav__link site-nav__link mobile__nav-link link"><span class="span__link"><svg width="32"
                 height="32">
                 <use class="icon-menu" href="./images/header.svg#favorite"></use>
               </svg>Favorite</span><svg width="20" height="20">
@@ -33,7 +33,7 @@
           </a>
         </li>
         <li class="site-nav__item container__item">
-          <a href="./index.html" class="nav__link site-nav__link mobile__nav-link link"><span class="span__link"><svg width="32"
+          <a href="./read.html" class="nav__link site-nav__link mobile__nav-link link"><span class="span__link"><svg width="32"
                 height="32">
                 <use class="icon-menu" href="./images/header.svg#read"></use>
               </svg>Read</span><svg width="20" height="20">
@@ -90,3 +90,17 @@
   </div>
   <div class="box-shadow-header"></div>
 </header>
+
+<!--  Скрипт для додавання підкреслення до пункту меню -->
+<script>
+  let page = window.location.pathname;
+  let menu = document.querySelector('.navigation__container');
+  let menuItem = menu.querySelector(`[href='${page}']`);
+  menuItem.classList.add('site-nav__link--current');
+
+  let mobMenu = document.querySelector('.site-nav__mobile');
+  console.log('mobMenu: ', mobMenu);
+  let mobItem = mobMenu.querySelector(`[href='${page}']`);
+  console.log('mobItem: ', mobItem.parentElement);
+  mobItem.parentElement.classList.add('container__item--current');
+</script>
