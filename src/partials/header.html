@@ -15,41 +15,33 @@
     <div class="menu-container" id="menu-container" data-menu>
       <ul class="site-nav site-nav__container site-nav__mobile list">
         <li class="site-nav__item container__item">
-          <div class="icon__link">
-            <svg width="32" height="32">
+            <a href="./index.html" class="nav__link site-nav__link mobile__nav-link link"><span class="span__link"><svg width="32" height="32">
               <use class="icon-menu" href="./images/header.svg#home"></use>
+            </svg>Home</span><svg width="20" height="20">
+              <use class="icon-menu" href="./images/header.svg#chevron-right"></use>
             </svg>
-            <a href="./index.html" class="site-nav__link link">Home</a>
-          </div>
-          
-          <svg width="20" height="20"><use class="icon-menu" href="./images/header.svg#chevron-right"></use></svg>
+          </a>
         </li>
         
         <li class="site-nav__item container__item">
-          <div class="icon__link">
-            <svg width="32" height="32">
-              <use class="icon-menu" href="./images/header.svg#favorite"></use>
+          <a href="./index.html" class="nav__link site-nav__link mobile__nav-link link"><span class="span__link"><svg width="32"
+                height="32">
+                <use class="icon-menu" href="./images/header.svg#favorite"></use>
+              </svg>Favorite</span><svg width="20" height="20">
+              <use class="icon-menu" href="./images/header.svg#chevron-right"></use>
             </svg>
-            <a href="./favorite.html" class="site-nav__link link">Favorite</a>
-          </div>
-          <svg width="20" height="20">
-            <use class="icon-menu" href="./images/header.svg#chevron-right"></use>
-          </svg>
+          </a>
         </li>
         <li class="site-nav__item container__item">
-          <div class="icon__link">
-            <svg width="32" height="32">
-              <use class="icon-menu" href="./images/header.svg#read"></use>
+          <a href="./index.html" class="nav__link site-nav__link mobile__nav-link link"><span class="span__link"><svg width="32"
+                height="32">
+                <use class="icon-menu" href="./images/header.svg#read"></use>
+              </svg>Read</span><svg width="20" height="20">
+              <use class="icon-menu" href="./images/header.svg#chevron-right"></use>
             </svg>
-            <a href="./read.html" class="site-nav__link link">Read</a>
-          </div>
-          
-          <svg width="20" height="20">
-            <use class="icon-menu" href="./images/header.svg#chevron-right"></use>
-          </svg>
+          </a>
         </li>
       </ul>
-      
     </div>
     <nav class="header__nav navigation navigation__container">
       <ul class="nav__list site-nav site-nav__container list">
@@ -67,10 +59,10 @@
     <div class="container__search">
       <form class="search" id="search-form">
         <label class="search__label">
+          <input type="text" name="search" id="search" class="search__line" placeholder="Search" />
           <svg class="search__ico" width="16" height="15">
             <use href="./images/header.svg#search"></use>
           </svg>
-          <input type="text" name="search" id="search" class="search__line" placeholder="Search" />
         </label>
       </form>
     </div>
