@@ -7,6 +7,8 @@ body.modal-open {
   z-index: 99;
   margin-bottom: 28px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  // border-bottom: 1px solid rgba($color: var(--clr-border), $alpha: 0.2);
+
 
   .container {
     display: flex;
@@ -168,6 +170,8 @@ body.modal-open {
       justify-content: space-between;
       overflow: hidden;
       padding: 0 10px;
+      max-width: 300px;
+
   
 
       @media screen and (max-width: 767px) {
@@ -213,6 +217,12 @@ body.modal-open {
       background: transparent;
       height: 100%;
 
+      text-align: center;
+
+      &::placeholder{
+          text-align: left;
+          opacity: 0.4;
+        }
 
       @include tablet {
         padding-left: 10px;
@@ -220,7 +230,6 @@ body.modal-open {
         font-size: 14px;
         line-height: 1.71;
         flex-grow: 1;
-        text-align: center;
       }
 
       @media screen and (max-width: 767px) {
@@ -234,18 +243,12 @@ body.modal-open {
         width: 100%;
         opacity: 0;
       }
-
-      &::placeholder{
-        @include tablet {
-          text-align: left;
-          opacity: 0.4;
-        }
-      }
     }
 
     .search__ico {
       cursor: pointer;
-      color: var(--clr-body);
+      fill: var(--color-primary);
+      // stroke: var(--color-primary);
       margin: 0;
     }
 
@@ -351,6 +354,8 @@ body.modal-open {
     padding: 0;
     border: none;
     background-color: transparent;
+    // fill: var(--clr-border);
+    stroke: var(--color-primary);
 
     & svg .icon-cross,
     & svg .icon-menu{
@@ -436,5 +441,11 @@ body.modal-open {
       color: aliceblue;
     }
     background-color: #4440F6;
+  }
+}
+
+body.dark-mode{
+  .menu-button svg{
+    stroke: var(--color-primary);
   }
 }
