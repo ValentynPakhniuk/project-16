@@ -128,43 +128,16 @@ refs.categoriesOthersList.addEventListener('click', onClickOtherCategories);
 refs.openOthersBtn.addEventListener('click', onOthersBtnClick);
 refs.categoriesList.addEventListener('click', onClickCategories);
 
-// function onClickOtherCategories(e) {
-//   let target = e.target;
-//   if (target.tagName != 'BUTTON') {
-//     return;
-//   } else {
-//     console.log(e);
-//     refs.othersTextInBtn.textContent = e.srcElement.textContent;
-//     refs.othersWrapper.classList.remove('is-open');
-//     refs.othersIconOpen.style.display = 'block';
-//     refs.othersIconOpen.style.fill = 'var(--clr-fill-toogle-ground)';
-//     refs.othersIconClose.style.display = 'none';
-//   }
-// }
-
 function clearCategoriesMarkup() {
   refs.categoriesList.innerHTML = '';
   refs.categoriesOthersList.innerHTML = '';
 }
 
-// function onClickCategories(e) {
-//   console.log(e.srcElement.classList);
-//   if (!e.srcElement.classList.contains('category-active')) {
-//     e.srcElement.classList.add('category-active');
-//   } else {
-//     e.srcElement.classList.remove('category-active');
-//     //   refs.othersTextInBtn.textContent = 'Others';
-//     // refs.othersWrapper.classList.remove('is-open');
-//     // refs.openOthersBtn.classList.remove('others__btn-active');
-//     // refs.othersIconOpen.style.fill = 'var(--clr-categoty-btn)';}
-  
-//   }
-// }
-
 function onClickCategories(e) {
 	refs.othersWrapper.classList.remove('is-open');
   addAndRemoveActiveCategory(e.target);
   refs.othersTextInBtn.textContent = "Others";
+  refs.othersIconOpen.style.fill = 'var(--clr-categoty-btn)';
    refs.openOthersBtn.classList.remove('category-active');
 }
 
@@ -175,12 +148,11 @@ function onClickOtherCategories(e) {
   } 
 	refs.othersWrapper.classList.remove('is-open');
   addAndRemoveActiveCategory(target);
-  refs.othersTextInBtn.textContent = e.srcElement.textContent;
+  refs.othersTextInBtn.textContent = e.target.textContent;
   refs.othersIconOpen.style.display = 'block';
-  refs.othersIconOpen.style.fill = 'var(--clr-categoty-btn)';
+  refs.othersIconOpen.style.fill = 'var(--clr-categoty-btn-background)';
   refs.othersIconClose.style.display = 'none';
-
-
+refs.openOthersBtn.classList.add('category-active');
 }
 
 let previosBtn = null;
@@ -215,7 +187,7 @@ function onOthersBtnClick(e) {
   )
     ? 'block'
     : 'none';
-  previosBtn.contains('category-active')
+  previosBtn && previosBtn.contains('category-active')
     ? previosBtn.remove('category-active')
     : null;
   if (refs.othersWrapper.classList.contains('is-open')) {
