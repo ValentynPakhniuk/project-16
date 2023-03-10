@@ -21,8 +21,6 @@ const refs = {
   othersItemBtn: document.querySelector('.others__item-btn'),
 };
 
-console.log(refs.othersTextInBtn);
-
 async function getResponseCategory() {
   try {
     let categories = await categoryApiService.getCategories();

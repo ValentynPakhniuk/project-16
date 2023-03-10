@@ -6,7 +6,7 @@ const API_KEY = 'api-key=SWTGJZG6lt2ntZukcf6TH36zlYgqv0Eb';
 
 class NewsApiService {
   constructor() {
-    this.news = []; // [{ title: 'Title', description: 'Description', isFavorite: false}, ...] `<div>${title}</div>${isFavorite ? '<button id="remove">Remove</button>' : '<button>Add</button>'}`
+    this.news = [];
     this.category = '';
     this.search = '';
     this.page = 1;
