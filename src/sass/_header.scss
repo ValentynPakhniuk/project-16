@@ -40,7 +40,7 @@ body.modal-open {
 
   .mobile-header-container {
     z-index: 999;
-
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -269,7 +269,7 @@ body.modal-open {
     display: flex;
     margin-bottom: 120px;
     width: 100%;
-    // max-width: 480px;
+    max-width: 480px;
     padding: 0 14px;
     gap: 8px;
     z-index: 999;
@@ -424,6 +424,7 @@ body.modal-open {
     z-index: 999;
     display: flex;
     width: 100%;
+    max-width: 480px;
     flex-direction: column;
     align-content: center;
   }
