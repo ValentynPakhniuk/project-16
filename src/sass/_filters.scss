@@ -41,15 +41,6 @@
     }
 }
 
-.category-active {
-    color: #ffffff;
-    background-color: var(--clr-categoty-btn);
-}
-
-.others__container {
-    position: relative;
-}
-
 .others__btn {
     display: flex;
     align-items: center;
@@ -67,6 +58,17 @@
         padding: 7.5px 24.5px;
     }
 }
+
+.category-active {
+    color: #ffffff;
+    background-color: var(--clr-categoty-btn);
+}
+
+.others__container {
+    position: relative;
+}
+
+
 
 // .others__btn-active {
 //     display: flex;
