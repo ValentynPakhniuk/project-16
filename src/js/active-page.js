@@ -1,4 +1,7 @@
-const activePage = window.location.pathname;
+let activePage = window.location.pathname;
+if (activePage.length < 3) {
+  activePage = '/index.html';
+}
 const menuNav = document.querySelector('.navigation__container');
 const menuItem = menuNav.querySelector(`[href='${activePage}']`);
 menuItem.classList.add('site-nav__link--current');
