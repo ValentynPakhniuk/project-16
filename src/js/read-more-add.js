@@ -7,7 +7,7 @@ import {
   LIST_CARD_SELECTOR,
 } from './constants';
 
-const FAVORITE_PAGE_PATH = '/read.html';
+const READ_MORE_PAGE_PATH = '/read.html';
 
 const newsList = document.querySelector(LIST_CARD_SELECTOR);
 newsList.addEventListener('click', saveReadNews);
@@ -59,3 +59,23 @@ parsedNews.forEach(element => {
 });
 //console.log(idFrom, "ele2")
 //console.log(readfromobj)
+
+function visibleReadNoData() {
+  if (window.location.pathname.includes(READ_MORE_PAGE_PATH)) {
+    const savedApiData2 =
+      JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || [];
+    const noDataBlock = document.querySelector('.no-data .error');
+    const containerCardList = document.querySelector('.container.list__cards');
+    if (savedApiData2.length == 0) {
+      noDataBlock.querySelector('.title-error').innerHTML =
+        'No read news found';
+      noDataBlock.classList.remove(VISUALLY_HIDDEN_CLASS);
+      containerCardList.classList.add(VISUALLY_HIDDEN_CLASS);
+    } else {
+      noDataBlock.classList.add(VISUALLY_HIDDEN_CLASS);
+      containerCardList.classList.remove(VISUALLY_HIDDEN_CLASS);
+    }
+  }
+}
+
+visibleReadNoData();
