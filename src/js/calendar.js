@@ -5,11 +5,9 @@ import NewsApiService from './NewsApiService';
 import { onSelectDataByCalendar } from './index.js';
 
 const options = {
-  // defaultDate: new Date(),
   dateFormat: 'd/m/Y',
   disableMobile: 'true',
   onClose(selectedDates) {
-    // console.log(selectedDates[0]);
     onSelectDataByCalendar();
   },
 };

@@ -1,8 +1,4 @@
-import {
-  STORAGE_KEY_FAVORITE,
-  VISUALLY_HIDDEN_CLASS,
-} from './constants';
-
+import { STORAGE_KEY_FAVORITE, VISUALLY_HIDDEN_CLASS } from './constants';
 
 function createMarkup(news) {
   const markup = news
@@ -32,7 +28,7 @@ function createMarkup(news) {
     })
     .join('');
   // favoritePage.insertAdjacentHTML('beforeend', markup);
-   favoritePage.innerHTML = markup;
+  favoritePage.innerHTML = markup;
 }
 
 const favoritePage = document.querySelector('.favorite-page-wrap');
@@ -54,7 +50,9 @@ function onSearchFavorite(e) {
 
   let normalizedToUpperCaseInput = searchInputValue.toUpperCase();
 
-  const foundFavoriteNews = parsedNews.filter(news => news.title.toUpperCase().includes(normalizedToUpperCaseInput))
+  const foundFavoriteNews = parsedNews.filter(news =>
+    news.title.toUpperCase().includes(normalizedToUpperCaseInput)
+  );
 
   const noDataBlock = document.querySelector('.no-data .error');
   const containerCardList = document.querySelector('.container.list__cards');
@@ -64,14 +62,11 @@ function onSearchFavorite(e) {
     noDataBlock.querySelector('.title-error').innerHTML =
       'We haven’t found <br> favorite news';
 
-      noDataBlock.classList.remove(VISUALLY_HIDDEN_CLASS);
-      containerCardList.classList.add(VISUALLY_HIDDEN_CLASS);
-  }
-
-  else {
+    noDataBlock.classList.remove(VISUALLY_HIDDEN_CLASS);
+    containerCardList.classList.add(VISUALLY_HIDDEN_CLASS);
+  } else {
     createMarkup(foundFavoriteNews, favoritePage);
     noDataBlock.classList.add(VISUALLY_HIDDEN_CLASS);
     containerCardList.classList.remove(VISUALLY_HIDDEN_CLASS);
   }
 }
-

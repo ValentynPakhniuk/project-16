@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     margin-top: 40px;
     row-gap: 28px;
-    width: 288px;
+    
     @include tablet {
         gap: 30px;
         width: 736px;
@@ -22,6 +22,8 @@
 .card {
     height: 630px;
     flex-basis: 100%;
+    width: 100%;
+    max-width: 480px;
     @include tablet {
     flex-basis: calc((100% - 30px) / 2);
     height: 675px;
@@ -58,7 +60,7 @@
     top: 40;
     background-color: rgba(68, 64, 247, 0.7);
     border-radius: 0px 4px 4px 0px;
-    color: var(--clr-fill-toogle-ground);
+    color: var(--clr-card-category-text);
 }
 
 .checked-news {
@@ -80,7 +82,7 @@
     height: 28px;
     gap: 4px;
     border-radius: 20px;
-    background-color: var(--color-secondary);
+    background-color: var(--clr-categoty-btn-background);
     justify-content: center;
     align-items: center;
     bottom: 12;
@@ -89,7 +91,7 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
-    color: var(--clr-border);
+    color: var(--clr-pag);
 }
 
 .add-favorite-btn {
