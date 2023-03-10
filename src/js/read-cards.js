@@ -48,18 +48,4 @@ function createMarkup(news) {
   });
 }
 
-//console.log(parsedNews[0].id)
-
-// const noDataBlock = document.querySelector('.no-data .error');
-//     const containerCardList = document.querySelector('.container.list__cards');
-// if (parsedNews.length = 0)
-// {noDataBlock.querySelector('.title-error').innerHTML =
-// 'We haven’t found <br> favorite news';
-// noDataBlock.classList.remove(VISUALLY_HIDDEN_CLASS);
-// containerCardList.classList.add(VISUALLY_HIDDEN_CLASS);
-// } else {
-// noDataBlock.classList.add(VISUALLY_HIDDEN_CLASS);
-// containerCardList.classList.remove(VISUALLY_HIDDEN_CLASS);
-// }
-
 createMarkup(parsedNews);

@@ -6,7 +6,6 @@ const API_KEY = 'api-key=SWTGJZG6lt2ntZukcf6TH36zlYgqv0Eb';
 
 class NewsApiService {
   constructor() {
-    this.news = [];
     this.category = '';
     this.search = '';
     this.page = 1;
@@ -45,21 +44,6 @@ class NewsApiService {
 
   resetPage() {
     this.page = 1;
-  }
-
-  getFavoriteNews() {
-    // fetch favorite news
-  }
-
-  getReadNews() {
-    // fetch read news
-  }
-
-  markAsRead() {
-    // on click "Read more" button
-  }
-  removeToFavorite() {
-    // on click "Remove from favorite" button
   }
 }
 

@@ -11,8 +11,16 @@
   <body class="light-mode">
     <include src="./partials/header.html"></include>
     <div class="container list__cards">
-      <div class="dateDiv"></div>
-      <ul class="read-page-wrap list-card"></ul>
+      <div class="dateDiv">
+        
+      </div>
+      <button type="button" class="menu-button is-open" aria-expanded="false" aria-controls="menu-container" data-menu-button>
+        <svg width="14" height="14" aria-label="Преключатель">
+          <use class="others__icon-open icon-cross" href="/src/images/filters.svg#others_icon-open"></use>
+          <use class="others__icon-close icon-menu" href="/src/images/filters.svg#others_icon-close"></use>
+        </svg>
+      </button>
+      <ul class="read-page-wrap list-card" data-read></ul>
     </div>
     <div class="no-data">
       <include src="./partials/not_found.html"></include>

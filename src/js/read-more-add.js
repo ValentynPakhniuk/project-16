@@ -11,11 +11,9 @@ const READ_MORE_PAGE_PATH = '/read.html';
 
 const newsList = document.querySelector(LIST_CARD_SELECTOR);
 newsList.addEventListener('click', saveReadNews);
-//newsList.addEventListener('click', saveData);
 let idFrom = [];
 let readfromobj;
 function saveReadNews(e) {
-  //e.preventDefault();
   if (e.target.classList.contains(ADD_READ_BTN)) {
     const date = new Date();
     const dateForKey = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
@@ -40,7 +38,6 @@ function saveReadNews(e) {
     }
     const savedApiData2 =
       JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || {};
-    console.log('savedApiData2', savedApiData2);
 
     if (savedApiData2[dateForKey]) {
       savedApiData2[dateForKey].push(readObj);
@@ -71,4 +68,3 @@ function visibleReadNoData() {
 }
 
 visibleReadNoData();
-

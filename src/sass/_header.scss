@@ -9,7 +9,6 @@ body.modal-open {
   z-index: 99;
   margin-bottom: 28px;
   border-bottom: 1px solid var(--clr-header-border);
-  // border-bottom: 1px solid rgba($color: var(--clr-border), $alpha: 0.2);
 
   .container {
     display: flex;
@@ -64,7 +63,6 @@ body.modal-open {
     }
 
     @include desktop {
-      // margin-right: 102px;
       font-size: 42px;
       line-height: 1.36;
     }
@@ -75,10 +73,8 @@ body.modal-open {
     z-index: 999;
     @include tablet {
       display: flex;
-      // margin-right: 30px;
     }
     @include desktop {
-      // margin-right: 140px;
     }
   }
 
@@ -360,7 +356,6 @@ body.modal-open {
     padding: 0;
     border: none;
     background-color: transparent;
-    // fill: var(--clr-border);
     stroke: var(--color-primary);
 
     & svg .icon-cross,
