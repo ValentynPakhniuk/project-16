@@ -1,5 +1,6 @@
 let activePage = window.location.pathname;
-if (activePage.length < 3) {
+const path = window.location.pathname.split('/');
+if (path[path.length - 1] === '') {
   activePage = '/index.html';
 }
 const menuNav = document.querySelector('.navigation__container');
