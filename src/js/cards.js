@@ -20,7 +20,7 @@ function onSubmitForm(e) {
 
 export const getCard = (urlPhoto, category, title, text, date, url) => {
   const defaultUrl =
-    'https://image-placeholder.com/images/actual-size/200x200.png';
+    'https://thumbs.dreamstime.com/b/best-design-global-news-digital-illusration-71660044.jpg';
   const domain = 'https://static01.nyt.com/';
   const protocol = 'https://';
   const photo =

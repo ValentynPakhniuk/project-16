@@ -9,7 +9,7 @@ const refs = {
 
 const getUrl = el => {
   if (el.media.length === 0) {
-    return 'https://image-placeholder.com/images/actual-size/200x200.png';
+    return 'https://thumbs.dreamstime.com/b/best-design-global-news-digital-illusration-71660044.jpg';
   }
   const photosArray = el.media[0];
   const photos = photosArray['media-metadata'];
