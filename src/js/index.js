@@ -12,7 +12,8 @@ import './mobile-menu';
 import './filters';
 import './calendar';
 import './favorite-add';
-
+import './read-more-add';
+import './active-page';
 /**
  * Блок пагінації,
  */
@@ -43,6 +44,14 @@ function onSubmitSearchLine(e) {
   requestDataBaseControler.searchLine =
     e.currentTarget.elements.search.value.trim();
   requestDataBaseControler.category = '';
+  requestDataBaseControler.date = refDate.value;
+  mainRequestData();
+}
+
+/**
+ * пошук по даті
+ */
+export function onSelectDataByCalendar() {
   requestDataBaseControler.date = refDate.value;
   mainRequestData();
 }
@@ -79,6 +88,8 @@ function onClickCategories(e) {
   }
 
   if (category.length > 0) {
+    document.querySelector('#search').value = '';
+
     requestDataBaseControler.searchLine = '';
     requestDataBaseControler.category = category;
     requestDataBaseControler.date = refDate.value;
@@ -100,10 +111,14 @@ function mainRequestData(pageNumber = 1) {
 
   const data = requestDataBaseControler.requestData(pageNumber);
 
+  refNoData.parentElement.classList.remove(VISUALLY_HIDDEN_CLASS);
+
   data.then(data => {
     // перевірка на відсутність даних у запиті
-    refNoData.classList.add(VISUALLY_HIDDEN_CLASS);
-    if (data.hits <= 0) {
+    if (data.hits > 0) {
+      refNoData.classList.add(VISUALLY_HIDDEN_CLASS);
+      refNoData.parentElement.classList.add(VISUALLY_HIDDEN_CLASS);
+    } else {
       refNoData.classList.remove(VISUALLY_HIDDEN_CLASS);
       return;
     }

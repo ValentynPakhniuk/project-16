@@ -1,4 +1,4 @@
-import { STORAGE_KEY_FAVORITE } from './constants';
+import { STORAGE_KEY_FAVORITE, VISUALLY_HIDDEN_CLASS } from './constants';
 
 function createMarkup(news) {
   const markup = news
@@ -27,10 +27,46 @@ function createMarkup(news) {
       </li>`;
     })
     .join('');
-  favoritePage.insertAdjacentHTML('beforeend', markup);
+  // favoritePage.insertAdjacentHTML('beforeend', markup);
+  favoritePage.innerHTML = markup;
 }
 
 const favoritePage = document.querySelector('.favorite-page-wrap');
 const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_FAVORITE)) || [];
 
 createMarkup(parsedNews, favoritePage);
+
+//пошук на сторінці favorite по ключовому слову в title
+
+const searchFavoriteInput = document.getElementById('search');
+
+searchFavoriteInput.addEventListener('input', onSearchFavorite);
+
+function onSearchFavorite(e) {
+  e.preventDefault();
+  const searchInput = e.currentTarget;
+
+  const searchInputValue = searchInput.value.trim();
+
+  let normalizedToUpperCaseInput = searchInputValue.toUpperCase();
+
+  const foundFavoriteNews = parsedNews.filter(news =>
+    news.title.toUpperCase().includes(normalizedToUpperCaseInput)
+  );
+
+  const noDataBlock = document.querySelector('.no-data .error');
+  const containerCardList = document.querySelector('.container.list__cards');
+  console.log(noDataBlock);
+
+  if (foundFavoriteNews.length === 0) {
+    noDataBlock.querySelector('.title-error').innerHTML =
+      'We haven’t found <br> favorite news';
+
+    noDataBlock.classList.remove(VISUALLY_HIDDEN_CLASS);
+    containerCardList.classList.add(VISUALLY_HIDDEN_CLASS);
+  } else {
+    createMarkup(foundFavoriteNews, favoritePage);
+    noDataBlock.classList.add(VISUALLY_HIDDEN_CLASS);
+    containerCardList.classList.remove(VISUALLY_HIDDEN_CLASS);
+  }
+}
