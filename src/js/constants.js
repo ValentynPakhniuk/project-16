@@ -1,8 +1,6 @@
 export const PAGE_SIZE = 10;
 export const STORAGE_KEY_FAVORITE = 'favoriteNews';
-const date = new Date();
-export const dateForKey = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-export const STORAGE_KEY_READ = dateForKey;
+export const STORAGE_KEY_READ = 'readNews';
 export const VISUALLY_HIDDEN_CLASS = 'visually-hidden';
 export const REMOTE_FAVORITE_BTN = 'remove-favorite-btn';
 export const REMOTE_READ_BTN = 'remove-read-btn';
