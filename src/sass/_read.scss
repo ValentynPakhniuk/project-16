@@ -1,5 +1,12 @@
 
-.container__read-bottom {
+// .container__read-bottom {
+//   display: flex;
+//   gap: 8px;
+//   width: 100%;
+//   border-bottom: 1px solid #929292;
+// }
+
+.dateDiv {
   display: flex;
   gap: 8px;
   width: 100%;
@@ -7,6 +14,7 @@
 }
 
 .button-read {
+  position: relative;
   z-index: 10;
   display: inline-flex;
   margin: 0;
@@ -17,9 +25,14 @@
 
   & svg .icon-cross,
   & svg .icon-menu {
-    transition: transform 0.5s ease-in-out, scale 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: transform 1s ease-in-out, scale 1s ease-in-out, opacity 1s ease-in-out;
     transform-origin: center;
   }
+}
+
+.icon-cross,
+.icon-menu {
+position: absolute;
 }
 
 .button-read .icon-cross {

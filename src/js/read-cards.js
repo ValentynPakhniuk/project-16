@@ -1,16 +1,24 @@
 import { STORAGE_KEY_READ } from './constants';
 
 const readPage = document.querySelector('.read-page-wrap');
-const readPage2 = document.querySelector('.dateDiv');
+const readPage2 = document.querySelector('.container__read-bottom');
 const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || {};
 
 function createMarkup(news) {
   Object.entries(news).forEach(([date, items]) => {
-    const dataMarkup = `<div>
+    const dataMarkup = `<div class="dateDiv">
         <p>
           "${date}"
         </p>
-      </div>`;
+        <button type="button" class="button-read is-open" aria-expanded="false" aria-controls="menu-container" data-read-button>
+          <svg class="icon-cross" width="15" height="18" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.7625 9L-3.18545e-07 7.28745L7.5 3.27835e-07L15 7.28745L13.2375 9L7.5 3.43725L1.7625 9Z" fill=""/>
+          </svg>
+          <svg class="icon-menu" width="15" height="18" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.7625 8.76633e-07L-3.18545e-07 1.71255L7.5 9L15 1.71255L13.2375 3.75045e-07L7.5 5.56275L1.7625 8.76633e-07Z" fill=""/>
+          </svg>
+        </button>
+        </div>`;
 
     const newsMarkup = items
       .map(({ id, imgUrl, title, text, readMoreLink, date }) => {
@@ -43,8 +51,9 @@ function createMarkup(news) {
       </li>`;
       })
       .join('');
-    readPage2.insertAdjacentHTML('beforeend', dataMarkup);
+
     readPage.insertAdjacentHTML('beforeend', newsMarkup);
+    readPage2.insertAdjacentHTML('beforeend', dataMarkup);
   });
 }
 
