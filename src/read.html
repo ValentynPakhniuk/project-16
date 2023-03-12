@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Read</title>
+    <link rel="shortcut icon" href="./images/fav-news.jpg" type="image/png" />
     <link rel="stylesheet" href="./sass/index.scss" />
     <script type="module" src="./js/read.js"></script>
   </head>
@@ -11,15 +12,17 @@
   <body class="light-mode">
     <include src="./partials/header.html"></include>
     <div class="container list__cards">
-      <div class="dateDiv">
+      <div class="container__read-bottom">
+        <div class="dateDiv">
         
+        </div>
+        <button type="button" class="button-read is-open" aria-expanded="false" aria-controls="menu-container" data-read-button>
+          <svg width="14" height="14" aria-label="Перемикач">
+            <use class="icon-cross" href="./images/filters.svg#others_icon-close"></use>
+            <use class="icon-menu" href="./images/filters.svg#others_icon-open"></use>
+          </svg>
+        </button>
       </div>
-      <button type="button" class="menu-button is-open" aria-expanded="false" aria-controls="menu-container" data-menu-button>
-        <svg width="14" height="14" aria-label="Преключатель">
-          <use class="others__icon-open icon-cross" href="/src/images/filters.svg#others_icon-open"></use>
-          <use class="others__icon-close icon-menu" href="/src/images/filters.svg#others_icon-close"></use>
-        </svg>
-      </button>
       <ul class="read-page-wrap list-card" data-read></ul>
     </div>
     <div class="no-data">
