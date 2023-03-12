@@ -1,0 +1,43 @@
+
+.container__read-bottom {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  border-bottom: 1px solid #929292;
+}
+
+.button-read {
+  z-index: 10;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  stroke: var(--color-primary);
+
+  & svg .icon-cross,
+  & svg .icon-menu {
+    transition: transform 0.5s ease-in-out, scale 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transform-origin: center;
+  }
+}
+
+.button-read .icon-cross {
+  transform: rotate(180deg) scale(1);
+  opacity: 0;
+}
+
+.button-read.is-open .icon-cross {
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+.button-read.is-open .icon-menu {
+  transform: rotate(-180deg) scale(1);
+  opacity: 0;
+}
+
+.button-read svg {
+  stroke: var(--color-primary);
+  fill: var(--color-primary);
+}
