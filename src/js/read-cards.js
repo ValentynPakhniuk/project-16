@@ -49,3 +49,19 @@ function createMarkup(news) {
 }
 
 createMarkup(parsedNews);
+
+(() => {
+  const menuBtnRef = document.querySelector('[data-read-button]');
+  const mobileMenuRef = document.querySelector('[data-read]');
+  const body = document.body;
+  const readPageWrap = document.querySelector('.read-page-wrap');
+
+  menuBtnRef.addEventListener('click', () => {
+    const expanded =
+      menuBtnRef.getAttribute('aria-expanded') === 'true' || false;
+    menuBtnRef.classList.toggle('is-open');
+    menuBtnRef.getAttribute('aria-expanded', !expanded);
+    mobileMenuRef.classList.toggle('is-open');
+    readPageWrap.classList.toggle('visually-hidden');
+  });
+})();
