@@ -5,7 +5,8 @@ import { PAGE_SIZE, STORAGE_KEY_FAVORITE } from './constants';
 const URL = 'https://api.nytimes.com';
 const API_KEY = 'api-key=SWTGJZG6lt2ntZukcf6TH36zlYgqv0Eb';
 
-const TMP_LINK = 'https://image-placeholder.com/images/actual-size/200x200.png';
+const TMP_LINK =
+  'https://thumbs.dreamstime.com/b/best-design-global-news-digital-illusration-71660044.jpg';
 const domain = 'https://static01.nyt.com/';
 const httpProtocol = 'https://';
 
