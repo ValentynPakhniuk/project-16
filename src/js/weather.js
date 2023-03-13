@@ -9,6 +9,7 @@ const refs = {
   buttonSwitch: document.querySelector('#switch'),
   weatherDaily: document.querySelector('#weather-daily'),
   weatherWeek: document.querySelector('#weather-week'),
+  weatherIcon: document.querySelector('#weather-icon'),
 }
 
 const APIURL = 'https://api.openweathermap.org/data/2.5/';
@@ -26,6 +27,7 @@ function weatherRequest() {
           refs.temperature.textContent = Math.round(weather.main.temp);
           refs.weatherConditions.textContent = weather.weather[0].main;
           refs.cityName.textContent = weather.name;
+          refs.weatherIcon.setAttribute('src', `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
   });
   } catch (error) {
     console.log(error);
