@@ -1,24 +1,23 @@
 import { STORAGE_KEY_READ } from './constants';
 
-const readPage = document.querySelector('.read-page-wrap');
-const readPage2 = document.querySelector('.container__read-bottom');
+const readPage = document.getElementById('read-page');
 const parsedNews = JSON.parse(localStorage.getItem(STORAGE_KEY_READ)) || {};
 
 function createMarkup(news) {
   Object.entries(news).forEach(([date, items]) => {
-    const dataMarkup = `<div class="dateDiv">
+    const dataMarkup = `<div class="container__read-bottom"><div class="dateDiv">
         <p>
           "${date}"
         </p>
         <button type="button" class="button-read is-open" aria-expanded="false" aria-controls="menu-container" data-read-button>
           <svg class="icon-cross" width="15" height="18" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.7625 9L-3.18545e-07 7.28745L7.5 3.27835e-07L15 7.28745L13.2375 9L7.5 3.43725L1.7625 9Z" fill=""/>
+          <path class="icon-path" d="M1.7625 9L-3.18545e-07 7.28745L7.5 3.27835e-07L15 7.28745L13.2375 9L7.5 3.43725L1.7625 9Z" fill=""/>
           </svg>
           <svg class="icon-menu" width="15" height="18" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.7625 8.76633e-07L-3.18545e-07 1.71255L7.5 9L15 1.71255L13.2375 3.75045e-07L7.5 5.56275L1.7625 8.76633e-07Z" fill=""/>
+          <path class="icon-path" d="M1.7625 8.76633e-07L-3.18545e-07 1.71255L7.5 9L15 1.71255L13.2375 3.75045e-07L7.5 5.56275L1.7625 8.76633e-07Z" fill=""/>
           </svg>
         </button>
-        </div>`;
+        </div></div>`;
 
     const newsMarkup = items
       .map(({ id, imgUrl, title, text, readMoreLink, date }) => {
@@ -52,25 +51,49 @@ function createMarkup(news) {
       })
       .join('');
 
-    readPage.insertAdjacentHTML('beforeend', newsMarkup);
-    readPage2.insertAdjacentHTML('beforeend', dataMarkup);
+    const ul = document.createElement('ul');
+    ul.classList = 'read-page-wrap list-card';
+    ul.dataset.read = true;
+
+    ul.insertAdjacentHTML('beforeend', newsMarkup);
+    const blockWrap = document.createElement('div');
+    blockWrap.classList = 'collapse-block';
+
+    blockWrap.insertAdjacentHTML('beforeend', dataMarkup);
+    blockWrap.insertAdjacentElement('beforeend', ul);
+    readPage.insertAdjacentElement('beforeend', blockWrap);
   });
 }
 
 createMarkup(parsedNews);
 
-(() => {
-  const menuBtnRef = document.querySelector('[data-read-button]');
-  const mobileMenuRef = document.querySelector('[data-read]');
-  const body = document.body;
-  const readPageWrap = document.querySelector('.read-page-wrap');
+// const readPage = document.getElementById('read-page');
+// const collapseIcon = document.querySelector('[data-read]');
+// const readPageWrap = document.querySelector('.read-page-wrap');
 
-  menuBtnRef.addEventListener('click', () => {
-    const expanded =
-      menuBtnRef.getAttribute('aria-expanded') === 'true' || false;
-    menuBtnRef.classList.toggle('is-open');
-    menuBtnRef.getAttribute('aria-expanded', !expanded);
-    mobileMenuRef.classList.toggle('is-open');
-    readPageWrap.classList.toggle('visually-hidden');
-  });
-})();
+readPage.addEventListener('click', toggleCards);
+
+function findAncestor(el, cls) {
+  if (el.classList.contains(cls) || el === document.body) {
+    return el;
+  }
+  return findAncestor(el.parentElement, cls);
+}
+
+function toggleCards(e) {
+  const elementClassList = e.target.classList;
+  if (
+    elementClassList.contains('button-read') ||
+    elementClassList.contains('icon-cross') ||
+    elementClassList.contains('icon-path') ||
+    elementClassList.contains('icon-menu')
+  ) {
+    const collapseBlock = findAncestor(e.target, 'collapse-block');
+    const button = findAncestor(e.target, 'button-read');
+    const list = collapseBlock.children[1];
+    const expanded = button.getAttribute('aria-expanded') === 'true' || false;
+    button.classList.toggle('is-open');
+    button.getAttribute('aria-expanded', !expanded);
+    list.classList.toggle('visually-hidden');
+  }
+}
