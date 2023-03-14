@@ -30,6 +30,7 @@
 
 .weather__header {
 	display: flex;
+	justify-content: center;
 }
 
 .temperature {
@@ -100,7 +101,7 @@
 }
 
 .weather-icon {
-	width: 75%;
+	width: 45%;
 	height: 75%;
 	margin-left: auto;
 	margin-right: auto;
