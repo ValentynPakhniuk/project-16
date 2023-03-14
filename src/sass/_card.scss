@@ -23,7 +23,7 @@
     height: 630px;
     flex-basis: 100%;
     width: 100%;
-    max-width: 288px;
+    max-width: 480px;
     @include tablet {
     flex-basis: calc((100% - 30px) / 2);
     max-width: 480px;
